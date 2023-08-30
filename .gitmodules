@@ -1,3 +1,3 @@
-[submodule "blog/themes/ringo"]
-	path = blog/themes/ringo
-	url = https://github.com/HeliumOI/hexo-theme-ringo.git
+[submodule "themes/purer"]
+	path = themes/purer
+	url = https://github.com/fengkx/hexo-theme-purer.git
