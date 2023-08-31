@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "config-theme": "cat ./_theme.yml > ./themes/purer/_config.yml",
-    "build": "npm run config-theme && hexo generate",
+    "config-cname": "cp CNAME public/ && cp -r img public/images",
+    "build": "npm run config-theme && hexo generate && npm run config-cname",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server"
@@ -13,16 +14,25 @@
     "version": "6.3.0"
   },
   "dependencies": {
+    "@iktakahiro/markdown-it-katex": "^4.0.1",
     "hexo": "^6.3.0",
+    "hexo-asset-image": "^1.0.0",
     "hexo-cli": "^4.3.1",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
+    "hexo-generator-feed": "^3.0.0",
     "hexo-generator-index": "^3.0.0",
+    "hexo-generator-json-content": "^4.2.3",
+    "hexo-generator-sitemap": "^3.0.1",
     "hexo-generator-tag": "^2.0.0",
+    "hexo-math": "^4.0.0",
+    "hexo-neat": "^1.0.9",
     "hexo-renderer-ejs": "^2.0.0",
-    "hexo-renderer-marked": "^6.0.0",
-    "hexo-renderer-stylus": "^3.0.0",
+    "hexo-renderer-markdown-it": "^7.1.0",
     "hexo-server": "^3.0.0",
-    "hexo-theme-landscape": "^1.0.0"
+    "hexo-theme-landscape": "^1.0.0",
+    "hexo-wordcount": "^6.0.1",
+    "markdown-it-emoji": "^2.0.2",
+    "pandoc": "^0.2.0"
   }
 }

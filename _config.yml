@@ -103,3 +103,20 @@ theme: purer
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+mathjax: true
+markdown:
+  html: true
+  xhtmlOut: true
+  breaks: true
+  langPrefix:
+  linkify: true
+  typographer:
+  quotes: “”‘’
+  anchors:
+    level: 1
+    permalink: false
+    separator: '-'
+  plugins:
+    - '@iktakahiro/markdown-it-katex'
+    - markdown-it-emoji

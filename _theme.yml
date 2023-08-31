@@ -42,8 +42,8 @@ comment:
   livere:
     uid: # enter youyan uid
   gitalk: # gitalk. https://gitalk.github.io/
-    owner: fengkx #必须. GitHub repository 所有者，可以是个人或者组织。
-    admin: fengkx #必须. GitHub repository 的所有者和合作者 (对这个 repository 有写权限的用户)。
+    owner: Vollate #必须. GitHub repository 所有者，可以是个人或者组织。
+    admin: Vollate #必须. GitHub repository 的所有者和合作者 (对这个 repository 有写权限的用户)。
     repo: blog-comment #必须. GitHub repository.
     ClientID:  #必须. GitHub Application Client ID.
     ClientSecret:  #必须. GitHub Application Client `ecret.
@@ -61,7 +61,7 @@ comment:
 
 
 github:
-  username: fengkx
+  username: Vollate
 
 # wordcount
 postCount:
@@ -70,6 +70,7 @@ postCount:
   min2read: true  # 阅读时长预计
 
 search: true # enable local search
+insight: ture
 toc: true
 fancybox: true
 license: 'This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License'
@@ -78,19 +79,19 @@ footer:
 
 profile:
   enabled: true # Whether to show profile bar
-#  avatar: images/avatar.jpg
-  gravatar: MyEmailAddress@example.com # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
-  author: fengkx
-  author_title: Student & Coder
-  author_description: Having fun
-  location: Guangzhou, China
-  follow: https://github.com/fengkx
+  avatar: images/about/avatar.jpg
+  #gravatar: uint44t@gmail.com # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
+  author: Vollate
+  author_title: CS undergraduate student
+  author_description: Just for fun
+  location: Shenzhen, China
+  follow: https://github.com/Vollate
   # Social Links
   social:
     links:
-      github: https://github.com/fengkx
-      telegram: https://t.me/fengkx
-      twitter: https://twitter.com/example
+      github: https://github.com/Vollate
+      #telegram: https://t.me/fengkx
+      #twitter: https://twitter.com/example
       # facebook: /
       # dribbble: /
 #      behance: https://www.behance.net/cofess
@@ -99,32 +100,31 @@ profile:
 
   # My Personal Links
   links:
-    Github: https://github.com/fengkx
-    Blog: http://www.fengkx.top
-    Email: i#fengkx.top(请将#替换成@)
-    Wechat: liang222liang
+    Github: https://github.com/Vollate
+    Blog: http://blog.vollate.top
+    Email: uint44t@gmail.com
+    #Wechat: 
   # My Personal Labels
   labels:
-    - 前端
-    - Node.js
-    - Golang
-    - Linux日常使用
+    - CPP
+    #- Node.js
+    #- Golang
+    #- Linux日常使用
   skills:
     Git: ★★★☆☆
-    Gulp: ★★★☆☆
-    Javascript: ★★★☆☆
-    HTML+CSS: ★★★☆☆
-    Bootstrap: ★★★☆☆
+    C++: ★★☆☆☆
+    #Gulp: ★★★☆☆
+    #Javascript: ★★★☆☆
+    #HTML+CSS: ★★★☆☆
+    #Bootstrap: ★★★☆☆
    # My Personal Works
-  works:
-   name:
-     link: http://www.example.com
-     date: 2016
+  #works:
+   #name:
+     #link: http://www.example.com
+     #date: 2016
   # My Personal Projects
   projects:
-    fengkx/NodeRSSBot: https://github.com/fengkx/NodeRSSBot
-    fengkx/translator: https://github.com/fengkx/translator
-    fengkx/cacheman-level: https://github.com/fengkx/cacheman-level
+    #fengkx/NodeRSSBot: https://github.com/fengkx/NodeRSSBot
 
 
 widgets:
