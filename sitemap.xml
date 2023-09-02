@@ -2,63 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.vollate.top/2022/11/10/blog-achieves/</loc>
-    
-    <lastmod>2023-08-31</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.vollate.top/2023/01/22/book-list/</loc>
-    
-    <lastmod>2023-08-31</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.vollate.top/2022/10/01/first-post/</loc>
-    
-    <lastmod>2023-08-31</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.vollate.top/2022/11/03/happy-runner/</loc>
-    
-    <lastmod>2023-08-31</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.vollate.top/2023/03/27/tool-list/</loc>
-    
-    <lastmod>2023-08-31</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.vollate.top/about/index.html</loc>
-    
-    <lastmod>2023-08-31</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://blog.vollate.top/categories/index.html</loc>
     
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2023-09-02</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -67,7 +13,7 @@
   <url>
     <loc>http://blog.vollate.top/links/index.html</loc>
     
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2023-09-02</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -76,7 +22,7 @@
   <url>
     <loc>http://blog.vollate.top/repository/index.html</loc>
     
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2023-09-02</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -85,7 +31,61 @@
   <url>
     <loc>http://blog.vollate.top/tags/index.html</loc>
     
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2023-09-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.vollate.top/2022/11/10/blog-achieves/</loc>
+    
+    <lastmod>2023-09-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.vollate.top/2023/01/22/book-list/</loc>
+    
+    <lastmod>2023-09-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.vollate.top/2022/10/01/first-post/</loc>
+    
+    <lastmod>2023-09-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.vollate.top/2022/11/03/happy-runner/</loc>
+    
+    <lastmod>2023-09-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.vollate.top/2023/03/27/tool-list/</loc>
+    
+    <lastmod>2023-09-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.vollate.top/about/index.html</loc>
+    
+    <lastmod>2023-09-02</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -94,7 +94,7 @@
 
   <url>
     <loc>http://blog.vollate.top/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2023-09-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -102,35 +102,35 @@
   
   <url>
     <loc>http://blog.vollate.top/tags/Resource/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2023-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/Books/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2023-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/%E8%87%AA%E8%A8%80%E8%87%AA%E8%AF%AD/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2023-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/Magic/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2023-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/Tools/</loc>
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2023-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

@@ -6,7 +6,7 @@
   <link href="http://blog.vollate.top/atom.xml" rel="self"/>
   
   <link href="http://blog.vollate.top/"/>
-  <updated>2023-08-31T11:21:58.013Z</updated>
+  <updated>2023-09-02T04:45:46.594Z</updated>
   <id>http://blog.vollate.top/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://blog.vollate.top/2023/03/27/tool-list/"/>
     <id>http://blog.vollate.top/2023/03/27/tool-list/</id>
     <published>2023-03-27T00:17:41.000Z</published>
-    <updated>2023-08-31T11:21:58.013Z</updated>
+    <updated>2023-09-02T04:45:46.594Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Tools-List">Tools List</h1><blockquote><p>本文收录了Windows和Linux下使用的一些有用的工具(没有MacOS是因为没钱)</p></blockquote><h2 id="Windows">Windows</h2><h4 id="ShareX">ShareX</h4><p>强大的开源截图工具，支持自定义截图后动作(上传，复制文件路径，复制到剪贴板等等),支持录屏和录制gif，功能强大</p><ul><li><a href="https://getsharex.com/">offical site</a></li><li><a href="https://github.com/ShareX/ShareX">github</a></li></ul><h4 id="Wox">Wox</h4><p>一款开源桌面启动器,“alt+space”唤出菜单让后可直接执行程序，网页搜索文件检索以及其他许许多多的功能(windows powertoys的luncher就是改的wox但是不好用)</p><blockquote><p>和windows按下meta键后直接搜索相比</p><ul><li>支持自定义主题</li><li>支持安装插件(如集成everything的高效文件检索<s>点名批评windows的搜索，慢的要死精度还低</s>)，这点直接薄纱</li></ul></blockquote><ul><li><a href="http://www.wox.one/">offical site</a></li><li><a href="https://github.com/Wox-launcher/Wox">github</a></li></ul><h2 id="GNU-Linux">GNU/Linux</h2><h4 id="SimpleScreenRecorder">SimpleScreenRecorder</h4><p>一个简单高效的录屏工具，虽然没有obs那么强大但是胜在小巧，各个包管理器几乎都有</p><ul><li><a href="https://www.maartenbaert.be/simplescreenrecorder/">offical site</a></li></ul><h4 id="FlameShot">FlameShot</h4><p>截图软件,见 Cross-platform 条目</p><h2 id="Cross-platform-Win-Mac-Linux">Cross-platform(Win&amp;Mac&amp;Linux)</h2><h4 id="OBS-Open-Broadcast-software">OBS(Open Broadcast software)</h4><p>用于视频录制和直播的免费开源软件,功能强大</p><ul><li><a href="https://obsproject.com/">offical site</a></li><li><a href="https://github.com/obsproject/obs-studio">github</a></li></ul><h4 id="FlameShot-2">FlameShot</h4><p>一款开源跨平台截图工具,功能强大(虽然和ShareX相比还是差点，但是它跨平台啊),是Linux下截图的不二之选。i<s>mac端没用过</s></p><ul><li><a href="https://flameshot.org/">offical site</a></li><li><a href="https://github.com/flameshot-org/flameshot">github</a></li></ul>]]></content>
     
@@ -40,7 +40,7 @@
     <link href="http://blog.vollate.top/2023/01/22/book-list/"/>
     <id>http://blog.vollate.top/2023/01/22/book-list/</id>
     <published>2023-01-22T04:18:11.000Z</published>
-    <updated>2023-08-31T11:21:58.013Z</updated>
+    <updated>2023-09-02T04:45:46.594Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Reading">Reading</h2><ul><li>C++ Currency in Action</li><li>The Fast Guide towards Modern C++</li><li>Computer Organzation And Design</li></ul><h2 id="Plan-To-Read">Plan To Read</h2><ul><li>Effective Modern C++</li><li>C++ Templates ed.2</li><li>共产党宣言</li><li>意识形态的崇高客体</li></ul><h2 id="Shelve">Shelve</h2><ul><li>Deep learning</li><li>The Introduction to Algorithm</li></ul><h2 id="Had-Read">Had Read</h2><table><thead><tr><th>Name</th><th>Finish date</th></tr></thead><tbody><tr><td>C++ Primer Plus</td><td>2021.12</td></tr><tr><td>Effective C++</td><td>2022.7</td></tr><tr><td>1984</td><td>2022.6</td></tr><tr><td>沙丘</td><td>2022.6</td></tr><tr><td>资本论</td><td>2022.8.1</td></tr><tr><td>地铁系列(203[3,5])</td><td>2022.9.25</td></tr><tr><td>More Effective C++</td><td>2023.1.22</td></tr></tbody></table>]]></content>
     
@@ -59,7 +59,7 @@
     <link href="http://blog.vollate.top/2022/11/10/blog-achieves/"/>
     <id>http://blog.vollate.top/2022/11/10/blog-achieves/</id>
     <published>2022-11-10T20:10:57.000Z</published>
-    <updated>2023-08-31T11:21:58.013Z</updated>
+    <updated>2023-09-02T04:45:46.594Z</updated>
     
     <content type="html"><![CDATA[<h2 id="OS">OS</h2><p><a href="https://bbs.huaweicloud.com/blogs/279735">内存管理</a></p><h2 id="Program">Program</h2><ul><li><a href="https://www.foonathan.net/2016/03/cmake-install/">CMake导出库</a></li><li><a href="https://www.cnblogs.com/pcdack/p/16019319.html">oneAPI|DPC++资料归档</a></li></ul>]]></content>
     
@@ -78,7 +78,7 @@
     <link href="http://blog.vollate.top/2022/11/03/happy-runner/"/>
     <id>http://blog.vollate.top/2022/11/03/happy-runner/</id>
     <published>2022-11-03T02:57:19.000Z</published>
-    <updated>2023-08-31T11:21:58.013Z</updated>
+    <updated>2023-09-02T04:45:46.594Z</updated>
     
     <content type="html"><![CDATA[<blockquote><p>如何快乐地乐跑</p></blockquote><h2 id="require">require</h2><p>一部root了的安卓手机(解不了bl的可以试试太极)</p><blockquote><p>如何root建议google,据说小米开模糊定位不root也行，但是没试过(没有没root的手机)</p></blockquote><h2 id="Steps">Steps</h2><ol><li>下载<a href="http://fakeloc.cc/app"> fake location </a>，链接挂了就上github搜</li><li>买pro</li><li>设置里面把地图换成百度</li><li>路线模拟里面画路线，建议把每个可能的打卡点都过一遍(差不多就行，注意别超过单次最大路程)</li><li>开启路线模拟和乐跑，设置速度(注意别太快了)，建议开启浮动速度和模拟步频</li><li>记得到时间来关乐跑免得超时</li></ol><h2 id="Some-problems">Some problems</h2><ul><li>开了模拟没反应: 换运行模式(root OR no root)</li><li>乐跑闪退(root了的手机/模拟器): 对乐跑隐藏root(Magisk OR use fake location)</li><li>其他: 看fake location文档, google</li></ul><p><strong>本教程仅供参考，实际情况请以实际为准</strong></p>]]></content>
     
@@ -97,7 +97,7 @@
     <link href="http://blog.vollate.top/2022/10/01/first-post/"/>
     <id>http://blog.vollate.top/2022/10/01/first-post/</id>
     <published>2022-10-01T03:12:59.000Z</published>
-    <updated>2023-08-31T11:21:58.013Z</updated>
+    <updated>2023-09-02T04:45:46.594Z</updated>
     
     <content type="html"><![CDATA[<h1 id="碎碎念">碎碎念</h1><p>总算整了个能看的blog界面</p><p>之前搭图床然后疯狂报错<br>最后发现发现设置nginx的时候location拼错了~~(不开高亮的下场)~~</p><p>总之捣鼓了快一个月想起来弄一下断断续续的终于配好了<br>然后…<br>没什么想说的了</p><details><summary>恋恋可爱捏</summary><img src="https://image.uint44t.icu/101578567_p0.png"/></details>]]></content>
     
