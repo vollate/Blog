@@ -2,42 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.vollate.top/categories/index.html</loc>
-    
-    <lastmod>2023-09-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.vollate.top/links/index.html</loc>
-    
-    <lastmod>2023-09-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.vollate.top/repository/index.html</loc>
-    
-    <lastmod>2023-09-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.vollate.top/tags/index.html</loc>
-    
-    <lastmod>2023-09-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://blog.vollate.top/2022/11/10/blog-achieves/</loc>
     
     <lastmod>2023-09-02</lastmod>
@@ -84,6 +48,42 @@
   
   <url>
     <loc>http://blog.vollate.top/about/index.html</loc>
+    
+    <lastmod>2023-09-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.vollate.top/categories/index.html</loc>
+    
+    <lastmod>2023-09-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.vollate.top/links/index.html</loc>
+    
+    <lastmod>2023-09-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.vollate.top/repository/index.html</loc>
+    
+    <lastmod>2023-09-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.vollate.top/tags/index.html</loc>
     
     <lastmod>2023-09-02</lastmod>
     
