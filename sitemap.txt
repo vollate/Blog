@@ -1,6 +1,3 @@
-http://blog.vollate.top/2022/11/10/blog-achieves/
-http://blog.vollate.top/2023/01/22/book-list/
-http://blog.vollate.top/2022/10/01/first-post/
 http://blog.vollate.top/2022/11/03/happy-runner/
 http://blog.vollate.top/2023/03/27/tool-list/
 http://blog.vollate.top/about/index.html
@@ -8,9 +5,14 @@ http://blog.vollate.top/categories/index.html
 http://blog.vollate.top/links/index.html
 http://blog.vollate.top/repository/index.html
 http://blog.vollate.top/tags/index.html
+http://blog.vollate.top/2022/11/10/blog-achieves/
+http://blog.vollate.top/2023/01/22/book-list/
+http://blog.vollate.top/2022/10/01/first-post/
 http://blog.vollate.top/
-http://blog.vollate.top/tags/Resource/
-http://blog.vollate.top/tags/Books/
-http://blog.vollate.top/tags/%E8%87%AA%E8%A8%80%E8%87%AA%E8%AF%AD/
+http://blog.vollate.top/tags/Blog/
+http://blog.vollate.top/tags/Doc/
 http://blog.vollate.top/tags/Magic/
 http://blog.vollate.top/tags/Tools/
+http://blog.vollate.top/categories/Resource/
+http://blog.vollate.top/categories/Book/
+http://blog.vollate.top/categories/Tips/
