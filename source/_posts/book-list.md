@@ -1,8 +1,7 @@
 ---
 title: Book List
 date: 2023-1-22 12:18:11
-tags: Books
-description: "Just a book list"
+categories: Book
 ---
 ## Reading
 - C++ Currency in Action
@@ -19,7 +18,7 @@ description: "Just a book list"
 - Deep learning
 - The Introduction to Algorithm
 
-## Had Read
+## Finished
 | Name                   | Finish date |
 | -                      | -           |
 | C++ Primer Plus        | 2021.12     |

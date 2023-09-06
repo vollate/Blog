@@ -5,14 +5,14 @@ tags: Tools
 description: "Achieve useful tools"
 ---
 # Tools List
->
->本文收录了Windows和Linux下使用的一些有用的工具(没有MacOS是因为没钱)
->
+
+>收录了Windows和Linux下使用的一些工具
+
 ## Windows
 
 #### ShareX
 
-强大的开源截图工具，支持自定义截图后动作(上传，复制文件路径，复制到剪贴板等等),支持录屏和录制gif，功能强大
+开源截图工具，支持自定义截图后动作(上传，复制文件路径，复制到剪贴板等等),支持录屏和录制gif，功能强大
 
 - [offical site](https://getsharex.com/)
 - [github](https://github.com/ShareX/ShareX)
@@ -51,7 +51,7 @@ description: "Achieve useful tools"
 
 #### FlameShot
 
-一款开源跨平台截图工具,功能强大(虽然和ShareX相比还是差点，但是它跨平台啊),是Linux下截图的不二之选。i~~mac端没用过~~
+一款开源跨平台截图工具,功能强大,Linux下截图的不二之选。
 
 - [offical site](https://flameshot.org/)
 - [github](https://github.com/flameshot-org/flameshot)

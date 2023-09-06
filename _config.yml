@@ -40,7 +40,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:
@@ -105,18 +105,22 @@ deploy:
   type: ''
 
 mathjax: true
-markdown:
-  html: true
-  xhtmlOut: true
-  breaks: true
-  langPrefix:
-  linkify: true
-  typographer:
-  quotes: “”‘’
-  anchors:
-    level: 1
-    permalink: false
-    separator: '-'
-  plugins:
-    - '@iktakahiro/markdown-it-katex'
-    - markdown-it-emoji
+
+marked:
+  prependRoot: true
+  postAsset: true
+#markdown:
+  #html: true
+  #xhtmlOut: true
+  #breaks: true
+  #langPrefix:
+  #linkify: true
+  #typographer:
+  #quotes: “”‘’
+  #anchors:
+    #level: 1
+    #permalink: false
+    #separator: '-'
+  #plugins:
+    #- '@iktakahiro/markdown-it-katex'
+    #- markdown-it-emoji

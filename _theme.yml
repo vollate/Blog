@@ -37,16 +37,16 @@ pagination:
     alwayShow: true
 
 comment:
-  type: # gitalk  # 启用哪种评论系统
+  type: gitalk  # 启用哪种评论系统
   disqus:  # enter disqus shortname here
   livere:
     uid: # enter youyan uid
   gitalk: # gitalk. https://gitalk.github.io/
     owner: Vollate #必须. GitHub repository 所有者，可以是个人或者组织。
     admin: Vollate #必须. GitHub repository 的所有者和合作者 (对这个 repository 有写权限的用户)。
-    repo: blog-comment #必须. GitHub repository.
-    ClientID:  #必须. GitHub Application Client ID.
-    ClientSecret:  #必须. GitHub Application Client `ecret.
+    repo: Blog #必须. GitHub repository.
+    ClientID: 346bd3ac57ee5e238afd #必须. GitHub Application Client ID.
+    ClientSecret: 786b6b92c2216fae1114b63adf3d10a49931ce6a #必须. GitHub Application Client `ecret.
   valine: # Valine. https://valine.js.org
     appid:  # your leancloud application appid
     appkey:  # your leancloud application appkey
@@ -79,7 +79,7 @@ footer:
 
 profile:
   enabled: true # Whether to show profile bar
-  avatar: images/about/avatar.jpg
+  avatar: about/avatar.jpg
   #gravatar: uint44t@gmail.com # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
   author: Vollate
   author_title: CS undergraduate student
@@ -141,8 +141,8 @@ show_count: true
 cdn:
   katex: //cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css
   gitment: //cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.min.css
-  gitalk: //cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css
-  gitalk_js: //cdn.jsdelivr.net/npm/gitalk@1.5.2/dist/gitalk.min.js
+  gitalk: //cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.css
+  gitalk_js: //cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js
   blueimp_md5: //cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js
   valine: //cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js
   lightgallery_css: //cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/css/lightgallery.min.css
