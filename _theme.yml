@@ -82,7 +82,7 @@ profile:
   avatar: about/avatar.jpg
   #gravatar: uint44t@gmail.com # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
   author: Vollate
-  author_title: CS undergraduate student
+  author_title: Coder
   author_description: Just for fun
   location: Shenzhen, China
   follow: https://github.com/Vollate
@@ -106,12 +106,12 @@ profile:
     #Wechat: 
   # My Personal Labels
   labels:
-    - CPP
-    #- Node.js
+    - C++
+    - Linux
     #- Golang
     #- Linux日常使用
   skills:
-    Git: ★★★☆☆
+    #Git: ★★★☆☆
     C++: ★★☆☆☆
     #Gulp: ★★★☆☆
     #Javascript: ★★★☆☆

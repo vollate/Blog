@@ -46,15 +46,16 @@ future: true
 highlight:
   enable: true
   line_number: true
+  line_threshold: 5
   auto_detect: false
-  tab_replace: ''
+  tab_replace: '  '
   wrap: true
   hljs: false
 prismjs:
   enable: false
   preprocess: true
   line_number: true
-  tab_replace: ''
+  tab_replace: '  '
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -104,23 +105,25 @@ theme: purer
 deploy:
   type: ''
 
-mathjax: true
+#mathjax: true
 
 marked:
   prependRoot: true
   postAsset: true
-#markdown:
-  #html: true
-  #xhtmlOut: true
-  #breaks: true
-  #langPrefix:
-  #linkify: true
-  #typographer:
-  #quotes: “”‘’
-  #anchors:
-    #level: 1
-    #permalink: false
-    #separator: '-'
-  #plugins:
-    #- '@iktakahiro/markdown-it-katex'
-    #- markdown-it-emoji
+
+markdown:
+  html: true
+  xhtmlOut: true
+  breaks: true
+  langPrefix:
+  linkify: true
+  typographer:
+  quotes: “”‘’
+  anchors:
+    level: 1
+    permalink: false
+    separator: '-'
+  plugins:
+    - '@iktakahiro/markdown-it-katex'
+    - markdown-it-emoji
+
