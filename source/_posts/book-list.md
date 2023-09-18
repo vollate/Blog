@@ -1,11 +1,10 @@
 ---
 title: Book List
-date: 2023-1-22 12:18:11
+date: 2023-9-18 12:18:11
 categories: Book
 ---
 ## Reading
 - C++ Currency in Action
-- The Fast Guide towards Modern C++
 - Computer Organzation And Design
 
 ## Plan To Read
@@ -28,3 +27,4 @@ categories: Book
 | 资本论                 | 2022.8.1    |
 | 地铁系列(203[3,5])     | 2022.9.25   |
 | More Effective C++     | 2023.1.22   |
+| The Fast Guide towards Modern C++|2023.7.15|
