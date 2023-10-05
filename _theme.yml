@@ -90,11 +90,11 @@ profile:
   social:
     links:
       github: https://github.com/Vollate
-      #telegram: https://t.me/fengkx
-      #twitter: https://twitter.com/example
+      #telegram: 
+      #twitter: 
       # facebook: /
       # dribbble: /
-#      behance: https://www.behance.net/cofess
+#      behance: 
       rss: atom.xml
     link_tooltip: true # enable the social link tooltip, options: true, false
 
