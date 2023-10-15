@@ -24,7 +24,7 @@ description: "Useful tools on Linux"
 - [cfw](https://github.com/Fndroid/clash_for_windows_pkg)(closed-source)
 - [clash-verge]( https://github.com/zzzgydi/clash-verge )(open-source)
 
->注意 Clash 和 Clash.Meta 是开源软件，clash.Premium 为Clash 原作者在 Clash 基础上开发的闭源软件，介意误用
+>注意 Clash 和 Clash.Meta 是开源软件，clash.Premium 为 Clash 原作者在 Clash 基础上开发的闭源软件，介意误用
 
 ### V2ray Client
 
@@ -38,4 +38,10 @@ description: "Useful tools on Linux"
 
 - [libreoffice](https://github.com/LibreOffice/core)
 - [onlyoffice](https://github.com/ONLYOFFICE/DesktopEditors)
+
+## Terminal Resource Monitor
+
+- [btop](https://github.com/aristocratos/btop) or [bpytop](https://github.com/aristocratos/bpytop)
+- [htop](https://github.com/htop-dev/htop)
+
 
