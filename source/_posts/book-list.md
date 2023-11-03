@@ -6,19 +6,17 @@ tags: Book
 ## Reading
 
 - C++ Currency in Action
-- Computer Organzation And Design
+- ~~Computer Organzation And Design~~ 摆了
+- RISCV-privileged
 
 ## Plan To Read
 
 - Effective Modern C++
 - C++ Templates ed.2
-- 共产党宣言
-- 意识形态的崇高客体
 
 ## Shelve
 
 - Deep learning
-- The Introduction to Algorithm
 
 ## Finished
 
