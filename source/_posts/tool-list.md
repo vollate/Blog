@@ -1,8 +1,11 @@
 ---
 title: Tool List
 date: 2023-03-27 08:17:41
-tags: Tools
-description: "Useful tools on Linux"
+tags: 
+- Tools
+- Linux
+Categories: 
+- Archives
 ---
 >收录了Linux下使用的一些工具
 
@@ -10,7 +13,7 @@ description: "Useful tools on Linux"
 
 - [SimpleScreenRecorder](https://www.maartenbaert.be/simplescreenrecorder/)
 - [OBS studio](https://obsproject.com/)
-- [flameshot](https://flameshot.org/)
+- [Flameshot](https://flameshot.org/)
 
 ## Cloud Drive
 
