@@ -12,7 +12,7 @@
 <meta property="og:description" content="记录cpp编程过程中的一些总结和感想 含非智能指针类的注意事项 为含有指针的类的写函数是一个很麻烦的事情，总结了一下经验:  移动构造函数和移动赋值运算符：需要检查this!&#x3D;&amp;that，防止自我赋值后把自己数据删除的情况。 涉及到资源的指针的拷贝，移动的：移动指针可能导致无法正常释放，拷贝指针可能导致外界使用悬空指针（释放过的指针） 所有会用到该类引用&#x2F;指针的非const成员函数：同移动">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-03T03:20:31.000Z">
-<meta property="article:modified_time" content="2023-11-03T15:49:16.132Z">
+<meta property="article:modified_time" content="2023-11-08T08:41:43.959Z">
 <meta property="article:author" content="Vollate">
 <meta property="article:tag" content="Essay">
 <meta name="twitter:card" content="summary">
