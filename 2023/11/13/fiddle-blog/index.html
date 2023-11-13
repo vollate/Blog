@@ -3,19 +3,20 @@
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
-    <title>CPP随笔 | Vollate's Blog</title>
-    <meta name="description" content="记录cpp编程过程中的一些总结和感想 含非智能指针类的注意事项 为含有指针的类的写函数是一个很麻烦的事情，总结了一下经验:  移动构造函数和移动赋值运算符：需要检查this!&#x3D;&amp;that，防止自我赋值后把自己数据删除的情况。 涉及到资源的指针的拷贝，移动的：移动指针可能导致无法正常释放，拷贝指针可能导致外界使用悬空指针（释放过的指针） 所有会用到该类引用&#x2F;指针的非const成员函数：同移动">
+    <title>折腾博客记录 | Vollate's Blog</title>
+    <meta name="description" content="使用cf后无限redirect 在 namesilo 买的域名，突发奇想试试用 Cloudflare 免费计划的域名解析（为了CDN） 配完后炸了，http 请求返回 301 导致无限 redirect，查了下原因如下： 服务器端使用了强制HTTPS，CloudFlare 的Flexible策略原理是：用户访问时使用HTTPS访问到CF的节点，然后CF通过HTTP方式回源到你的服务器去读取数据，这">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CPP随笔">
-<meta property="og:url" content="http://blog.vollate.top/2023/11/03/cpp-essay/index.html">
+<meta property="og:title" content="折腾博客记录">
+<meta property="og:url" content="http://blog.vollate.top/2023/11/13/fiddle-blog/index.html">
 <meta property="og:site_name" content="Vollate&#39;s Blog">
-<meta property="og:description" content="记录cpp编程过程中的一些总结和感想 含非智能指针类的注意事项 为含有指针的类的写函数是一个很麻烦的事情，总结了一下经验:  移动构造函数和移动赋值运算符：需要检查this!&#x3D;&amp;that，防止自我赋值后把自己数据删除的情况。 涉及到资源的指针的拷贝，移动的：移动指针可能导致无法正常释放，拷贝指针可能导致外界使用悬空指针（释放过的指针） 所有会用到该类引用&#x2F;指针的非const成员函数：同移动">
+<meta property="og:description" content="使用cf后无限redirect 在 namesilo 买的域名，突发奇想试试用 Cloudflare 免费计划的域名解析（为了CDN） 配完后炸了，http 请求返回 301 导致无限 redirect，查了下原因如下： 服务器端使用了强制HTTPS，CloudFlare 的Flexible策略原理是：用户访问时使用HTTPS访问到CF的节点，然后CF通过HTTP方式回源到你的服务器去读取数据，这">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-03T03:20:31.000Z">
+<meta property="og:image" content="http://blog.vollate.top/2023/11/13/fiddle-blog/fiddle-with-ddl.jpg">
+<meta property="article:published_time" content="2023-11-13T09:02:27.000Z">
 <meta property="article:modified_time" content="2023-11-13T09:22:38.633Z">
 <meta property="article:author" content="Vollate">
-<meta property="article:tag" content="Essay">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.vollate.top/2023/11/13/fiddle-blog/fiddle-with-ddl.jpg">
 
     <link rel="alternate" type="application/atom+xml" href="/atom.xml">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
@@ -192,7 +193,7 @@
             
     
         <h1 class="article-title text-lg" itemprop="name">
-            CPP随笔
+            折腾博客记录
         </h1>
     
 
@@ -201,33 +202,23 @@
             <p class="article-meta mb-3 text-xs">
                 <span class="article-date">
     <i class="iconfont icon-calendar-check"></i>
-	<a href="/2023/11/03/cpp-essay/" class="article-date">
-	  <time datetime="2023-11-03T03:20:31.000Z" itemprop="datePublished">Nov 3</time>
+	<a href="/2023/11/13/fiddle-blog/" class="article-date">
+	  <time datetime="2023-11-13T09:02:27.000Z" itemprop="datePublished">Nov 13</time>
 	</a>
 </span>
 
                 
-    <span class="article-category">
-    <i class="iconfont icon-folder"></i>
-    <a class="article-category-link" href="/categories/C/">C++</a>
-  </span>
-
 
                 
-    <span class="article-tags">
-    <i class="iconfont icon-tag"></i>
-    <a class="article-tag-none-link" href="/tags/Essay/" rel="tag">Essay</a>
-  </span>
-
 
                 <span class="_partial/post-comment"><i class="icon icon-comment"></i>
-                    <a href="/2023/11/03/cpp-essay/#comments" class="article-comment-link">
+                    <a href="/2023/11/13/fiddle-blog/#comments" class="article-comment-link">
                         Comments
                     </a>
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">Word Count: 326(words)</span>
+        <span class="post-wordcount" itemprop="wordCount">Word Count: 167(words)</span>
     
     
         <span class="post-readcount" itemprop="timeRequired">Read Count: 1(minutes)</span>
@@ -237,21 +228,19 @@
             </p>
         </header>
         <div class="marked-body article-body">
-            <p>记录cpp编程过程中的一些总结和感想</p>
-<h2 id="含非智能指针类的注意事项">含非智能指针类的注意事项</h2>
-<p>为含有指针的类的写函数是一个很麻烦的事情，总结了一下经验:</p>
-<ul>
-<li>移动构造函数和移动赋值运算符：需要检查<code>this!=&amp;that</code>，防止自我赋值后把自己数据删除的情况。</li>
-<li>涉及到资源的指针的拷贝，移动的：移动指针可能导致无法正常释放，拷贝指针可能导致外界使用悬空指针（释放过的指针）</li>
-<li>所有会用到该类引用/指针的非const成员函数：同移动构造一样需要检查<code>this!=&amp;that</code>，防止函数执行过程中 that 数据改变影响自身数据。eg：假设有一个mString类，有一个insert(size_t index,size_t count, const mString&amp;)成员方法，如果进行a.insert(0,20,a)而内部实现使用循环插入就会出问题</li>
-<li>所有会更改/依赖多个实例pointer的值进行操作的函数。eg:(std::swap)</li>
-</ul>
-<p>带裸指针的类写起来非常头疼，一不小心就会出问题。建议非极度性能或特殊需求（写驱动等），或者<s>折磨</s>锻炼自己的情况还是乖乖用智能指针吧。</p>
+            <h2 id="使用cf后无限redirect">使用cf后无限redirect</h2>
+<p>在 namesilo 买的域名，突发奇想试试用 Cloudflare 免费计划的域名解析（<s>为了CDN</s>）</p>
+<p>配完后炸了，http 请求返回 301 导致无限 redirect，查了下原因如下：</p>
+<blockquote><p>服务器端使用了强制HTTPS，CloudFlare 的Flexible策略原理是：用户访问时使用HTTPS访问到CF的节点，然后CF通过HTTP方式回源到你的服务器去读取数据，这个时候对于你的服务器来说，CF就是访客，所以服务器返回的状态都是 301。解决方法很简单，将 SSL 策略设为 Full 或者 Full(strict) 就能解决。</p>
+<footer><strong>Vanish <https://vzone.me/897/></strong></footer></blockquote>
+<hr>
+<h2 id="上大学上的-jpg"><s><strong>上大学上的.jpg</strong></s></h2>
+<p><img src="fiddle-with-ddl.jpg" alt="ddl fuck you"></p>
 
         </div>
         
 <blockquote class="copyright">
-    <p><strong>Link to this article : </strong><a class="permalink" href="http://blog.vollate.top/2023/11/03/cpp-essay/">http://blog.vollate.top/2023/11/03/cpp-essay/</a></p>
+    <p><strong>Link to this article : </strong><a class="permalink" href="http://blog.vollate.top/2023/11/13/fiddle-blog/">http://blog.vollate.top/2023/11/13/fiddle-blog/</a></p>
     <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
 </blockquote>
 
@@ -274,7 +263,7 @@
     <div class="toc-sidebar">
         <nav id="toc" class="article-toc">
             <h3 class="toc-title">Catalogue</h3>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AB%E9%9D%9E%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E7%B1%BB%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.</span> <span class="toc-text">含非智能指针类的注意事项</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8cf%E5%90%8E%E6%97%A0%E9%99%90redirect"><span class="toc-number">1.</span> <span class="toc-text">使用cf后无限redirect</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E5%A4%A7%E5%AD%A6%E4%B8%8A%E7%9A%84-jpg"><span class="toc-number">2.</span> <span class="toc-text">上大学上的.jpg</span></a></li></ol>
         </nav>
     </div>
 </aside>
