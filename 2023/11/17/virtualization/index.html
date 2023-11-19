@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html  lang="en" >
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <title>浅记系统虚拟化 | Vollate's Blog</title>
+    <meta name="description" content="最近由于项目需要学习虚拟化的知识，于是在师兄的建议下读了 sjtu 出的新书《操作系统原理与实践》中的系统虚拟化的部分，随便记点笔记。 虚拟化发展历史:  1960s出现分时操作系统概念。同时期IBM进行了另一个方向也就是虚拟化的探索，并在1968年的system360上实现了第一个VMM(Virtual Machine Monitor) CP&#x2F;CMS 1980s，开始出现纯软件实现的虚拟机监视器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅记系统虚拟化">
+<meta property="og:url" content="http://blog.vollate.top/2023/11/17/virtualization/index.html">
+<meta property="og:site_name" content="Vollate&#39;s Blog">
+<meta property="og:description" content="最近由于项目需要学习虚拟化的知识，于是在师兄的建议下读了 sjtu 出的新书《操作系统原理与实践》中的系统虚拟化的部分，随便记点笔记。 虚拟化发展历史:  1960s出现分时操作系统概念。同时期IBM进行了另一个方向也就是虚拟化的探索，并在1968年的system360上实现了第一个VMM(Virtual Machine Monitor) CP&#x2F;CMS 1980s，开始出现纯软件实现的虚拟机监视器">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-11-17T11:24:06.000Z">
+<meta property="article:modified_time" content="2023-11-19T07:01:41.383Z">
+<meta property="article:author" content="Vollate">
+<meta property="article:tag" content="Note">
+<meta name="twitter:card" content="summary">
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    
+<link rel="stylesheet" href="/css/common.min.css">
+
+
+
+    
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.css" rel="stylesheet">
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/css/lightgallery.min.css" rel="stylesheet">
+    
+    
+    
+<link rel="stylesheet" href="/css/iconfont.min.css">
+
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.0.0"></head>
+
+    <body>
+        <header class="header header-fixture">
+    <div class="profile-search-wrap flex sm:block">
+        
+        
+        <div class="profile sm:text-center md:px-1 lg:px-3 sm:pb-4 sm:pt-6">
+            <a id="avatar" role="link" href="https://github.com/Vollate" class="inline-block lg:w-16 lg:h-16 w-8 h-8 m-2" target="_blank" rel="noopener" rel="noreferrer" >
+                <img src="/about/avatar.jpg" class="rounded-full" alt="avatar">
+            </a>
+            <h2 id="name" class="hidden lg:block">Vollate</h2>
+            <h3 id="title" class="hidden lg:block">Coder</h3>
+            
+            <small id="location" class="hidden lg:block">
+                <i class="iconfont icon-map-icon"></i>
+                Shenzhen, China
+            </small>
+            
+        </div>
+        
+        
+<div class="search flex-1 flex lg:inline-block sm:hidden lg:px-4 lg:mt-2 lg:mb-4 lg:w-full">
+    <form id="search-form" class="my-auto flex-1 lg:border lg:border-solid lg:border-gray-200">
+        <div class="input-group table bg-gray-100 lg:bg-white w-full">
+            <input id="search-input" type="text" placeholder="Search" class="inline-block w-full bg-gray-100 lg:bg-white p-1">
+            <span class="table-cell">
+                <button name="search tigger button" disabled>
+                    <i class="iconfont icon-search m-2"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+        
+<div id="content-json" data-placeholder="Search" class="invisible hidden">/content.json</div>
+<script id="search-teamplate" type="text/html" data-path="/content.json">
+    <div>
+        <div class="search-header bg-gray-400">
+            <input id="actual-search-input" model="keyword" ref="input" class="inline-block w-full h-10 px-2 py-1" placeholder="Search" type="text">
+        </div>
+        <div class="search-result bg-gray-200">
+            {{#each searchPosts}}
+            <a href="/{{ path }}" class="result-item block px-2 pb-3 mb-1 pt-1 hover:bg-indigo-100">
+                <i class="iconfont icon-file"></i>
+                <h1 class="result-title inline font-medium text-lg">{{ title }}</h1>
+                <p class="result-content text-gray-600 text-sm">{{{ text }}}</p>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</script>
+
+</div>
+
+
+        <button name="menu toogle button" id="menu-toggle-btn" class="block sm:hidden p-3" role="button" aria-expanded="false">
+            <i class="iconfont icon-hamburger"></i>
+        </button>
+    </div>
+    <nav id="menu-nav" class="hidden sm:flex flex-col">
+        
+        
+            <div class="menu-item menu-home" role="menuitem">
+                <a href="/.">
+                    <i class="iconfont icon-home" aria-hidden="true"></i>
+                    <span class="menu-title">Home</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-archives" role="menuitem">
+                <a href="/archives">
+                    <i class="iconfont icon-archive" aria-hidden="true"></i>
+                    <span class="menu-title">Archives</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-categories" role="menuitem">
+                <a href="/categories">
+                    <i class="iconfont icon-folder" aria-hidden="true"></i>
+                    <span class="menu-title">Categories</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-tags" role="menuitem">
+                <a href="/tags">
+                    <i class="iconfont icon-tag" aria-hidden="true"></i>
+                    <span class="menu-title">Tags</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-repository" role="menuitem">
+                <a href="/repository">
+                    <i class="iconfont icon-project" aria-hidden="true"></i>
+                    <span class="menu-title">Repository</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-links" role="menuitem">
+                <a href="/links">
+                    <i class="iconfont icon-friend" aria-hidden="true"></i>
+                    <span class="menu-title">Links</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-about" role="menuitem">
+                <a href="/about">
+                    <i class="iconfont icon-cup" aria-hidden="true"></i>
+                    <span class="menu-title">About</span>
+                </a>
+            </div>
+        
+        
+<div class="social-links flex sm:flex-col lg:hidden mt-5">
+    
+        <span class="social-item text-center">
+            <a target="_blank" rel="noopener" href="https://github.com/Vollate">
+                <i class="iconfont social-icon icon-github"></i>
+                <span class="menu-title hidden lg:inline">menu.github</span>
+            </a>
+        </span>
+    
+        <span class="social-item text-center">
+            <a href="/atom.xml">
+                <i class="iconfont social-icon icon-rss"></i>
+                <span class="menu-title hidden lg:inline">menu.rss</span>
+            </a>
+        </span>
+    
+</div>
+
+
+    </nav>
+</header>
+
+        <section class="main-section">
+            
+    <main class="flex-1 px-4 py-14 md:px-5 lg:px-8 lg:py-4 relative min-h-screen">
+    
+
+    <article class="content article article-archives article-type-list" itemscope="">
+        <header class="article-header">
+            
+    
+        <h1 class="article-title text-lg" itemprop="name">
+            浅记系统虚拟化
+        </h1>
+    
+
+
+
+            <p class="article-meta mb-3 text-xs">
+                <span class="article-date">
+    <i class="iconfont icon-calendar-check"></i>
+	<a href="/2023/11/17/virtualization/" class="article-date">
+	  <time datetime="2023-11-17T11:24:06.000Z" itemprop="datePublished">Nov 17</time>
+	</a>
+</span>
+
+                
+    <span class="article-category">
+    <i class="iconfont icon-folder"></i>
+    <a class="article-category-link" href="/categories/OS/">OS</a>
+  </span>
+
+
+                
+    <span class="article-tags">
+    <i class="iconfont icon-tag"></i>
+    <a class="article-tag-none-link" href="/tags/Note/" rel="tag">Note</a>
+  </span>
+
+
+                <span class="_partial/post-comment"><i class="icon icon-comment"></i>
+                    <a href="/2023/11/17/virtualization/#comments" class="article-comment-link">
+                        Comments
+                    </a>
+                </span>
+                
+    
+        <span class="post-wordcount" itemprop="wordCount">Word Count: 2.8k(words)</span>
+    
+    
+        <span class="post-readcount" itemprop="timeRequired">Read Count: 9(minutes)</span>
+    
+
+
+            </p>
+        </header>
+        <div class="marked-body article-body">
+            <p>最近由于项目需要学习虚拟化的知识，于是在师兄的建议下读了 sjtu 出的新书<a target="_blank" rel="noopener" href="https://ipads.se.sjtu.edu.cn/ospi/">《操作系统原理与实践》</a>中的系统虚拟化的部分，随便记点笔记。</p>
+<p><strong>虚拟化发展历史:</strong></p>
+<ul>
+<li>1960s出现分时操作系统概念。同时期IBM进行了另一个方向也就是虚拟化的探索，并在1968年的system360上实现了第一个VMM(Virtual Machine Monitor) <em>CP/CMS</em></li>
+<li>1980s，开始出现纯软件实现的虚拟机监视器</li>
+<li>1990s, 互联网兴起，web服务器逐渐性能过剩</li>
+<li>1998年，VMware成立。</li>
+<li>云计算兴起，虚拟化越发重要</li>
+</ul>
+<p><strong>优势:</strong></p>
+<ul>
+<li>充分利用服务器性能，<s>搞超售</s></li>
+<li>虚拟机管理更为便捷，可以快速部署销毁</li>
+<li>可以热迁移</li>
+<li>VMI (Virtual Machine Introspection 虚拟机自省)可以从外部检查虚拟机是否被入侵</li>
+</ul>
+<h2 id="系统虚拟化概述">系统虚拟化概述</h2>
+<h3 id="组成部分">组成部分</h3>
+<ul>
+<li>CPU 虚拟化（vCPU）：若虚拟化的指令集和物理架构指令集相同，除了部分特殊指令其他都可以直接执行，效率较高（KVM）；若架构不同，则需要全部转译执行。</li>
+<li>内存虚拟化：引入虚拟物理地址，内存访问需要多经过一层虚拟物理地址到物理地址的映射操作。</li>
+<li>I/O 虚拟化：VMM 提供虚拟驱动供虚拟机使用，并将操作转化为实际的物理设备访问或其他操作。</li>
+</ul>
+<h3 id="VMM-类型">VMM 类型</h3>
+<ul>
+<li>半虚拟化: 运行在最高权限级别，相当于一个以OS作为进程的操作系统，如 Xen。</li>
+<li>完全虚拟化：作为一个进程运行在 OS 上，复用宿主OS的线程调度和资源管理，如 QEMU。</li>
+</ul>
+<h2 id="Trap-Emulate（下陷-模拟）">Trap-Emulate（下陷-模拟）</h2>
+<p>Trap：将系统级ISA拦截转由 VMM 进行模拟操作。如系统调用先转化为虚拟机内核态，然后由 VMM 拦截并完成对应调用的模拟。</p>
+<p>Emulate：用软件模拟执行后的副作用</p>
+<p><strong>基础概念:</strong></p>
+<ul>
+<li>CPU 上下文：指CPU在执行特定进程或任务时所需的信息集合。一般包括该CPU的所有寄存器（包括PC）的值和当前系统状态（内存信息，调度优先级等）。</li>
+<li>中断向量表（Interrupt Vector Table）：存放中断处理函数。</li>
+<li>中断处理过程：触发中断时，首先检查中断是否开启。若开启，CPU 接收中断信号并暂停当前程序处理。然后保存当前上下文以供恢复。然后确定中断类型并从中断向量表中查找对应处理函数的地址并跳转执行。执行结束后，恢复中断前的上下文。</li>
+<li>用户态：用户态是普通应用程序运行的模式。该模式下，程序对硬件的访问受限，一般通过OS提供系统调用切换到内核态来执行对应函数进行访问。</li>
+<li>内核态：OS 一般运行在该状态下。该状态下，OS 能够完全访问并操作硬件，访问所有内存。</li>
+</ul>
+<h3 id="Trap-Emulate-虚拟化实现">Trap-Emulate 虚拟化实现</h3>
+<p>VMM 需提供数据结构，来存储原本存储在物理 CPU 上的所有进程上下文信息，以及对应的其它信息（如中断向量表,虚拟页表等）。</p>
+<ul>
+<li>处理中断：对于硬件中断，将会触发 VMM 查看虚拟机是否开启对应中断。如开启，虚拟机保存上下文后下陷到 VMM，然后 VMM 检查中断向量表处理中断。</li>
+<li>处理系统调用：同中断处理的模式，只是 VMM 需要隔离用户态和内核态的页表映射</li>
+<li>处理线程切换：本质软件中断到内核态然后进行线程调度，切换进程上下文即可。</li>
+<li>多 CPU 模拟：加个数据结构存进程上下文和 vCPU 的对应关系就行。vCPU 调度参考 OS 的进程调度，或者直接用线程 OS 进程来实现。</li>
+</ul>
+<h2 id="CPU虚拟化">CPU虚拟化</h2>
+<p>特权指令：在用户态执行时会下陷进入特权级的指令</p>
+<p>敏感指令：管理物理硬件资源或更改CPU状态的指令</p>
+<p>eg：</p>
+<ul>
+<li>x86 修改 CR 寄存器的值</li>
+<li>读写敏感内存</li>
+<li>I/O 指令</li>
+</ul>
+<h3 id="可虚拟化和不可虚拟化架构">可虚拟化和不可虚拟化架构</h3>
+<p>所有满足敏感指令都是特权指令的架构称为可虚拟化架构，反之则为不可虚拟化架构。</p>
+<p>eg:</p>
+<ul>
+<li>AArch32</li>
+<li>早期 x86</li>
+</ul>
+<h3 id="弥补不可虚拟化架构的方法">弥补不可虚拟化架构的方法</h3>
+<h4 id="全虚拟化">全虚拟化</h4>
+<p><em>适用于无需修改客户端源码的情况</em></p>
+<ul>
+<li>解释执行：用纯软件模拟cpu执行指令过程。具体操作是对于每条指令调用对应的用于模拟的函数，整个过程不产生任何下陷。优点是可以模拟任何 ISA 类型的虚拟机。缺点显而易见，效率低下。</li>
+<li>动态二进制编译：在解释执行的基础上将程序划分为只有一个入口和一个出口,中间无任何修改控制流指令的代码块(相当于创建了一个函数)。第一次执行该块时进行翻译并缓存，之后再执行时调用之前的缓存。翻译替换所有敏感指令，在块的末尾添加一条跳转指令来通知 VMM 执行完毕。</li>
+<li>扫描-翻译：用于虚拟机架构和宿主相同的情况，在程序执行前扫描可能存在敏感指令的代码，翻译并缓存翻译后的代码以便下次复用。大多数情况敏感指令只存在于 OS kernal 中，可以只扫描内核代码。</li>
+</ul>
+<h4 id="半虚拟化">半虚拟化</h4>
+<blockquote>
+<p>在允许修改虚拟机客户端代码的情况下可以使用</p>
+</blockquote>
+<p>原理：通过 VMM 提供的类似系统调用的服务使得虚拟机内核不再需要下陷模拟，而是类似进程使用系统调用一样进行对应操作，效率更高。半虚拟化使得 VMM 获得查看客户端内存分布的能力，能够更合理的分配资源。</p>
+<h4 id="硬件虚拟化">硬件虚拟化</h4>
+<p>通过 CPU 硬件支持来实现更高效的虚拟化。具体来说就是增加一个专为 VMM 运行的特权级，该特权级下 VMM 拥有和宿主 OS 相同的硬件访问权限，来节省下陷的开销。</p>
+<p>拓展——KVM (kernal-based virtual machine) 技术: 通过将 VMM 作为内核模块加载使得 VMM 能够使用 宿主 OS 内核的功能，这样下陷时某些支持的架构可以消除 KVM 到 OS 内核特权级转换带来的开销。指令无需翻译，直接在硬件上执行，使得虚拟化效率接近直接运行。</p>
+<h2 id="内存虚拟化">内存虚拟化</h2>
+<p>目标：实现虚拟机之间，虚拟机和物理机之间的内存隔离<br>
+术语：</p>
+<ul>
+<li>GVA: Guest Virtual Address</li>
+<li>GPA: Guest Physical Address</li>
+<li>HPA: Host Physical Address</li>
+</ul>
+<h3 id="影子页表-Shadow-Page-Table">影子页表(Shadow Page Table)</h3>
+<p>复习进程页表的配置&amp;使用：</p>
+<ol>
+<li>调用前 OS 为进程配置一个虚拟地址映射到物理地址的静态页表（相对地址）</li>
+<li>OS 将页表基地址写入对应寄存器以让 MMU 能找到页表</li>
+<li>MMU 解析虚拟地址到物理地址</li>
+</ol>
+<p>内存虚拟化中，VMM 需要根据存储的 GPA 到 HPA 的映射信息并生成一个 GVA 到 HPA 的影子页表。在虚拟机下陷时,将页表基地址替换为影子页表基地址，从而让 MMU 直接解析 GVA。</p>
+<p>VMM 需要监视虚拟机对页表的更改，并对应地修改影子页表。同时为了分隔用户态和内核态，需要分离对应的页表，使得用户态页表中不包含内核态的映射</p>
+<p>缺页处理：</p>
+<ul>
+<li>若为页表项不存在或无权限，VMM 需触发宿主 OS 的缺页中断进行处理</li>
+<li>若为访问权限足够，则需要同步影子页表与虚拟机页表</li>
+</ul>
+<h3 id="直接页表映射">直接页表映射</h3>
+<p>客户端与宿主共用页表。该情况下客户端知道自己处在虚拟环境中，VMM 会告知客户端可以使用的页表范围，方便客户端规划。客户端的页表项被设为只读，修改页表需要使用 VMM 提供的超级调用，该调用会检查对页表的修改是否合法。</p>
+<h3 id="两阶段地址翻译">两阶段地址翻译</h3>
+<p>硬件虚拟化的一部分，需要 CPU 支持使用第二页表将 GPA 转换到 HPA，省去 VMM 手动维护影子页表的步骤。同时可以使用 TLB 来优化解析速度。</p>
+<p>缺页中断处理：</p>
+<ul>
+<li>客户虚拟机缺页：无需下陷，硬件直接调用虚拟机注册的中断函数</li>
+<li>第二阶段页表缺页：下陷，硬件直接调用 VMM 注册的的对应中断函数</li>
+</ul>
+<p>优点：</p>
+<ul>
+<li>不用维护影子页表</li>
+<li>不用为每个进程维护一个页表</li>
+<li>缺页处理更快</li>
+</ul>
+<h3 id="换页和内存气球">换页和内存气球</h3>
+<p>目的：运行时动态调整虚拟机内存大小，<s>内存超售</s></p>
+<p><strong>换页逻辑</strong>：</p>
+<ul>
+<li>保存将要交换的页的 GVA 和 GPA</li>
+<li>交换页内数据到持久化存储设备（硬盘什么的）</li>
+<li>将客户端页表项设为 INVALID</li>
+<li>VMM 重新分配该页</li>
+</ul>
+<p><strong>内存气球(Memory Ballooning)</strong>：在客户端插入一个驱动(<s>内鬼</s>)，该驱动根据 VMM 的要求使用虚拟机的接口申请/释放内存，然后将申请的内存物理地址告诉 VMM 来使用。</p>
+<h2 id="I-O虚拟化">I/O虚拟化</h2>
+<ul>
+<li>限制虚拟机对物理硬件的直接访问</li>
+<li>提供虚拟设备接口</li>
+<li>充分利用I/O</li>
+</ul>
+<h3 id="软件模拟（全虚拟化）">软件模拟（全虚拟化）</h3>
+<p>捕获客户端对虚拟硬件的 MMIO, DMA, 中断，下陷后由 VMM 执行对应操作</p>
+<h3 id="半虚拟化-2">半虚拟化</h3>
+<p>类似全虚拟化，客户端不再使用原生驱动而是前端驱动，用于与 VMM 后端驱动交互。 通过内存共享传递数据，并使用批处理加速，由后端驱动完成和物理硬件的交互。</p>
+<h3 id="设备直通">设备直通</h3>
+<p>让客户端直接管理硬件设备，此时操作对应硬件不会产生任何下陷。为防止 DMA 攻击使用 IOMMU 进行二阶段 GPA 到 HPA 的映射并检查对应权限。</p>
+<p>SR-IOV(single root I/O virtualization):实现硬件层面 IO 虚拟化，避免单一虚拟机独占硬件。通过创建多个 VF （virtual function） 让 VMM 分配给虚拟机使用</p>
+<h2 id="中断虚拟化">中断虚拟化</h2>
+<p>两种中断：</p>
+<ul>
+<li>物理中断：由硬件产生，在非直通情况下由 VMM 处理</li>
+<li>虚拟中断：由 VMM 产生</li>
+</ul>
+<p>解决开关中断下陷的问题：增加可供虚拟机修改中断而无需下陷的虚拟寄存器</p>
+<p>直接向虚拟机发送中断：增加一个中断翻译表，用于将物理中断翻译为虚拟机对应的中断。因此无需再进行下陷。</p>
+<h2 id="QEMU-KVM">QEMU/KVM</h2>
+<p>略</p>
+
+        </div>
+        
+<blockquote class="copyright">
+    <p><strong>Link to this article : </strong><a class="permalink" href="http://blog.vollate.top/2023/11/17/virtualization/">http://blog.vollate.top/2023/11/17/virtualization/</a></p>
+    <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
+</blockquote>
+
+
+    </article>
+    
+    <section id="comments">
+        
+
+        
+    </section>
+
+
+    
+
+</main>
+
+
+<aside style="" id="sidebar" class="aside aside-fixture">
+    <div class="toc-sidebar">
+        <nav id="toc" class="article-toc">
+            <h3 class="toc-title">Catalogue</h3>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%99%9A%E6%8B%9F%E5%8C%96%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">系统虚拟化概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-number">1.1.</span> <span class="toc-text">组成部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VMM-%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">VMM 类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Trap-Emulate%EF%BC%88%E4%B8%8B%E9%99%B7-%E6%A8%A1%E6%8B%9F%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">Trap-Emulate（下陷-模拟）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Trap-Emulate-%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.1.</span> <span class="toc-text">Trap-Emulate 虚拟化实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CPU%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">CPU虚拟化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%99%9A%E6%8B%9F%E5%8C%96%E5%92%8C%E4%B8%8D%E5%8F%AF%E8%99%9A%E6%8B%9F%E5%8C%96%E6%9E%B6%E6%9E%84"><span class="toc-number">3.1.</span> <span class="toc-text">可虚拟化和不可虚拟化架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%A5%E8%A1%A5%E4%B8%8D%E5%8F%AF%E8%99%9A%E6%8B%9F%E5%8C%96%E6%9E%B6%E6%9E%84%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">弥补不可虚拟化架构的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-number">3.2.1.</span> <span class="toc-text">全虚拟化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%8A%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-number">3.2.2.</span> <span class="toc-text">半虚拟化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-number">3.2.3.</span> <span class="toc-text">硬件虚拟化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-number">4.</span> <span class="toc-text">内存虚拟化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%B1%E5%AD%90%E9%A1%B5%E8%A1%A8-Shadow-Page-Table"><span class="toc-number">4.1.</span> <span class="toc-text">影子页表(Shadow Page Table)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E9%A1%B5%E8%A1%A8%E6%98%A0%E5%B0%84"><span class="toc-number">4.2.</span> <span class="toc-text">直接页表映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E9%98%B6%E6%AE%B5%E5%9C%B0%E5%9D%80%E7%BF%BB%E8%AF%91"><span class="toc-number">4.3.</span> <span class="toc-text">两阶段地址翻译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%A2%E9%A1%B5%E5%92%8C%E5%86%85%E5%AD%98%E6%B0%94%E7%90%83"><span class="toc-number">4.4.</span> <span class="toc-text">换页和内存气球</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-O%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-number">5.</span> <span class="toc-text">I&#x2F;O虚拟化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E6%A8%A1%E6%8B%9F%EF%BC%88%E5%85%A8%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%89"><span class="toc-number">5.1.</span> <span class="toc-text">软件模拟（全虚拟化）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8A%E8%99%9A%E6%8B%9F%E5%8C%96-2"><span class="toc-number">5.2.</span> <span class="toc-text">半虚拟化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E7%9B%B4%E9%80%9A"><span class="toc-number">5.3.</span> <span class="toc-text">设备直通</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-number">6.</span> <span class="toc-text">中断虚拟化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#QEMU-KVM"><span class="toc-number">7.</span> <span class="toc-text">QEMU&#x2F;KVM</span></a></li></ol>
+        </nav>
+    </div>
+</aside>
+
+
+
+
+
+        </section>
+        <footer class="hidden lg:block fixed bottom-0 left-0 sm:w-1/12 lg:w-1/6 bg-gray-100 z-40">
+    
+    <div class="footer-social-links">
+        
+            <a target="_blank" rel="noopener" href="https://github.com/Vollate">
+                <i class="iconfont icon-github"></i>
+            </a>
+        
+            <a href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+            </a>
+        
+    </div>
+    
+    
+</footer>
+
+        <div id="mask" class="hidden mask fixed inset-0 bg-gray-900 opacity-75 z-40"></div>
+        <div id="search-view-container" class="hidden shadow-xl"></div>
+        
+<script src="/js/dom-event.min.js"></script>
+
+
+
+<script src="/js/local-search.min.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '346bd3ac57ee5e238afd',
+        clientSecret: '786b6b92c2216fae1114b63adf3d10a49931ce6a',
+        repo: 'Blog',
+        owner: 'Vollate',
+        admin: ['Vollate'],
+        id: md5(location.pathname),
+        distractionFreeMode: true
+    })
+    gitalk.render('comments')
+</script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/js/lightgallery.min.js"></script>
+    
+<script src="/js/light-gallery.min.js"></script>
+
+
+
+
+
+
+    </body>
+</html>
