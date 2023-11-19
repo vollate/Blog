@@ -1,3 +1,3 @@
 #!/bin/sh
 
-npm run build && npm run server &&hexo generate --watch
+npm run build && npm run server && hexo generate --watch

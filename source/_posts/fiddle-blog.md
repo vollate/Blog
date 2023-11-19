@@ -6,6 +6,8 @@ tags:
 categories:
 - Network
 ---
+原来的 vps 到期了，不想续费新开了一台，忘了全系统备份了。索性新 vps 改成 Debian，blog 扔 github page,然后又是一顿折腾。
+
 ## Github Action 样例
 
 改了改 Hexo 官网的:
@@ -17,7 +19,6 @@ on:
   push:
     branches:
       - main
-
 jobs:
   pages:
     runs-on: ubuntu-latest
@@ -47,7 +48,7 @@ jobs:
 
 因为要用 `peaceiris/actions-gh-pages@v3` 进行部署，但是用的 Hexo 且已经在先前的操作编译完成，只需部署到对应分支即可。
 
-~~一开始不知道 debug 了半天~~ 解决方法在仓库里创建一个`.nojekyll`文件即可,这会自动仅用 jekyll build
+~~一开始不知道 debug 了半天~~ 解决方法在仓库里创建一个`.nojekyll`文件即可, 这会自动禁用 jekyll build 而只执行 deploy (部署编译好的文件到对应分支)
 
 ## 使用cf后无限redirect
 
