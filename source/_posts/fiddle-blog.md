@@ -5,6 +5,7 @@ tags:
 - Fiddle
 categories:
 - Network
+- CI/CD
 ---
 原来的 vps 到期了，不想续费新开了一台，忘了全系统备份了。索性新 vps 改成 Debian，blog 扔 github page,然后又是一顿折腾。
 
