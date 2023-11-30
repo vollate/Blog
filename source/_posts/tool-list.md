@@ -3,9 +3,8 @@ title: Tool List
 date: 2023-03-27 08:17:41
 tags: 
 - Tools
-- Linux
 Categories: 
-- Archives
+- Linux
 ---
 >收录了Linux下使用的一些工具
 
@@ -47,4 +46,7 @@ Categories:
 - [btop](https://github.com/aristocratos/btop) or [bpytop](https://github.com/aristocratos/bpytop)
 - [htop](https://github.com/htop-dev/htop)
 
+## Diff Tools
+
+- [meld](https://gitlab.gnome.org/GNOME/meld)
 

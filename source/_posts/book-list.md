@@ -2,6 +2,8 @@
 title: Book List
 date: 2023-9-18 12:18:11
 tags: Book
+categories:
+- None
 ---
 ## Reading
 

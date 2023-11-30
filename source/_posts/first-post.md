@@ -2,6 +2,7 @@
 title: First Post
 date: 2022-10-01 11:12:59
 tags: 
+categories: None
 ---
 总算整了个能看的blog界面
 
