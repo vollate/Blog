@@ -4,16 +4,18 @@ date: 2023-11-03 11:20:31
 tags: Essay
 categories: C++
 ---
-记录cpp编程过程中的一些总结和感想
+记录cpp编程过程中的一些总结
 
-## 含非智能指针类的注意事项
+## clang + libstdc++ debug 问题
 
-为含有指针的类的写函数是一个很麻烦的事情，总结了一下经验:
+众所周知 LLVM 的 `libc++` 和 GNU 的 `libstdc++` 是两个不同的标准库实现。虽然使用 clang + libstdc++ 编译也可以使用 LLDB 对程序进行 debug，但是字符串以及一些数据结构如 `unordered_map` 无法正确显示值。解决方式是换  `libc++`,在 cmake 中可以使用 `set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")` 来解决。
 
-- 移动构造函数和移动赋值运算符：需要检查`this!=&that`，防止自我赋值后把自己数据删除的情况。
-- 涉及到资源的指针的拷贝，移动的：移动指针可能导致无法正常释放，拷贝指针可能导致外界使用悬空指针（释放过的指针）
-- 所有会用到该类引用/指针的非const成员函数：同移动构造一样需要检查`this!=&that`，防止函数执行过程中 that 数据改变影响自身数据。eg：假设有一个mString类，有一个insert(size_t index,size_t count, const mString&)成员方法，如果进行a.insert(0,20,a)而内部实现使用循环插入就会出问题
-- 所有会更改/依赖多个实例pointer的值进行操作的函数。eg:(std::swap)
+顺带记点 cmake 中切换到 llvm 全套工具链的方式:
 
-带裸指针的类写起来非常头疼，一不小心就会出问题。建议非极度性能或特殊需求（写驱动等），或者~~折磨~~锻炼自己的情况还是乖乖用智能指针吧。
+```cmake
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    set(CMAKE_CXX_FLAGS "-stdlib=libc++")
+    set(CMAKE_EXE_LINKER_FLAGS "-fuse-ld=lld")
+endif ()
+```
 
