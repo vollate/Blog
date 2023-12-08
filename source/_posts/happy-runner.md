@@ -5,7 +5,6 @@ tags:
 - Magic
 - Tips
 categories: 
-- None
 ---
 
 ## Requirement
