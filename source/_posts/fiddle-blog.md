@@ -7,7 +7,7 @@ categories:
 - Network
 - CI/CD
 ---
-原来的 vps 到期了，不想续费新开了一台，忘了全系统备份了。索性新 vps 改成 Debian，blog 扔 github page,然后又是一顿折腾。
+原来的 vps 到期了，不想续费新开了一台，忘了全系统备份。索性 blog 扔到 github page,然后又是一顿折腾。
 
 ## Github Action 样例
 
@@ -59,6 +59,10 @@ jobs:
 {% blockquote Vanish  https://vzone.me/897/ %}
 服务器端使用了强制HTTPS，CloudFlare 的Flexible策略原理是：用户访问时使用HTTPS访问到CF的节点，然后CF通过HTTP方式回源到你的服务器去读取数据，这个时候对于你的服务器来说，CF就是访客，所以服务器返回的状态都是 301。解决方法很简单，将 SSL 策略设为 Full 或者 Full(strict) 就能解决。
 {% endblockquote %}
+
+## 不要给网盘套 cf 的 cdn
+
+cf 的 cdn 有单文件上传下载大小限制，为了不被滥用。写 dns 的时候脑子抽了，然后虚空 debug。
 
 ---
 
