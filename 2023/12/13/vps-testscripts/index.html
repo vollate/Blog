@@ -3,21 +3,19 @@
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
-    <title>折腾博客记录 | Vollate's Blog</title>
-    <meta name="description" content="原来的 vps 到期了，不想续费新开了一台，忘了全系统备份。索性 blog 扔到 github page,然后又是一顿折腾。 Github Action 样例 改了改 Hexo 官网的: 1234567891011121314151617181920212223242526272829name: Blogon:  push:    branches:      - mainjobs:  pages">
+    <title>VPS 测试脚本整理 | Vollate's Blog</title>
+    <meta name="description" content="整理自知乎 基础测试(IO+网速) Bench wget -qO- bench.sh | bashcurl -Lso- bench.sh | bashwget -qO- 86.re&#x2F;bench.sh | bashcurl -so- 86.re&#x2F;bench.sh | bash SuperBench 会安装较多东西，测得也较全，并且网络测速注重回国速度 wget -qO- --no-check-cer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="折腾博客记录">
-<meta property="og:url" content="http://blog.vollate.top/2023/11/13/fiddle-blog/index.html">
+<meta property="og:title" content="VPS 测试脚本整理">
+<meta property="og:url" content="http://blog.vollate.top/2023/12/13/vps-testscripts/index.html">
 <meta property="og:site_name" content="Vollate&#39;s Blog">
-<meta property="og:description" content="原来的 vps 到期了，不想续费新开了一台，忘了全系统备份。索性 blog 扔到 github page,然后又是一顿折腾。 Github Action 样例 改了改 Hexo 官网的: 1234567891011121314151617181920212223242526272829name: Blogon:  push:    branches:      - mainjobs:  pages">
+<meta property="og:description" content="整理自知乎 基础测试(IO+网速) Bench wget -qO- bench.sh | bashcurl -Lso- bench.sh | bashwget -qO- 86.re&#x2F;bench.sh | bashcurl -so- 86.re&#x2F;bench.sh | bash SuperBench 会安装较多东西，测得也较全，并且网络测速注重回国速度 wget -qO- --no-check-cer">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://blog.vollate.top/2023/11/13/fiddle-blog/fiddle-with-ddl.jpg">
-<meta property="article:published_time" content="2023-11-13T09:02:27.000Z">
-<meta property="article:modified_time" content="2023-12-13T06:18:39.192Z">
+<meta property="article:published_time" content="2023-12-13T07:44:50.000Z">
+<meta property="article:modified_time" content="2023-12-13T16:27:03.074Z">
 <meta property="article:author" content="Vollate">
 <meta property="article:tag" content="Fiddle">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://blog.vollate.top/2023/11/13/fiddle-blog/fiddle-with-ddl.jpg">
 
     <link rel="alternate" type="application/atom+xml" href="/atom.xml">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
@@ -194,7 +192,7 @@
             
     
         <h1 class="article-title text-lg" itemprop="name">
-            折腾博客记录
+            VPS 测试脚本整理
         </h1>
     
 
@@ -203,17 +201,12 @@
             <p class="article-meta mb-3 text-xs">
                 <span class="article-date">
     <i class="iconfont icon-calendar-check"></i>
-	<a href="/2023/11/13/fiddle-blog/" class="article-date">
-	  <time datetime="2023-11-13T09:02:27.000Z" itemprop="datePublished">Nov 13</time>
+	<a href="/2023/12/13/vps-testscripts/" class="article-date">
+	  <time datetime="2023-12-13T07:44:50.000Z" itemprop="datePublished">Dec 13</time>
 	</a>
 </span>
 
                 
-    <span class="article-category">
-    <i class="iconfont icon-folder"></i>
-    <a class="article-category-link" href="/categories/Network/">Network</a> , <a class="article-category-link" href="/categories/Network/CI-CD/">CI/CD</a>
-  </span>
-
 
                 
     <span class="article-tags">
@@ -223,13 +216,13 @@
 
 
                 <span class="_partial/post-comment"><i class="icon icon-comment"></i>
-                    <a href="/2023/11/13/fiddle-blog/#comments" class="article-comment-link">
+                    <a href="/2023/12/13/vps-testscripts/#comments" class="article-comment-link">
                         Comments
                     </a>
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">Word Count: 438(words)</span>
+        <span class="post-wordcount" itemprop="wordCount">Word Count: 239(words)</span>
     
     
         <span class="post-readcount" itemprop="timeRequired">Read Count: 1(minutes)</span>
@@ -239,28 +232,26 @@
             </p>
         </header>
         <div class="marked-body article-body">
-            <p>原来的 vps 到期了，不想续费新开了一台，忘了全系统备份。索性 blog 扔到 github page,然后又是一顿折腾。</p>
-<h2 id="Github-Action-样例">Github Action 样例</h2>
-<p>改了改 Hexo 官网的:</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Blog</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">pages:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">permissions:</span></span><br><span class="line">      <span class="attr">contents:</span> <span class="string">write</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v3</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">token:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.GITHUB_TOKEN</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">submodules:</span> <span class="literal">true</span>   </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Use</span> <span class="string">Node.js</span> <span class="number">18.</span><span class="string">x</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="string">&quot;18&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">Dependencies</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">npm</span> <span class="string">install</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Build</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">npm</span> <span class="string">run</span> <span class="string">build</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">peaceiris/actions-gh-pages@v3</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">github_token:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.GITHUB_TOKEN</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">publish_dir:</span> <span class="string">./public</span></span><br></pre></td></tr></table></figure>
-<h2 id="Github-Action-禁用-jekyll-build">Github Action 禁用 jekyll build</h2>
-<p>因为要用 <code>peaceiris/actions-gh-pages@v3</code> 进行部署，但是用的 Hexo 且已经在先前的操作编译完成，只需部署到对应分支即可。</p>
-<p><s>一开始不知道 debug 了半天</s> 解决方法在仓库里创建一个<code>.nojekyll</code>文件即可, 这会自动禁用 jekyll build 而只执行 deploy (部署编译好的文件到对应分支)</p>
-<h2 id="使用cf后无限redirect">使用cf后无限redirect</h2>
-<p>在 namesilo 买的域名，突发奇想试试用 Cloudflare 免费计划的域名解析（<s>为了CDN</s>）</p>
-<p>配完后炸了，http 请求返回 301 导致无限 redirect，查了下原因如下：</p>
-<blockquote><p>服务器端使用了强制HTTPS，CloudFlare 的Flexible策略原理是：用户访问时使用HTTPS访问到CF的节点，然后CF通过HTTP方式回源到你的服务器去读取数据，这个时候对于你的服务器来说，CF就是访客，所以服务器返回的状态都是 301。解决方法很简单，将 SSL 策略设为 Full 或者 Full(strict) 就能解决。</p>
-<footer><strong>Vanish</strong><cite><a target="_blank" rel="noopener" href="https://vzone.me/897/">vzone.me/897</a></cite></footer></blockquote>
-<h2 id="不要给网盘套-cf-的-cdn">不要给网盘套 cf 的 cdn</h2>
-<p>cf 的 cdn 有单文件上传下载大小限制，为了不被滥用。写 dns 的时候脑子抽了，然后虚空 debug。</p>
-<hr>
-<h2 id="上大学上的-jpg"><s><strong>上大学上的.jpg</strong></s></h2>
-<p><img src="fiddle-with-ddl.jpg" alt="ddl fuck you"></p>
+            <p>整理自<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/117547388">知乎</a></p>
+<h2 id="基础测试-IO-网速">基础测试(IO+网速)</h2>
+<h3 id="Bench">Bench</h3>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget -qO- bench.sh | bash</span><br><span class="line">curl -Lso- bench.sh | bash</span><br><span class="line">wget -qO- 86.re/bench.sh | bash</span><br><span class="line">curl -so- 86.re/bench.sh | bash</span><br></pre></td></tr></table></figure>
+<h3 id="SuperBench">SuperBench</h3>
+<p>会安装较多东西，测得也较全，并且网络测速注重回国速度</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget -qO- --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/superbench.sh | bash</span><br><span class="line">curl -Lso- -no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/superb</span><br></pre></td></tr></table></figure>
+<h3 id="Superseed">Superseed</h3>
+<p>提供测试全国各地三大运营商速度</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/oooldking/script/master/superspeed.sh &amp;&amp; chmod +x superspeed.sh &amp;&amp; ./superspeed.sh</span><br></pre></td></tr></table></figure>
+<h3 id="UnixBench">UnixBench</h3>
+<p>主要测试项目有：系统调用、读写、进程、图形化测试、2D、3D、管道、运算、C库等系统基准性能提供测试数据，<a target="_blank" rel="noopener" href="https://github.com/teddysun/across?tab=readme-ov-file">发布页</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/unixbench.sh</span><br><span class="line">chmod +x unixbench.sh</span><br><span class="line">./unixbench.sh</span><br></pre></td></tr></table></figure>
+<h3 id="Memory-Test">Memory Test</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">CentOS / RHEL</span></span><br><span class="line">yum install wget -y</span><br><span class="line">yum groupinstall &quot;Development Tools&quot; -y</span><br><span class="line">wget https://raw.githubusercontent.com/FunctionClub/Memtester/master/memtester.cpp</span><br><span class="line">gcc -l stdc++ memtester.cpp</span><br><span class="line">./a.out</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Ubuntu / Debian</span></span><br><span class="line">apt-get update</span><br><span class="line">apt-get install wget build-essential -y</span><br><span class="line">wget https://raw.githubusercontent.com/FunctionClub/Memtester/master/memtester.cpp</span><br><span class="line">gcc -l stdc++ memtester.cpp</span><br><span class="line">./a.out</span><br></pre></td></tr></table></figure>
 
         </div>
         
 <blockquote class="copyright">
-    <p><strong>Link to this article : </strong><a class="permalink" href="http://blog.vollate.top/2023/11/13/fiddle-blog/">http://blog.vollate.top/2023/11/13/fiddle-blog/</a></p>
+    <p><strong>Link to this article : </strong><a class="permalink" href="http://blog.vollate.top/2023/12/13/vps-testscripts/">http://blog.vollate.top/2023/12/13/vps-testscripts/</a></p>
     <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
 </blockquote>
 
@@ -283,7 +274,7 @@
     <div class="toc-sidebar">
         <nav id="toc" class="article-toc">
             <h3 class="toc-title">Catalogue</h3>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Github-Action-%E6%A0%B7%E4%BE%8B"><span class="toc-number">1.</span> <span class="toc-text">Github Action 样例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Github-Action-%E7%A6%81%E7%94%A8-jekyll-build"><span class="toc-number">2.</span> <span class="toc-text">Github Action 禁用 jekyll build</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8cf%E5%90%8E%E6%97%A0%E9%99%90redirect"><span class="toc-number">3.</span> <span class="toc-text">使用cf后无限redirect</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E8%A6%81%E7%BB%99%E7%BD%91%E7%9B%98%E5%A5%97-cf-%E7%9A%84-cdn"><span class="toc-number">4.</span> <span class="toc-text">不要给网盘套 cf 的 cdn</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E5%A4%A7%E5%AD%A6%E4%B8%8A%E7%9A%84-jpg"><span class="toc-number">5.</span> <span class="toc-text">上大学上的.jpg</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%B5%8B%E8%AF%95-IO-%E7%BD%91%E9%80%9F"><span class="toc-number">1.</span> <span class="toc-text">基础测试(IO+网速)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bench"><span class="toc-number">1.1.</span> <span class="toc-text">Bench</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SuperBench"><span class="toc-number">1.2.</span> <span class="toc-text">SuperBench</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Superseed"><span class="toc-number">1.3.</span> <span class="toc-text">Superseed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UnixBench"><span class="toc-number">1.4.</span> <span class="toc-text">UnixBench</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memory-Test"><span class="toc-number">1.5.</span> <span class="toc-text">Memory Test</span></a></li></ol></li></ol>
         </nav>
     </div>
 </aside>
@@ -308,7 +299,7 @@
     </div>
     
     
-        <p class="footer-custom">What a day!</p>
+        <p class="footer-custom">Freedom is the freedom to say that two plus two makes four</p>
         <p class="theme-brand">Theme by <a target="_blank" href="https://github.com/fengkx/hexo-theme-purer" rel="nofollow noopener noreferrer noopener">hexo-theme-purer</a></p>
     
 </footer>
