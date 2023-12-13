@@ -1,6 +1,6 @@
 ---
-title: 折腾博客记录
-date: 2023-11-13 17:02:27
+title: 折腾网站记录
+date: 2023-12-13 12:02:27
 tags:
 - Fiddle
 categories:
@@ -62,7 +62,7 @@ jobs:
 
 ## 不要给网盘套 cf 的 cdn
 
-cf 的 cdn 有单文件上传下载大小限制，为了不被滥用。写 dns 的时候脑子抽了，然后虚空 debug。
+cf 的 cdn 有单文件100M 大小限制，为了不被滥用。写 dns 的时候脑子抽了，然后虚空 debug nginx 配置文件。
 
 ---
 
