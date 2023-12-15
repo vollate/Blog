@@ -204,7 +204,7 @@ clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -rpath `pwd`
 ```
 
 - 引用头文件
-现在我们不偷懒了，引入一个头文件 [head.h](head.h)，创建一个 [nMBoolTest.c](nMBoolTest.c)，假设头文件存储在目录 `/tmp` 下，我们要让编译器知道我们头文件的位置，使用 `-I`
+现在我们不偷懒了，引入一个头文件 [head.h](head.h)，创建一个 [nMBoolTest.c](nMBoolTest.c)，假设头文件存储在目录 `/tmp` 下，我们要让编译器知道我们头文件的位置，使用 `-I` 选项
 
 ```shell
 clang -o nTest.out nMBoolTest.c -L`pwd` -lmBool -rpath `pwd` -I/tmp
@@ -220,6 +220,22 @@ clang -o nTest.out nMBoolTest.c -L`pwd` -lmBool -rpath `pwd` -I/tmp
 
 写法同 `PATH`，用 `:` 分隔
 
+- 常用编译选项:
+  - `-g`: generate debug info
+  - `-O0, -O1, -O3, -Ofast`: 设置编译器优化等级，等级越高优化越多。O0无优化，Ofast 启用O3的同时使用一些不符合 ISO 标准的优化
+  - `-v`：输出执行的命令
+  - `-x`：显示指定语言类型
+  - `-std=`：指定语言标准
+  - `-Wall`：将所有 warning 当作 error
+  - `-Wno-deprecated`：如果使用了编译器被弃用的功能，不要产生 warning
+  - `-Wno-deprecated-declarations`：不要对使用 C++ 中的 [[deprecated]] 修饰的对象产生 warning
+  - `-mx32`：生成32位x86代码
+  - `-stdlib=`：指定使用的标准库
+  - `-E`：只进行预处理
+  - `-S`：生成汇编代码后停止
+  - `-c`：编译或汇编对象文件，但不链接
+  - more: read the manual
+
 ## 常见问题解决
 
 - 运行时装了但找不到动态链接库: 把库目录写进 `LD_LIBRARY_PATH`，这个环境变量告诉动态链接器除了默认目录外该去哪里找库
@@ -229,3 +245,4 @@ clang -o nTest.out nMBoolTest.c -L`pwd` -lmBool -rpath `pwd` -I/tmp
 ![fix_all](fix_all.jpg)
 
 ## 完
+
