@@ -13,7 +13,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://blog.vollate.top/2023/12/14/compile-knowledge/fix_all.jpg">
 <meta property="article:published_time" content="2023-12-14T17:23:36.000Z">
-<meta property="article:modified_time" content="2023-12-15T08:55:18.930Z">
+<meta property="article:modified_time" content="2023-12-15T10:13:53.411Z">
 <meta property="article:author" content="Vollate">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://blog.vollate.top/2023/12/14/compile-knowledge/fix_all.jpg">
@@ -223,7 +223,7 @@
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">Word Count: 2.9k(words)</span>
+        <span class="post-wordcount" itemprop="wordCount">Word Count: 3.1k(words)</span>
     
     
         <span class="post-readcount" itemprop="timeRequired">Read Count: 11(minutes)</span>
@@ -365,7 +365,7 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">use relative path</span></span><br><span class="line">clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -rpath .</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">use absolute path</span></span><br><span class="line">clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -rpath `pwd`</span><br></pre></td></tr></table></figure>
 <ul>
 <li>引用头文件<br>
-现在我们不偷懒了，引入一个头文件 <a href="head.h">head.h</a>，创建一个 <a href="nMBoolTest.c">nMBoolTest.c</a>，假设头文件存储在目录 <code>/tmp</code> 下，我们要让编译器知道我们头文件的位置，使用 <code>-I</code></li>
+现在我们不偷懒了，引入一个头文件 <a href="head.h">head.h</a>，创建一个 <a href="nMBoolTest.c">nMBoolTest.c</a>，假设头文件存储在目录 <code>/tmp</code> 下，我们要让编译器知道我们头文件的位置，使用 <code>-I</code> 选项</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">clang -o nTest.out nMBoolTest.c -L`pwd` -lmBool -rpath `pwd` -I/tmp</span><br></pre></td></tr></table></figure>
 <ul>
@@ -387,6 +387,26 @@
 </li>
 </ul>
 <p>写法同 <code>PATH</code>，用 <code>:</code> 分隔</p>
+<ul>
+<li>常用编译选项:
+<ul>
+<li><code>-g</code>: generate debug info</li>
+<li><code>-O0, -O1, -O3, -Ofast</code>: 设置编译器优化等级，等级越高优化越多。O0无优化，Ofast 启用O3的同时使用一些不符合 ISO 标准的优化</li>
+<li><code>-v</code>：输出执行的命令</li>
+<li><code>-x</code>：显示指定语言类型</li>
+<li><code>-std=</code>：指定语言标准</li>
+<li><code>-Wall</code>：将所有 warning 当作 error</li>
+<li><code>-Wno-deprecated</code>：如果使用了编译器被弃用的功能，不要产生 warning</li>
+<li><code>-Wno-deprecated-declarations</code>：不要对使用 C++ 中的 [[deprecated]] 修饰的对象产生 warning</li>
+<li><code>-mx32</code>：生成32位x86代码</li>
+<li><code>-stdlib=</code>：指定使用的标准库</li>
+<li><code>-E</code>：只进行预处理</li>
+<li><code>-S</code>：生成汇编代码后停止</li>
+<li><code>-c</code>：编译或汇编对象文件，但不链接</li>
+<li>more: read the manual</li>
+</ul>
+</li>
+</ul>
 <h2 id="常见问题解决">常见问题解决</h2>
 <ul>
 <li>运行时装了但找不到动态链接库: 把库目录写进 <code>LD_LIBRARY_PATH</code>，这个环境变量告诉动态链接器除了默认目录外该去哪里找库</li>
