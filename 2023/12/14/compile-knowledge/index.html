@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html  lang="en" >
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <title>编译之法 | Vollate's Blog</title>
+    <meta name="description" content="以 C&#x2F;C++ 为例，简单介绍一下 Linux 下编译的相关知识。看完应该能掌握基础的编译能力，处理报错不再抓瞎。 麻麻再也不用担心我遇到问题只能瞎逛 stackoverflow 了 该逛还得逛 基础知识 编译型语言与解释型语言  编译型语言是将代码直接编译成机器可以直接执行的机器码，可以直接在目标机器上执行。代表是 Fortran, C, C++, RUST, Go 等。 解释型语言是通过解释器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译之法">
+<meta property="og:url" content="http://blog.vollate.top/2023/12/14/compile-knowledge/index.html">
+<meta property="og:site_name" content="Vollate&#39;s Blog">
+<meta property="og:description" content="以 C&#x2F;C++ 为例，简单介绍一下 Linux 下编译的相关知识。看完应该能掌握基础的编译能力，处理报错不再抓瞎。 麻麻再也不用担心我遇到问题只能瞎逛 stackoverflow 了 该逛还得逛 基础知识 编译型语言与解释型语言  编译型语言是将代码直接编译成机器可以直接执行的机器码，可以直接在目标机器上执行。代表是 Fortran, C, C++, RUST, Go 等。 解释型语言是通过解释器">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://blog.vollate.top/2023/12/14/compile-knowledge/fix_all.jpg">
+<meta property="article:published_time" content="2023-12-14T17:23:36.000Z">
+<meta property="article:modified_time" content="2023-12-15T08:55:18.930Z">
+<meta property="article:author" content="Vollate">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.vollate.top/2023/12/14/compile-knowledge/fix_all.jpg">
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    
+<link rel="stylesheet" href="/css/common.min.css">
+
+
+
+    
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.css" rel="stylesheet">
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/css/lightgallery.min.css" rel="stylesheet">
+    
+    
+    
+<link rel="stylesheet" href="/css/iconfont.min.css">
+
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.0.0"></head>
+
+    <body>
+        <header class="header header-fixture">
+    <div class="profile-search-wrap flex sm:block">
+        
+        
+        <div class="profile sm:text-center md:px-1 lg:px-3 sm:pb-4 sm:pt-6">
+            <a id="avatar" role="link" href="https://github.com/Vollate" class="inline-block lg:w-16 lg:h-16 w-8 h-8 m-2" target="_blank" rel="noopener" rel="noreferrer" >
+                <img src="/about/avatar.jpg" class="rounded-full" alt="avatar">
+            </a>
+            <h2 id="name" class="hidden lg:block">Vollate</h2>
+            <h3 id="title" class="hidden lg:block">Coder</h3>
+            
+            <small id="location" class="hidden lg:block">
+                <i class="iconfont icon-map-icon"></i>
+                Shenzhen, China
+            </small>
+            
+        </div>
+        
+        
+<div class="search flex-1 flex lg:inline-block sm:hidden lg:px-4 lg:mt-2 lg:mb-4 lg:w-full">
+    <form id="search-form" class="my-auto flex-1 lg:border lg:border-solid lg:border-gray-200">
+        <div class="input-group table bg-gray-100 lg:bg-white w-full">
+            <input id="search-input" type="text" placeholder="Search" class="inline-block w-full bg-gray-100 lg:bg-white p-1">
+            <span class="table-cell">
+                <button name="search tigger button" disabled>
+                    <i class="iconfont icon-search m-2"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+        
+<div id="content-json" data-placeholder="Search" class="invisible hidden">/content.json</div>
+<script id="search-teamplate" type="text/html" data-path="/content.json">
+    <div>
+        <div class="search-header bg-gray-400">
+            <input id="actual-search-input" model="keyword" ref="input" class="inline-block w-full h-10 px-2 py-1" placeholder="Search" type="text">
+        </div>
+        <div class="search-result bg-gray-200">
+            {{#each searchPosts}}
+            <a href="/{{ path }}" class="result-item block px-2 pb-3 mb-1 pt-1 hover:bg-indigo-100">
+                <i class="iconfont icon-file"></i>
+                <h1 class="result-title inline font-medium text-lg">{{ title }}</h1>
+                <p class="result-content text-gray-600 text-sm">{{{ text }}}</p>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</script>
+
+</div>
+
+
+        <button name="menu toogle button" id="menu-toggle-btn" class="block sm:hidden p-3" role="button" aria-expanded="false">
+            <i class="iconfont icon-hamburger"></i>
+        </button>
+    </div>
+    <nav id="menu-nav" class="hidden sm:flex flex-col">
+        
+        
+            <div class="menu-item menu-home" role="menuitem">
+                <a href="/.">
+                    <i class="iconfont icon-home" aria-hidden="true"></i>
+                    <span class="menu-title">Home</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-archives" role="menuitem">
+                <a href="/archives">
+                    <i class="iconfont icon-archive" aria-hidden="true"></i>
+                    <span class="menu-title">Archives</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-categories" role="menuitem">
+                <a href="/categories">
+                    <i class="iconfont icon-folder" aria-hidden="true"></i>
+                    <span class="menu-title">Categories</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-tags" role="menuitem">
+                <a href="/tags">
+                    <i class="iconfont icon-tag" aria-hidden="true"></i>
+                    <span class="menu-title">Tags</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-repository" role="menuitem">
+                <a href="/repository">
+                    <i class="iconfont icon-project" aria-hidden="true"></i>
+                    <span class="menu-title">Repository</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-links" role="menuitem">
+                <a href="/links">
+                    <i class="iconfont icon-friend" aria-hidden="true"></i>
+                    <span class="menu-title">Links</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-about" role="menuitem">
+                <a href="/about">
+                    <i class="iconfont icon-cup" aria-hidden="true"></i>
+                    <span class="menu-title">About</span>
+                </a>
+            </div>
+        
+        
+<div class="social-links flex sm:flex-col lg:hidden mt-5">
+    
+        <span class="social-item text-center">
+            <a target="_blank" rel="noopener" href="https://github.com/Vollate">
+                <i class="iconfont social-icon icon-github"></i>
+                <span class="menu-title hidden lg:inline">menu.github</span>
+            </a>
+        </span>
+    
+        <span class="social-item text-center">
+            <a href="/atom.xml">
+                <i class="iconfont social-icon icon-rss"></i>
+                <span class="menu-title hidden lg:inline">menu.rss</span>
+            </a>
+        </span>
+    
+</div>
+
+
+    </nav>
+</header>
+
+        <section class="main-section">
+            
+    <main class="flex-1 px-4 py-14 md:px-5 lg:px-8 lg:py-4 relative min-h-screen">
+    
+
+    <article class="content article article-archives article-type-list" itemscope="">
+        <header class="article-header">
+            
+    
+        <h1 class="article-title text-lg" itemprop="name">
+            编译之法
+        </h1>
+    
+
+
+
+            <p class="article-meta mb-3 text-xs">
+                <span class="article-date">
+    <i class="iconfont icon-calendar-check"></i>
+	<a href="/2023/12/14/compile-knowledge/" class="article-date">
+	  <time datetime="2023-12-14T17:23:36.000Z" itemprop="datePublished">Dec 15</time>
+	</a>
+</span>
+
+                
+    <span class="article-category">
+    <i class="iconfont icon-folder"></i>
+    <a class="article-category-link" href="/categories/Compile/">Compile</a> , <a class="article-category-link" href="/categories/Compile/Linux/">Linux</a>
+  </span>
+
+
+                
+
+                <span class="_partial/post-comment"><i class="icon icon-comment"></i>
+                    <a href="/2023/12/14/compile-knowledge/#comments" class="article-comment-link">
+                        Comments
+                    </a>
+                </span>
+                
+    
+        <span class="post-wordcount" itemprop="wordCount">Word Count: 2.9k(words)</span>
+    
+    
+        <span class="post-readcount" itemprop="timeRequired">Read Count: 11(minutes)</span>
+    
+
+
+            </p>
+        </header>
+        <div class="marked-body article-body">
+            <p>以 C/C++ 为例，简单介绍一下 Linux 下编译的相关知识。看完应该能掌握基础的编译能力，处理报错不再抓瞎。 <s>麻麻再也不用担心我遇到问题只能瞎逛 stackoverflow 了</s> 该逛还得逛</p>
+<h2 id="基础知识">基础知识</h2>
+<h3 id="编译型语言与解释型语言">编译型语言与解释型语言</h3>
+<ul>
+<li>编译型语言是将代码直接编译成机器可以直接执行的机器码，可以直接在目标机器上执行。代表是 Fortran, C, C++, RUST, Go 等。</li>
+<li>解释型语言是通过解释器逐行解释每条命令来执行对应的操作，运行不需要编译，但是需要对应的解释器解释成对应架构的指令。代表是 Python, ECMAScript, PHP 等等。</li>
+<li>也还有一些两者兼具的，如 JAVA，编译成字节码，然后由 JVM 解释执行。</li>
+</ul>
+<h3 id="汇编语言">汇编语言</h3>
+<p>汇编语言是最接近于机器码的语言，和目标机器的指令集架构紧密相关也称为低级语言。指令集是一种抽象，它将计算机的物理实现抽象成指令集规定的一系列操作，使得同一架构的不同型号计算机能运算同一个程序，且规定了程序如何操作硬件完成计算。汇编之所以成为最接近于机器码的语言，是在于它只需要进行简单的替换就能生成对应的机器码。</p>
+<p>举个 MIPS32 架构汇编的例子：</p>
+<figure class="highlight mips"><table><tr><td class="code"><pre><span class="line"><span class="keyword">add </span>$<span class="number">1</span>,$<span class="number">2</span>,$<span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>这条指令将2和3号寄存器的值相加存储到1号寄存器中，根据 MIPS32 的转换规则，生成的二进制机器码如下:</p>
+<table>
+<thead>
+<tr>
+<th>opcode</th>
+<th>rs</th>
+<th>rt</th>
+<th>rd</th>
+<th>shamt</th>
+<th>func</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>000000</td>
+<td>00010</td>
+<td>00011</td>
+<td>00001</td>
+<td>00000</td>
+<td>100000</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>操作码（opcode）：对于 add 操作，它的操作码是 000000。</li>
+<li>源寄存器2（rs）：$2 对应的寄存器是 00010。</li>
+<li>源寄存器3（rt）：$3 对应的寄存器是 00011。</li>
+<li>目标寄存器（rd）：$1 对应的寄存器是 00001。</li>
+<li>移位量（shamt）：对于 add 操作而言，不涉及移位，因此为 00000。</li>
+<li>功能码（funct）：add 操作的功能码是 100000。</li>
+</ul>
+<p>汇编语言经过简单的处理就可以直接转换为机器码，但是有许多坏处:</p>
+<ol>
+<li>可读性差。以下是一个 clang 生成的简单的 hello world 程序的汇编代码</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">    .text</span><br><span class="line">    .file   &quot;test.c&quot;</span><br><span class="line">    .globl  main                            # -- Begin function main</span><br><span class="line">    .p2align    4, 0x90</span><br><span class="line">    .type   main,@function</span><br><span class="line">main:                                   # @main</span><br><span class="line">    .cfi_startproc</span><br><span class="line"># %bb.0:</span><br><span class="line">    pushq   %rbp</span><br><span class="line">    .cfi_def_cfa_offset 16</span><br><span class="line">    .cfi_offset %rbp, -16</span><br><span class="line">    movq    %rsp, %rbp</span><br><span class="line">    .cfi_def_cfa_register %rbp</span><br><span class="line">    subq    $16, %rsp</span><br><span class="line">    movl    $0, -4(%rbp)</span><br><span class="line">    leaq    .L.str(%rip), %rdi</span><br><span class="line">    movb    $0, %al</span><br><span class="line">    callq   printf@PLT</span><br><span class="line">    xorl    %eax, %eax</span><br><span class="line">    addq    $16, %rsp</span><br><span class="line">    popq    %rbp</span><br><span class="line">    .cfi_def_cfa %rsp, 8</span><br><span class="line">    retq</span><br><span class="line">.Lfunc_end0:</span><br><span class="line">    .size   main, .Lfunc_end0-main</span><br><span class="line">    .cfi_endproc</span><br><span class="line">                                        # -- End function</span><br><span class="line">    .type   .L.str,@object                  # @.str</span><br><span class="line">    .section    .rodata.str1.1,&quot;aMS&quot;,@progbits,1</span><br><span class="line">.L.str:</span><br><span class="line">    .asciz  &quot;Hello, World!\n&quot;</span><br><span class="line">    .size   .L.str, 15</span><br><span class="line"></span><br><span class="line">    .ident  &quot;clang version 16.0.6&quot;</span><br><span class="line">    .section    &quot;.note.GNU-stack&quot;,&quot;&quot;,@progbits</span><br><span class="line">    .addrsig</span><br><span class="line">    .addrsig_sym printf</span><br></pre></td></tr></table></figure>
+<p>汇编中没有我们常用的控制流，需要手写判断跳转的操作<br>
+2. 可移植性差，只使用于特定架构的计算机。如果你想要你的汇编程序同时在 arm64 和 x86_64 上运行，你需要写两份代码。<br>
+3. 其他就不一一列举了……</p>
+<h3 id="函数声明和定义">函数声明和定义</h3>
+<p>在编程中，我们用函数来表示一种特定的操作，它能够处理我们的输入并且产生对应的输出(副作用)。想深入了解可以看看<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%CE%9B%E6%BC%94%E7%AE%97">λ演算</a>，这里就不过多介绍了。函数能够简化我们的代码，对于需要在多处重复执行的操作，我们通过将他包装成函数来简化我们的代码。<br>
+函数的声明就是告诉编译器我们有这么一个叫xxx的函数，它的输入和输出都是什么类型。定义则是具体描述了函数如何处理输入最终得到输出。</p>
+<p>在编程中，函数往往是声明和定义分开，来将逻辑和函数解耦。在 C/C++ 中，我们通常使用 <code>#include</code> 预处理命令来引用头文件，头文件中包含了函数声明。预处理器会直接将被 include 的文件内容复制到预处理后的文件对应位置中。</p>
+<h3 id="编译过程">编译过程</h3>
+<p>编译器是一种计算机程序，它会将某种编程语言写成的源代码转换成另一种编程语言。主要用途是将便于人编写、阅读、维护的高级计算机语言所写作的源代码程序，翻译为目标机器能解读、运行的低阶机器语言的程序。将高级语言转化为低级语言的过程称为编译，反过来成为反编译。</p>
+<p>一般编译的过程分为如下步骤:</p>
+<ul>
+<li>预处理: 进行文本替换等其他操作，如 C/C++ 里 “#xxx” 预处理命令的展开以及宏的替换</li>
+<li>编译：将源代码转换为对应架构的汇编代码，生成<code>.s</code>汇编文件</li>
+<li>汇编：将上一步生成的汇编代码翻译成二进制机器码，生成<code>.o</code> object 文件</li>
+<li>链接：将上一步生成的文件和所需要的静态/动态库链接为一个新的 object 文件</li>
+</ul>
+<p>注意不是所有语言的编译都有上述的几个部分，如 JAVA 。</p>
+<h3 id="静态链接和动态链接">静态链接和动态链接</h3>
+<p>我们可以通过声明让在多个地方使用函数而只需提供一次定义，同理，多个文件可以共用同一个函数，只需要链接包含了函数定义的 library 即可，无需重复编译。链接方式有如下两种:</p>
+<ul>
+<li>静态链接：将被链接的库的所有代码嵌入到新的可执行文件或目标文件中。
+<ul>
+<li>优点：生成的可执行文件不需要依赖外部库</li>
+<li>缺点：
+<ol>
+<li>生成文件变大</li>
+<li>如果被链接的库更新，需要重新编译</li>
+<li>无法重复利用共享库</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>动态链接：在程序运行时或运行前的装载阶段将外部库代码加载到内存中的过程。可执行文件只包含对这些库的引用，不包含实际的库代码
+<ul>
+<li>优点：
+<ol>
+<li>可执行文件可以更小</li>
+<li>多个可执行文件可以复用同一个 lib</li>
+<li>如果更新不改变函数接口，则无需重新编译</li>
+</ol>
+</li>
+<li>缺点：
+<ol>
+<li>会依赖外部库，如 linux 的 glibc。如果版本不兼容，运行时会报错。</li>
+<li>启动时会略微增加时间</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p>动态链接库 <code>.dll</code> (Dynamic link library)是 Windows 下的的称呼，在 Unix/Linux 下称为 Shared Object <code>.so</code>，本文会统一叫动态链接库(叫顺口了)。</p>
+<p>Linux 下，静态链接库一般以 <code>.a</code> 结尾 (archive)</p>
+<hr>
+<h2 id="gcc-clang-使用">gcc/clang 使用</h2>
+<p>本章主要介绍在命令行中使用 gcc/clang 进行编译的的过程和注意事项，以下命令中的 clang 都可以换成 gcc。但是注意，不同编译器所支持的编译参数并不完全相同，因此项目中需要对不同的编译器进行不同参数的适配。</p>
+<ul>
+<li>获取帮助 <code>man clang</code>，man 是 Linux 下的一个 reference 页面，安装的程序可以以一定格式提供 manual 供 man 命令调用。man 使用 vim 的键位，按 / 建开始搜索，n 建下一个，N 键上一个，按 q 键退出。你可以使用 <code>man man</code> 来查看 man 的 manual，如果你只想获得简单的帮助，请使用 <code>clang --help</code></li>
+<li>编译一个文件，生成可执行文件<br>
+<a href="test.c">test.c</a></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">clang test.c -o test</span><br></pre></td></tr></table></figure>
+<p>注意，在 clang/gcc 默认使用 “main” 作为主函数的入点，如果你的文件中没有 main 函数，编译会报错，因为编译器没有找到主函数入口。这里我们使用 “-o” 指定输出文件名称，如果不指定，默认为 “a.out”</p>
+<ul>
+<li>编译一个库<br>
+<a href="mBool.c">mBool.c</a></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">static lib</span></span><br><span class="line">clang -c mBool.c -o mBool.o # 这里不写默认生成同名后缀为.o的对应文件</span><br><span class="line">ar r mBool.a mBool.o        # for GNU toolchain</span><br><span class="line">llvm-ar r libmBool.a mBool.o   # for llvm toolchain</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其实静态连接库就是编译出的 object 文件改个名字，因为 linux 下静态链接库以 .a 结尾. 上面的指令只是把 .o 改个名存起来</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">shared lib</span></span><br><span class="line">clang -shared mBool.c -o libmBool.so -fPIC</span><br></pre></td></tr></table></figure>
+<p>上述动态链接库的编译过程中使用了 <code>-fPIC</code> 这个参数，意味着生成 position independent code，这样我们的动态链接库就可以在任意地址被装载。</p>
+<ul>
+<li>链接一个库<br>
+<a href="mBoolTest.c">mBoolTest.c</a>  这里我懒得写头文件了，直接前置声明了</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">link</span> the static lib</span></span><br><span class="line">clang -o mTest.out mBoolTest.c `pwd`/mBool.a</span><br><span class="line">clang -o mTest.out -static mBoolTest.c -L`pwd` -lmBool      # if no shared lib, &quot;-static&quot; is uneeded</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">link</span> the shared lib</span></span><br><span class="line">clang -o mTest.out mBoolTest.c -L`pwd` -lmBool</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ref:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> -L<span class="variable">$&#123;target_lib_path&#125;</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> -l<span class="variable">$&#123;lib_name&#125;</span>            <span class="comment"># compiler will try to find lib$&#123;lib_name&#125;.a/so</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> -l:<span class="variable">$&#123;custom_lib_name&#125;</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> -static                  <span class="comment"># use static link</span></span></span><br></pre></td></tr></table></figure>
+<p>对于静态链接库，我们直接将其作为输入即可链接，因为其本质上就是一个编译后生成的二进制文件 <code>.o</code></p>
+<p>对于动态链接库，编译器会有一些系统默认的动态库目录，它会进入目录下查找。显然我们当前的文件夹并不在此之列，因此为了让编译器进入我们当前的目录下查找链接库，我们使用 <code>-L</code> 来加入我们库所在的目录来让编译器查找。我们之前将编译出来的库命名为 “libmBool.*”，因此可以直接使用 <code>-l</code> 来链接我们的库。因为我们的目录下同时存在静态和动态链接库，因此编译器默认使用动态链接。我们可以使用 <code>-static</code> 来让编译器使用静态链接库。</p>
+<ul>
+<li>使用 -rpath<br>
+现在我们尝试运行我们刚刚链接完动态链接库的可执行文件，然后就报错了</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">./mTest.out: error while loading shared libraries: libmBool.so: cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>系统提示我们找不到动态链接库。因为我们没有存储动态链接库的位置，动态链接器(如 ld-linux.so)不知道去哪加载我们的动态链接库我们使用 <code>-rpath</code> 来存储动态链接库的目录信息。可以使用绝对路径或相对路径，一般使用相对路径，这样程序只要保持文件内的结构不变即可在各处执行。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">use relative path</span></span><br><span class="line">clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -rpath .</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">use absolute path</span></span><br><span class="line">clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -rpath `pwd`</span><br></pre></td></tr></table></figure>
+<ul>
+<li>引用头文件<br>
+现在我们不偷懒了，引入一个头文件 <a href="head.h">head.h</a>，创建一个 <a href="nMBoolTest.c">nMBoolTest.c</a>，假设头文件存储在目录 <code>/tmp</code> 下，我们要让编译器知道我们头文件的位置，使用 <code>-I</code></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">clang -o nTest.out nMBoolTest.c -L`pwd` -lmBool -rpath `pwd` -I/tmp</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>使用环境变量<br>
+假设我们没有 make，cmake 这样的自动化构建工具，或者有一个复杂无比的 Makefile/CMakeLists.txt，无法轻易更改。我们需要让编译器知道我们自定义的 header 和 lib 的位置，这时候就需要我们的环境变量登场了。下面介绍一些常用的，更多的看对应编译器的文档，<a target="_blank" rel="noopener" href="https://gcc.gnu.org/onlinedocs/gcc/Environment-Variables.html">GCC</a></p>
+</li>
+<li>
+<p>C_INCLUDE_PATH：阅读理解</p>
+</li>
+<li>
+<p>C_PATH：same as above</p>
+</li>
+<li>
+<p>CPLUS_INCLUDE_PATH：阅读理解</p>
+</li>
+<li>
+<p>LIBRARY_PATH：告诉连接器库的目录</p>
+</li>
+</ul>
+<p>写法同 <code>PATH</code>，用 <code>:</code> 分隔</p>
+<h2 id="常见问题解决">常见问题解决</h2>
+<ul>
+<li>运行时装了但找不到动态链接库: 把库目录写进 <code>LD_LIBRARY_PATH</code>，这个环境变量告诉动态链接器除了默认目录外该去哪里找库</li>
+<li>学会看报错，报错是帮你解决问题的</li>
+<li>心态崩了的话缓上个半天就好了</li>
+</ul>
+<p><img src="fix_all.jpg" alt="fix_all"></p>
+<h2 id="完">完</h2>
+
+        </div>
+        
+<blockquote class="copyright">
+    <p><strong>Link to this article : </strong><a class="permalink" href="http://blog.vollate.top/2023/12/14/compile-knowledge/">http://blog.vollate.top/2023/12/14/compile-knowledge/</a></p>
+    <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
+</blockquote>
+
+
+    </article>
+    
+    <section id="comments">
+        
+
+        
+    </section>
+
+
+    
+
+</main>
+
+
+<aside style="" id="sidebar" class="aside aside-fixture">
+    <div class="toc-sidebar">
+        <nav id="toc" class="article-toc">
+            <h3 class="toc-title">Catalogue</h3>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E5%9E%8B%E8%AF%AD%E8%A8%80%E4%B8%8E%E8%A7%A3%E9%87%8A%E5%9E%8B%E8%AF%AD%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">编译型语言与解释型语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80"><span class="toc-number">1.2.</span> <span class="toc-text">汇编语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E%E5%92%8C%E5%AE%9A%E4%B9%89"><span class="toc-number">1.3.</span> <span class="toc-text">函数声明和定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="toc-number">1.4.</span> <span class="toc-text">编译过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E5%92%8C%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5"><span class="toc-number">1.5.</span> <span class="toc-text">静态链接和动态链接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gcc-clang-%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">gcc&#x2F;clang 使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="toc-number">3.</span> <span class="toc-text">常见问题解决</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C"><span class="toc-number">4.</span> <span class="toc-text">完</span></a></li></ol>
+        </nav>
+    </div>
+</aside>
+
+
+
+
+
+        </section>
+        <footer class="hidden lg:block fixed bottom-0 left-0 sm:w-1/12 lg:w-1/6 bg-gray-100 z-40">
+    
+    <div class="footer-social-links">
+        
+            <a target="_blank" rel="noopener" href="https://github.com/Vollate">
+                <i class="iconfont icon-github"></i>
+            </a>
+        
+            <a href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+            </a>
+        
+    </div>
+    
+    
+        <p class="footer-custom">Freedom is the freedom to say that two plus two makes four</p>
+        <p class="theme-brand">Theme by <a target="_blank" href="https://github.com/fengkx/hexo-theme-purer" rel="nofollow noopener noreferrer noopener">hexo-theme-purer</a></p>
+    
+</footer>
+
+        <div id="mask" class="hidden mask fixed inset-0 bg-gray-900 opacity-75 z-40"></div>
+        <div id="search-view-container" class="hidden shadow-xl"></div>
+        
+<script src="/js/dom-event.min.js"></script>
+
+
+
+<script src="/js/local-search.min.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '346bd3ac57ee5e238afd',
+        clientSecret: '786b6b92c2216fae1114b63adf3d10a49931ce6a',
+        repo: 'Blog',
+        owner: 'Vollate',
+        admin: ['Vollate'],
+        id: md5(location.pathname),
+        distractionFreeMode: true
+    })
+    gitalk.render('comments')
+</script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/js/lightgallery.min.js"></script>
+    
+<script src="/js/light-gallery.min.js"></script>
+
+
+
+
+
+
+    </body>
+</html>
