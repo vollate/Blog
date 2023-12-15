@@ -2,7 +2,7 @@
 title: VPS 测试脚本整理
 tags:
   - Fiddle
-Categories:
+categories:
   - VPS
   - Server
 date: 2023-12-13 15:44:50

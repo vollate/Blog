@@ -1,5 +1,5 @@
 ---
-title: About me
+title: About Me
 date: 2023-08-31 18:15:23
 layout: about
 ---
