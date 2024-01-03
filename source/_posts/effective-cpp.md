@@ -2,7 +2,7 @@
 title: Effective C++
 date: 2023-10-05 16:03:48
 tags:
-- Note
+- 笔记
 category:
 - C++
 ---

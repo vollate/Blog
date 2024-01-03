@@ -5,7 +5,7 @@ categories:
   - Linux
 date: 2023-12-15 01:23:36
 tags:
-  - Tutorial
+  - 教程
 ---
 
 

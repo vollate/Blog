@@ -2,7 +2,7 @@
 title: Tool List
 date: 2023-03-27 08:17:41
 tags: 
-- Tools
+- 工具
 Categories: 
 - Linux
 ---

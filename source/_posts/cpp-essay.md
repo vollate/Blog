@@ -1,7 +1,7 @@
 ---
 title: CPP 随笔
 date: 2023-11-03 11:20:31
-tags: Essay
+tags: 随笔
 categories: C++
 ---
 记录cpp编程过程中的一些总结

@@ -2,7 +2,7 @@
 title: More Effecitve C++
 date: 2023-11-08 16:21:57
 tags:
-- Note
+- 笔记
 category:
 - C++
 ---

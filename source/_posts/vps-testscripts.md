@@ -1,7 +1,7 @@
 ---
 title: VPS 测试脚本整理
 tags:
-  - Fiddle
+  - 折腾
 categories:
   - VPS
   - Server
