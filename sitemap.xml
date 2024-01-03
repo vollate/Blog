@@ -2,18 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.vollate.top/about/index.html</loc>
-    
-    <lastmod>2023-12-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://blog.vollate.top/categories/index.html</loc>
     
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -22,7 +13,7 @@
   <url>
     <loc>http://blog.vollate.top/links/index.html</loc>
     
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -31,7 +22,7 @@
   <url>
     <loc>http://blog.vollate.top/repository/index.html</loc>
     
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -40,7 +31,7 @@
   <url>
     <loc>http://blog.vollate.top/tags/index.html</loc>
     
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -49,7 +40,7 @@
   <url>
     <loc>http://blog.vollate.top/2023/03/27/tool-list/</loc>
     
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -58,7 +49,7 @@
   <url>
     <loc>http://blog.vollate.top/2023/11/17/virtualization/</loc>
     
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -67,7 +58,16 @@
   <url>
     <loc>http://blog.vollate.top/2023/12/13/vps-testscripts/</loc>
     
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.vollate.top/about/index.html</loc>
+    
+    <lastmod>2024-01-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -76,7 +76,7 @@
   <url>
     <loc>http://blog.vollate.top/2022/11/03/happy-runner/</loc>
     
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -85,7 +85,7 @@
   <url>
     <loc>http://blog.vollate.top/2023/11/08/more-effecitve-cpp/</loc>
     
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -94,16 +94,7 @@
   <url>
     <loc>http://blog.vollate.top/2023/12/24/sustech/</loc>
     
-    <lastmod>2023-12-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.vollate.top/2022/11/10/blog-archives/</loc>
-    
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -112,16 +103,16 @@
   <url>
     <loc>http://blog.vollate.top/2023/09/18/book-list/</loc>
     
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://blog.vollate.top/2023/11/03/cpp-essay/</loc>
+    <loc>http://blog.vollate.top/2022/11/10/blog-archives/</loc>
     
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -130,7 +121,16 @@
   <url>
     <loc>http://blog.vollate.top/2023/12/14/compile-knowledge/</loc>
     
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.vollate.top/2023/11/03/cpp-essay/</loc>
+    
+    <lastmod>2024-01-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -139,7 +139,7 @@
   <url>
     <loc>http://blog.vollate.top/2023/10/05/effective-cpp/</loc>
     
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -148,7 +148,7 @@
   <url>
     <loc>http://blog.vollate.top/2023/12/13/fiddle-site/</loc>
     
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -157,7 +157,7 @@
   <url>
     <loc>http://blog.vollate.top/2022/10/01/first-post/</loc>
     
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -166,78 +166,78 @@
 
   <url>
     <loc>http://blog.vollate.top/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>http://blog.vollate.top/tags/Archive/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <loc>http://blog.vollate.top/tags/%E4%B9%A6%E7%B1%8D/</loc>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.vollate.top/tags/Book/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <loc>http://blog.vollate.top/tags/%E5%BD%92%E6%A1%A3/</loc>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.vollate.top/tags/Essay/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <loc>http://blog.vollate.top/tags/%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.vollate.top/tags/Tutorial/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <loc>http://blog.vollate.top/tags/%E9%9A%8F%E7%AC%94/</loc>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.vollate.top/tags/Note/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <loc>http://blog.vollate.top/tags/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.vollate.top/tags/Fiddle/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <loc>http://blog.vollate.top/tags/%E6%8A%98%E8%85%BE/</loc>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/Magic/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/Tips/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.vollate.top/tags/Record/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <loc>http://blog.vollate.top/tags/%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.vollate.top/tags/Tools/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <loc>http://blog.vollate.top/tags/%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -245,64 +245,64 @@
 
   
   <url>
-    <loc>http://blog.vollate.top/categories/C/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <loc>http://blog.vollate.top/categories/Compile/</loc>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.vollate.top/categories/Compile/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <loc>http://blog.vollate.top/categories/C/</loc>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/categories/Network/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/categories/Compile/Linux/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/categories/SUSTech/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/categories/Network/CI-CD/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/categories/OS/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/categories/VPS/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/categories/VPS/Server/</loc>
-    <lastmod>2023-12-25</lastmod>
+    <lastmod>2024-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
