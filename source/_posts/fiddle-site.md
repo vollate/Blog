@@ -4,8 +4,8 @@ date: 2023-12-13 12:02:27
 tags:
 - 折腾
 categories:
-- Network
-- CI/CD
+- [Network]
+- [CI/CD]
 ---
 原来的 vps 到期了，不想续费新开了一台，忘了全系统备份。索性 blog 扔到 github page,然后又是一顿折腾。
 

@@ -2,24 +2,21 @@
 title: Book List
 date: 2023-9-18 12:18:11
 tags: 书籍
-categories:
 ---
-## Reading
+## 在读
 
 - C++ Currency in Action
-- ~~Computer Organzation And Design~~ 摆了
-- RISCV-privileged
 
-## Plan To Read
+## 计划
 
 - Effective Modern C++
 - C++ Templates ed.2
 
-## Shelve
+## 搁置
 
 - Deep learning
 
-## Finished
+## 完成
 
 | Name                   | Finish date |
 | -                      | -           |
