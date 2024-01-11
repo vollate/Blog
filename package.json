@@ -29,7 +29,7 @@
     "hexo-math": "^4.0.0",
     "hexo-neat": "^1.0.9",
     "hexo-renderer-ejs": "^2.0.0",
-    "hexo-renderer-markdown-it": "^7.1.0",
+    "hexo-renderer-markdown-it": "^7.1.1",
     "hexo-server": "^3.0.0",
     "hexo-theme-landscape": "^1.0.0",
     "hexo-wordcount": "^6.0.1",
