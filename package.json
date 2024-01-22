@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@iktakahiro/markdown-it-katex": "^4.0.1",
-    "hexo": "^7.1.0",
+    "hexo": "^7.1.1",
     "hexo-browsersync": "^0.3.0",
     "hexo-cli": "^4.3.1",
     "hexo-generator-archive": "^2.0.0",
