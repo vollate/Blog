@@ -1,7 +1,7 @@
 ---
 title: 浅记系统虚拟化
 tags:
-  - 笔记
+  - Notes
 categories:
   - OS
 published: true

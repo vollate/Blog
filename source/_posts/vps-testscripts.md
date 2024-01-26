@@ -1,9 +1,8 @@
 ---
 title: VPS 测试脚本整理
 tags:
-  - 折腾
+  - Journal
 categories:
-  - VPS
   - Server
 date: 2023-12-13 15:44:50
 ---

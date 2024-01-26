@@ -2,7 +2,7 @@
 title: Tool List
 date: 2023-03-27 08:17:41
 tags: 
-- 工具
+- Tools
 Categories: 
 - Linux
 ---
@@ -23,7 +23,7 @@ Categories:
 
 ### Clash Client
 
-- [cfw](https://github.com/Fndroid/clash_for_windows_pkg)(closed-source)
+- ~~[cfw](https://github.com/Fndroid/clash_for_windows_pkg)(closed-source)~~ 不建议使用
 - [clash-verge]( https://github.com/zzzgydi/clash-verge )(open-source)
 
 >注意 Clash 和 Clash.Meta 是开源软件，clash.Premium 为 Clash 原作者在 Clash 基础上开发的闭源软件，介意误用
@@ -40,8 +40,9 @@ Categories:
 
 - [libreoffice](https://github.com/LibreOffice/core)
 - [onlyoffice](https://github.com/ONLYOFFICE/DesktopEditors)
+- [xournal++](https://github.com/xournalpp/xournalpp/) 全平台手写板工具
 
-## Terminal Resource Monitor
+## Resource Monitor
 
 - [btop](https://github.com/aristocratos/btop) or [bpytop](https://github.com/aristocratos/bpytop)
 - [htop](https://github.com/htop-dev/htop)

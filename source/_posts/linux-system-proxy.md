@@ -2,10 +2,9 @@
 title: Linux 下系统代理配置
 date: 2024-01-09 23:57:33
 categories:
-- [Linux]
-- [Network]
+- Linux
 tags:
-- 折腾
+- Journal
 ---
 配置 firefox 系统代理时出现了一些问题，然后查了下 Linux 桌面系统代理的原理，记录一下
 

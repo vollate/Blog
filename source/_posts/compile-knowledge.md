@@ -1,11 +1,10 @@
 ---
 title: 编译之法
 categories:
-- [Compile]
-- [Linux]
+- Compiler
 date: 2023-12-15 01:23:36
 tags:
-- 教程
+- Knowledge
 ---
 
 

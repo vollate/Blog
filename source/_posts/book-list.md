@@ -1,22 +1,22 @@
 ---
 title: Book List
 date: 2023-9-18 12:18:11
-tags: 书籍
+tags: Books
 ---
-## 在读
+## Reading
 
 - C++ Currency in Action
 
-## 计划
+## Schedule
 
 - Effective Modern C++
 - C++ Templates ed.2
 
-## 搁置
+## Stash
 
 - Deep learning
 
-## 完成
+## Finished
 
 | Name                   | Finish date |
 | -                      | -           |

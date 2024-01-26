@@ -2,7 +2,7 @@
 title: 南科大记录
 date: 2023-12-25 
 tags:
-- 记录
+- Journal
 categories:
 - SUSTech
 ---
