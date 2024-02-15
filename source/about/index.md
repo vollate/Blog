@@ -4,23 +4,21 @@ date: 2023-08-31 18:15:23
 layout: about
 ---
 
-## Coding preference
+## 代码偏好
 
-- Language: C++, JAVA, nodejs
-- Environment: GNU/Linux
-- Shell: zsh
-- Editor/IDE: Vim，Jetbrains 全家桶
-- Linux distriubtion: Arch(desktop), Debian(server)
+- 语言: C++, JAVA, js, Go
+- GNU/Linux 发行版: Arch, Debian
+- 编辑器: Vim, Jetbrains IDE, VScode
 
-## Habbits
+## 爱好
 
-- 追/补番
-- 轻小说
-- ~~养老fps选手~~，底力不足音游人
+- 番, 轻小说
+- 养老 fps 选手，底力不足音游人，假期一般会推 gal
 - 睡觉
 
-## Targets
+## 目标
 
-- 恢复健康的作息
-- 没有 DDL, 想睡就睡
+- 有一个健康的作息
+- 锻炼身体，尤其是小臂和手腕(音游体力虚b)
+- 好好活着
 
