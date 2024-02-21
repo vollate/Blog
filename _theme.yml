@@ -42,8 +42,8 @@ comment:
   livere:
     uid: # enter youyan uid
   gitalk: # gitalk. https://gitalk.github.io/
-    owner: Vollate #必须. GitHub repository 所有者，可以是个人或者组织。
-    admin: Vollate #必须. GitHub repository 的所有者和合作者 (对这个 repository 有写权限的用户)。
+    owner: vollate #必须. GitHub repository 所有者，可以是个人或者组织。
+    admin: vollate #必须. GitHub repository 的所有者和合作者 (对这个 repository 有写权限的用户)。
     repo: Blog #必须. GitHub repository.
     ClientID: 346bd3ac57ee5e238afd #必须. GitHub Application Client ID.
     ClientSecret: 786b6b92c2216fae1114b63adf3d10a49931ce6a #必须. GitHub Application Client `ecret.
@@ -61,7 +61,7 @@ comment:
 
 
 github:
-  username: Vollate
+  username: vollate
 
 # wordcount
 postCount:
@@ -85,11 +85,11 @@ profile:
   author_title: Student
   author_description: Just for fun
   location: Shenzhen, China
-  follow: https://github.com/Vollate
+  follow: https://github.com/vollate
   # Social Links
   social:
     links:
-      github: https://github.com/Vollate
+      github: https://github.com/vollate
       #telegram: 
       #twitter: 
       # facebook: /
