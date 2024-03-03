@@ -7,17 +7,17 @@
     <meta name="description" content="以 C&#x2F;C++ 为例，简单介绍一下 Linux 下编译的相关知识。看完应该能掌握基础的编译能力，处理报错不再抓瞎。 麻麻再也不用担心我遇到问题只能瞎逛 stackoverflow 了 该逛还得逛 基础知识 编译型语言与解释型语言  编译型语言是将代码直接编译成机器可以直接执行的机器码，可以直接在目标机器上执行。代表是 Fortran, C, C++, RUST, Go 等。 解释型语言是通过解释器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编译之法">
-<meta property="og:url" content="http://blog.vollate.top/2023/12/14/compile-knowledge/index.html">
+<meta property="og:url" content="http://blog.vollate.top/2024/03/03/compile-knowledge/index.html">
 <meta property="og:site_name" content="Vollate&#39;s Blog">
 <meta property="og:description" content="以 C&#x2F;C++ 为例，简单介绍一下 Linux 下编译的相关知识。看完应该能掌握基础的编译能力，处理报错不再抓瞎。 麻麻再也不用担心我遇到问题只能瞎逛 stackoverflow 了 该逛还得逛 基础知识 编译型语言与解释型语言  编译型语言是将代码直接编译成机器可以直接执行的机器码，可以直接在目标机器上执行。代表是 Fortran, C, C++, RUST, Go 等。 解释型语言是通过解释器">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://blog.vollate.top/2023/12/14/compile-knowledge/fix_all.jpg">
-<meta property="article:published_time" content="2023-12-14T17:23:36.000Z">
-<meta property="article:modified_time" content="2024-02-29T15:16:18.301Z">
+<meta property="og:image" content="http://blog.vollate.top/2024/03/03/compile-knowledge/fix_all.jpg">
+<meta property="article:published_time" content="2024-03-03T10:34:06.000Z">
+<meta property="article:modified_time" content="2024-03-03T10:47:28.254Z">
 <meta property="article:author" content="Vollate">
 <meta property="article:tag" content="Knowledge">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://blog.vollate.top/2023/12/14/compile-knowledge/fix_all.jpg">
+<meta name="twitter:image" content="http://blog.vollate.top/2024/03/03/compile-knowledge/fix_all.jpg">
 
     <link rel="alternate" type="application/atom+xml" href="/atom.xml">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
@@ -203,8 +203,8 @@
             <p class="article-meta mb-3 text-xs">
                 <span class="article-date">
     <i class="iconfont icon-calendar-check"></i>
-	<a href="/2023/12/14/compile-knowledge/" class="article-date">
-	  <time datetime="2023-12-14T17:23:36.000Z" itemprop="datePublished">Dec 15</time>
+	<a href="/2024/03/03/compile-knowledge/" class="article-date">
+	  <time datetime="2024-03-03T10:34:06.000Z" itemprop="datePublished">Mar 3</time>
 	</a>
 </span>
 
@@ -223,16 +223,16 @@
 
 
                 <span class="_partial/post-comment"><i class="icon icon-comment"></i>
-                    <a href="/2023/12/14/compile-knowledge/#comments" class="article-comment-link">
+                    <a href="/2024/03/03/compile-knowledge/#comments" class="article-comment-link">
                         Comments
                     </a>
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">Word Count: 3.1k(words)</span>
+        <span class="post-wordcount" itemprop="wordCount">Word Count: 3.4k(words)</span>
     
     
-        <span class="post-readcount" itemprop="timeRequired">Read Count: 11(minutes)</span>
+        <span class="post-readcount" itemprop="timeRequired">Read Count: 13(minutes)</span>
     
 
 
@@ -363,12 +363,12 @@
 <p>对于静态链接库，我们直接将其作为输入即可链接，因为其本质上就是一个编译后生成的二进制文件 <code>.o</code></p>
 <p>对于动态链接库，编译器会有一些系统默认的动态库目录，它会进入目录下查找。显然我们当前的文件夹并不在此之列，因此为了让编译器进入我们当前的目录下查找链接库，我们使用 <code>-L</code> 来加入我们库所在的目录来让编译器查找。我们之前将编译出来的库命名为 “libmBool.*”，因此可以直接使用 <code>-l</code> 来链接我们的库。因为我们的目录下同时存在静态和动态链接库，因此编译器默认使用动态链接。我们可以使用 <code>-static</code> 来让编译器使用静态链接库。</p>
 <ul>
-<li>使用 -rpath<br>
+<li>使用 -rpath/-runpath<br>
 现在我们尝试运行我们刚刚链接完动态链接库的可执行文件，然后就报错了</li>
 </ul>
 <figure class="highlight text"><table><tr><td class="code"><pre><span class="line">./mTest.out: error while loading shared libraries: libmBool.so: cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure>
-<p>系统提示我们找不到动态链接库。因为我们没有存储动态链接库的位置，动态链接器(如 ld-linux.so)不知道去哪加载我们的动态链接库我们使用 <code>-rpath</code> 来存储动态链接库的目录信息。可以使用绝对路径或相对路径，一般使用相对路径，这样程序只要保持文件内的结构不变即可在各处执行。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">use relative path</span></span><br><span class="line">clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -rpath .</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">use absolute path</span></span><br><span class="line">clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -rpath `pwd`</span><br></pre></td></tr></table></figure>
+<p>系统提示我们找不到动态链接库。因为我们没有存储动态链接库的位置，动态链接器(如 ld-linux.so)不知道去哪加载我们的动态链接库我们使用 <code>-rpath</code> 来存储动态链接库的目录信息。可以使用绝对路径或相对路径，一般使用相对路径，这样程序只要保持文件内的结构不变即可在各处执行。注意，这个参数是加给链接器的，clang 可以直接传递给链接器，但是 gcc 需要使用 <code>-Wl</code> 来传递给链接器。<code>runpath</code> 和 <code>rpath</code> 相比，更新，一些老旧的动态链接器可能不支持，但是提供了更多的灵活性，具体下面会讲到。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">use relative path</span></span><br><span class="line">clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -rpath . # clang could ignore the -Wl for rpath, but gcc can&#x27;t</span><br><span class="line">clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -Wl,-rpath . # also works</span><br><span class="line">gcc -o mTest.out  mBoolTest.c -L`pwd` -lmBool -Wl,-rpath .</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">use absolute path</span></span><br><span class="line">clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -rpath `pwd`</span><br><span class="line">clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -Wl,-rpath `pwd`</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">use runpath</span></span><br><span class="line">clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -Wl,--enable-new-dtags -Wl,-rpath . # gcc paremeter is the same</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">force use rpath(<span class="built_in">disable</span> runpath)</span></span><br><span class="line">clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -Wl,-rpath . -Wl,--disable-new-dtags</span><br></pre></td></tr></table></figure>
 <ul>
 <li>引用头文件<br>
 现在我们不偷懒了，引入一个头文件 <a href="head.h">head.h</a>，创建一个 <a href="nMBoolTest.c">nMBoolTest.c</a>，假设头文件存储在目录 <code>/tmp</code> 下，我们要让编译器知道我们头文件的位置，使用 <code>-I</code> 选项</li>
@@ -380,19 +380,30 @@
 假设我们没有 make，cmake 这样的自动化构建工具，或者有一个复杂无比的 Makefile/CMakeLists.txt，无法轻易更改。我们需要让编译器知道我们自定义的 header 和 lib 的位置，这时候就需要我们的环境变量登场了。下面介绍一些常用的，更多的看对应编译器的文档，<a target="_blank" rel="noopener" href="https://gcc.gnu.org/onlinedocs/gcc/Environment-Variables.html">GCC</a></p>
 </li>
 <li>
-<p>C_INCLUDE_PATH：阅读理解</p>
+<p>C_INCLUDE_PATH：阅读理解（</p>
 </li>
 <li>
 <p>C_PATH：same as above</p>
 </li>
 <li>
-<p>CPLUS_INCLUDE_PATH：阅读理解</p>
+<p>CPLUS_INCLUDE_PATH：阅读理解（</p>
 </li>
 <li>
-<p>LIBRARY_PATH：告诉连接器库的目录</p>
+<p>LIBRARY_PATH：告诉链接器库的位置，链接时会进入该目录搜索</p>
+</li>
+<li>
+<p>LD_LIBRARY_PATH: 告诉动态链接器库的位置，运行时会进入该目录搜索</p>
 </li>
 </ul>
-<p>写法同 <code>PATH</code>，用 <code>:</code> 分隔</p>
+<p>以上写法写法同 <code>PATH</code>，用 <code>:</code> 分隔每个路径</p>
+<p><a target="_blank" rel="noopener" href="http://ld.so">ld.so</a>(动态链接器) 搜索顺序:</p>
+<ol>
+<li>编译时设置的 rpath 路径</li>
+<li>环境变量 LD_LIBRARY_PATH</li>
+<li>编译时设置的 runpath: runpath 的搜索优先级低于 LD_LIBRARY_PATH，因此它可以允许用户设置 LD_LIBRARY_PATH 来覆盖 runpath 指定的库，提供更多的灵活性。而 rpath 则不行。当然，这也意味着有可能会无意间使用不同版本的库，造成一些问题。</li>
+<li>缓存文件(如 /etc/ld.so.cache): 包含了当前环境中可用库的索引，可以使用 <code>ldconfig</code> 来更新</li>
+<li>默认路径，如 “/lib”, “/usr/lib” 等等</li>
+</ol>
 <ul>
 <li>常用编译选项:
 <ul>
@@ -415,9 +426,8 @@
 </ul>
 <h2 id="常见问题解决">常见问题解决</h2>
 <ul>
-<li>运行时装了但找不到动态链接库: 把库目录写进 <code>LD_LIBRARY_PATH</code>，这个环境变量告诉动态链接器除了默认目录外该去哪里找库</li>
-<li>学会看报错，报错是帮你解决问题的</li>
-<li>心态崩了的话缓上个半天就好了</li>
+<li>报错了：学会看报错，报错是帮你解决问题的，看不懂把报错扔搜索引擎上多半能出来(注意不要复制过多本地环境的无效信息)</li>
+<li>心态崩了：缓上个半天继续整</li>
 </ul>
 <p><img src="fix_all.jpg" alt="fix_all"></p>
 <h2 id="完">完</h2>
@@ -425,7 +435,7 @@
         </div>
         
 <blockquote class="copyright">
-    <p><strong>Link to this article : </strong><a class="permalink" href="http://blog.vollate.top/2023/12/14/compile-knowledge/">http://blog.vollate.top/2023/12/14/compile-knowledge/</a></p>
+    <p><strong>Link to this article : </strong><a class="permalink" href="http://blog.vollate.top/2024/03/03/compile-knowledge/">http://blog.vollate.top/2024/03/03/compile-knowledge/</a></p>
     <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
 </blockquote>
 
