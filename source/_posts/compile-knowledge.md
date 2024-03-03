@@ -2,7 +2,7 @@
 title: 编译之法
 categories:
 - Compiler
-date: 2023-12-15 01:23:36
+date: 2024-3-3 18:34:06
 tags:
 - Knowledge
 ---
@@ -186,21 +186,30 @@ clang -o mTest.out mBoolTest.c -L`pwd` -lmBool
 
 对于动态链接库，编译器会有一些系统默认的动态库目录，它会进入目录下查找。显然我们当前的文件夹并不在此之列，因此为了让编译器进入我们当前的目录下查找链接库，我们使用 `-L` 来加入我们库所在的目录来让编译器查找。我们之前将编译出来的库命名为 "libmBool.*"，因此可以直接使用 `-l` 来链接我们的库。因为我们的目录下同时存在静态和动态链接库，因此编译器默认使用动态链接。我们可以使用 `-static` 来让编译器使用静态链接库。
 
-- 使用 -rpath
+- 使用 -rpath/-runpath
 现在我们尝试运行我们刚刚链接完动态链接库的可执行文件，然后就报错了
 
 ```text
 ./mTest.out: error while loading shared libraries: libmBool.so: cannot open shared object file: No such file or directory
 ```
 
-系统提示我们找不到动态链接库。因为我们没有存储动态链接库的位置，动态链接器(如 ld-linux\.so)不知道去哪加载我们的动态链接库我们使用 `-rpath` 来存储动态链接库的目录信息。可以使用绝对路径或相对路径，一般使用相对路径，这样程序只要保持文件内的结构不变即可在各处执行。
+系统提示我们找不到动态链接库。因为我们没有存储动态链接库的位置，动态链接器(如 ld-linux\.so)不知道去哪加载我们的动态链接库我们使用 `-rpath` 来存储动态链接库的目录信息。可以使用绝对路径或相对路径，一般使用相对路径，这样程序只要保持文件内的结构不变即可在各处执行。注意，这个参数是加给链接器的，clang 可以直接传递给链接器，但是 gcc 需要使用 `-Wl` 来传递给链接器。`runpath` 和 `rpath` 相比，更新，一些老旧的动态链接器可能不支持，但是提供了更多的灵活性，具体下面会讲到。
 
 ```shell
 # use relative path
-clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -rpath .
+clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -rpath . # clang could ignore the -Wl for rpath, but gcc can't
+clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -Wl,-rpath . # also works
+gcc -o mTest.out  mBoolTest.c -L`pwd` -lmBool -Wl,-rpath .
 
 # use absolute path
 clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -rpath `pwd`
+clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -Wl,-rpath `pwd`
+
+# use runpath
+clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -Wl,--enable-new-dtags -Wl,-rpath . # gcc paremeter is the same
+
+# force use rpath(disable runpath)
+clang -o mTest.out  mBoolTest.c -L`pwd` -lmBool -Wl,-rpath . -Wl,--disable-new-dtags
 ```
 
 - 引用头文件
@@ -213,12 +222,21 @@ clang -o nTest.out nMBoolTest.c -L`pwd` -lmBool -rpath `pwd` -I/tmp
 - 使用环境变量
 假设我们没有 make，cmake 这样的自动化构建工具，或者有一个复杂无比的 Makefile/CMakeLists.txt，无法轻易更改。我们需要让编译器知道我们自定义的 header 和 lib 的位置，这时候就需要我们的环境变量登场了。下面介绍一些常用的，更多的看对应编译器的文档，[GCC](https://gcc.gnu.org/onlinedocs/gcc/Environment-Variables.html)
 
-- C_INCLUDE_PATH：阅读理解
+- C_INCLUDE_PATH：阅读理解（
 - C_PATH：same as above
-- CPLUS_INCLUDE_PATH：阅读理解
-- LIBRARY_PATH：告诉连接器库的目录
+- CPLUS_INCLUDE_PATH：阅读理解（
+- LIBRARY_PATH：告诉链接器库的位置，链接时会进入该目录搜索
+- LD_LIBRARY_PATH: 告诉动态链接器库的位置，运行时会进入该目录搜索
 
-写法同 `PATH`，用 `:` 分隔
+以上写法写法同 `PATH`，用 `:` 分隔每个路径
+
+ld.so(动态链接器) 搜索顺序:
+
+1. 编译时设置的 rpath 路径
+2. 环境变量 LD_LIBRARY_PATH
+3. 编译时设置的 runpath: runpath 的搜索优先级低于 LD_LIBRARY_PATH，因此它可以允许用户设置 LD_LIBRARY_PATH 来覆盖 runpath 指定的库，提供更多的灵活性。而 rpath 则不行。当然，这也意味着有可能会无意间使用不同版本的库，造成一些问题。
+4. 缓存文件(如 /etc/ld.so.cache): 包含了当前环境中可用库的索引，可以使用 `ldconfig` 来更新
+5. 默认路径，如 "/lib", "/usr/lib" 等等
 
 - 常用编译选项:
   - `-g`: generate debug info
@@ -238,11 +256,9 @@ clang -o nTest.out nMBoolTest.c -L`pwd` -lmBool -rpath `pwd` -I/tmp
 
 ## 常见问题解决
 
-- 运行时装了但找不到动态链接库: 把库目录写进 `LD_LIBRARY_PATH`，这个环境变量告诉动态链接器除了默认目录外该去哪里找库
-- 学会看报错，报错是帮你解决问题的
-- 心态崩了的话缓上个半天就好了
+- 报错了：学会看报错，报错是帮你解决问题的，看不懂把报错扔搜索引擎上多半能出来(注意不要复制过多本地环境的无效信息)
+- 心态崩了：缓上个半天继续整
 
 ![fix_all](fix_all.jpg)
 
 ## 完
-
