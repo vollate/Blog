@@ -13,7 +13,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://blog.vollate.top/2024/03/03/compile-knowledge/fix_all.jpg">
 <meta property="article:published_time" content="2024-03-03T10:34:06.000Z">
-<meta property="article:modified_time" content="2024-03-03T10:47:28.254Z">
+<meta property="article:modified_time" content="2024-03-12T16:11:07.962Z">
 <meta property="article:author" content="Vollate">
 <meta property="article:tag" content="Knowledge">
 <meta name="twitter:card" content="summary">
@@ -353,8 +353,7 @@
 <li>编译一个库<br>
 <a href="mBool.c">mBool.c</a></li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">static lib</span></span><br><span class="line">clang -c mBool.c -o mBool.o # 这里不写默认生成同名后缀为.o的对应文件</span><br><span class="line">ar r mBool.a mBool.o        # for GNU toolchain</span><br><span class="line">llvm-ar r libmBool.a mBool.o   # for llvm toolchain</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其实静态连接库就是编译出的 object 文件改个名字，因为 linux 下静态链接库以 .a 结尾. 上面的指令只是把 .o 改个名存起来</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">shared lib</span></span><br><span class="line">clang -shared mBool.c -o libmBool.so -fPIC</span><br></pre></td></tr></table></figure>
-<p>上述动态链接库的编译过程中使用了 <code>-fPIC</code> 这个参数，意味着生成 position independent code，这样我们的动态链接库就可以在任意地址被装载。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">static lib</span></span><br><span class="line">clang -c mBool.c -o mBool.o # 这里不写默认生成同名后缀为.o的对应文件</span><br><span class="line">ar r mBool.a mBool.o        # for GNU toolchain</span><br><span class="line">llvm-ar r libmBool.a mBool.o   # for llvm toolchain</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ar 将所有(这里只有一个) .o 文件打包，并创建一个索引表以供查找。某些清苦，会选择性对文件进行压缩</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">shared lib</span></span><br><span class="line">clang -shared mBool.c -o libmBool.so -fPIC</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">上述动态链接库的编译过程中使用了 `-fPIC` 这个参数，意味着生成 position independent code，这样我们的动态链接库就可以在任意地址被装载。</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>链接一个库<br>
 <a href="mBoolTest.c">mBoolTest.c</a>  这里我懒得写头文件了，直接前置声明了</li>
