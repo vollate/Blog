@@ -156,13 +156,12 @@ clang test.c -o test
 clang -c mBool.c -o mBool.o # 这里不写默认生成同名后缀为.o的对应文件
 ar r mBool.a mBool.o        # for GNU toolchain
 llvm-ar r libmBool.a mBool.o   # for llvm toolchain
-# 其实静态连接库就是编译出的 object 文件改个名字，因为 linux 下静态链接库以 .a 结尾. 上面的指令只是把 .o 改个名存起来
+# ar 将所有(这里只有一个) .o 文件打包，并创建一个索引表以供查找。某些清苦，会选择性对文件进行压缩
 
 # shared lib
 clang -shared mBool.c -o libmBool.so -fPIC
+# 上述动态链接库的编译过程中使用了 `-fPIC` 这个参数，意味着生成 position independent code，这样我们的动态链接库就可以在任意地址被装载。
 ```
-
-上述动态链接库的编译过程中使用了 `-fPIC` 这个参数，意味着生成 position independent code，这样我们的动态链接库就可以在任意地址被装载。
 
 - 链接一个库
 [mBoolTest.c](mBoolTest.c)  这里我懒得写头文件了，直接前置声明了
@@ -262,3 +261,4 @@ ld.so(动态链接器) 搜索顺序:
 ![fix_all](fix_all.jpg)
 
 ## 完
+
