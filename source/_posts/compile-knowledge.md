@@ -156,7 +156,7 @@ clang test.c -o test
 clang -c mBool.c -o mBool.o # 这里不写默认生成同名后缀为.o的对应文件
 ar r mBool.a mBool.o        # for GNU toolchain
 llvm-ar r libmBool.a mBool.o   # for llvm toolchain
-# ar 将所有(这里只有一个) .o 文件打包，并创建一个索引表以供查找。某些清苦，会选择性对文件进行压缩
+# ar 将所有(这里只有一个) .o 文件打包，并创建一个索引表以供查找。某些情况，会选择性对文件进行压缩
 
 # shared lib
 clang -shared mBool.c -o libmBool.so -fPIC
