@@ -18,15 +18,17 @@ Categories:
 
 - [Onedrive](https://github.com/abraunegg/onedrive/tree/master)
 - [OnedriveGUI](https://github.com/bpozdena/OneDriveGUI): GUI for client above
+- [Rclone](https://rclone.org/): better than above
 
 ## Proxy
 
 ### Clash Client
 
 - ~~[cfw](https://github.com/Fndroid/clash_for_windows_pkg)(closed-source)~~ 不建议使用
-- [clash-verge]( https://github.com/zzzgydi/clash-verge )(open-source)
+- ~~[clash-verge]( https://github.com/zzzgydi/clash-verge )(open-source)~~
+- [clash verge rev](https://github.com/clash-verge-rev/clash-verge-rev); 因为某些烂人的原因，被铁拳制裁后重生的版本
 
->注意 Clash 和 Clash.Meta 是开源软件，clash.Premium 为 Clash 原作者在 Clash 基础上开发的闭源软件，介意误用
+>~~注意 Clash 和 Clash.Meta 是开源软件，clash.Premium 为 Clash 原作者在 Clash 基础上开发的闭源软件，介意误用~~ 只剩 Meta 了且改名了。原神，启动!!!
 
 ### V2ray Client
 
@@ -40,7 +42,7 @@ Categories:
 
 - [libreoffice](https://github.com/LibreOffice/core)
 - [onlyoffice](https://github.com/ONLYOFFICE/DesktopEditors)
-- [xournal++](https://github.com/xournalpp/xournalpp/) 全平台手写板工具
+- [xournal++](https://github.com/xournalpp/xournalpp/) 全平台手写板工具，但是安卓端还很烂
 
 ## Resource Monitor
 
