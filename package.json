@@ -12,11 +12,11 @@
     "dev": "hexo server --draft --open"
   },
   "hexo": {
-    "version": "7.1.1"
+    "version": "7.2.0"
   },
   "dependencies": {
     "@iktakahiro/markdown-it-katex": "^4.0.1",
-    "hexo": "^7.1.1",
+    "hexo": "^7.2.0",
     "hexo-browsersync": "^0.3.0",
     "hexo-cli": "^4.3.2",
     "hexo-generator-archive": "^2.0.0",
