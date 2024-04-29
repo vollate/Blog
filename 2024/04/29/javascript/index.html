@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html  lang="en" >
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <title>JavaScript 笔记 | Vollate's Blog</title>
+    <meta name="description" content="DOM:Document Object Model &lt;script&gt; element  use js code: &lt;script&gt; codes &lt;&#x2F;script&gt; use js file: &lt;script src&#x3D;&quot;&quot;&gt;&lt;&#x2F;script&gt; 外部js位置:  &lt;head&gt; after html element">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 笔记">
+<meta property="og:url" content="http://blog.vollate.top/2024/04/29/javascript/index.html">
+<meta property="og:site_name" content="Vollate&#39;s Blog">
+<meta property="og:description" content="DOM:Document Object Model &lt;script&gt; element  use js code: &lt;script&gt; codes &lt;&#x2F;script&gt; use js file: &lt;script src&#x3D;&quot;&quot;&gt;&lt;&#x2F;script&gt; 外部js位置:  &lt;head&gt; after html element">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-04-29T07:02:51.000Z">
+<meta property="article:modified_time" content="2024-04-29T07:08:05.771Z">
+<meta property="article:author" content="Vollate">
+<meta property="article:tag" content="Notes">
+<meta name="twitter:card" content="summary">
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    
+<link rel="stylesheet" href="/css/common.min.css">
+
+
+
+    
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.css" rel="stylesheet">
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/css/lightgallery.min.css" rel="stylesheet">
+    
+    
+    
+<link rel="stylesheet" href="/css/iconfont.min.css">
+
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head>
+
+    <body>
+        <header class="header header-fixture">
+    <div class="profile-search-wrap flex sm:block">
+        
+        
+        <div class="profile sm:text-center md:px-1 lg:px-3 sm:pb-4 sm:pt-6">
+            <a id="avatar" role="link" href="https://github.com/vollate" class="inline-block lg:w-16 lg:h-16 w-8 h-8 m-2" target="_blank" rel="noopener" rel="noreferrer" >
+                <img src="/about/avatar.jpg" class="rounded-full" alt="avatar">
+            </a>
+            <h2 id="name" class="hidden lg:block">Vollate</h2>
+            <h3 id="title" class="hidden lg:block">Student</h3>
+            
+            <small id="location" class="hidden lg:block">
+                <i class="iconfont icon-map-icon"></i>
+                Shenzhen, China
+            </small>
+            
+        </div>
+        
+        
+<div class="search flex-1 flex lg:inline-block sm:hidden lg:px-4 lg:mt-2 lg:mb-4 lg:w-full">
+    <form id="search-form" class="my-auto flex-1 lg:border lg:border-solid lg:border-gray-200">
+        <div class="input-group table bg-gray-100 lg:bg-white w-full">
+            <input id="search-input" type="text" placeholder="Search" class="inline-block w-full bg-gray-100 lg:bg-white p-1">
+            <span class="table-cell">
+                <button name="search tigger button" disabled>
+                    <i class="iconfont icon-search m-2"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+        
+<div id="content-json" data-placeholder="Search" class="invisible hidden">/content.json</div>
+<script id="search-teamplate" type="text/html" data-path="/content.json">
+    <div>
+        <div class="search-header bg-gray-400">
+            <input id="actual-search-input" model="keyword" ref="input" class="inline-block w-full h-10 px-2 py-1" placeholder="Search" type="text">
+        </div>
+        <div class="search-result bg-gray-200">
+            {{#each searchPosts}}
+            <a href="/{{ path }}" class="result-item block px-2 pb-3 mb-1 pt-1 hover:bg-indigo-100">
+                <i class="iconfont icon-file"></i>
+                <h1 class="result-title inline font-medium text-lg">{{ title }}</h1>
+                <p class="result-content text-gray-600 text-sm">{{{ text }}}</p>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</script>
+
+</div>
+
+
+        <button name="menu toogle button" id="menu-toggle-btn" class="block sm:hidden p-3" role="button" aria-expanded="false">
+            <i class="iconfont icon-hamburger"></i>
+        </button>
+    </div>
+    <nav id="menu-nav" class="hidden sm:flex flex-col">
+        
+        
+            <div class="menu-item menu-home" role="menuitem">
+                <a href="/.">
+                    <i class="iconfont icon-home" aria-hidden="true"></i>
+                    <span class="menu-title">Home</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-archives" role="menuitem">
+                <a href="/archives">
+                    <i class="iconfont icon-archive" aria-hidden="true"></i>
+                    <span class="menu-title">Archives</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-categories" role="menuitem">
+                <a href="/categories">
+                    <i class="iconfont icon-folder" aria-hidden="true"></i>
+                    <span class="menu-title">Categories</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-tags" role="menuitem">
+                <a href="/tags">
+                    <i class="iconfont icon-tag" aria-hidden="true"></i>
+                    <span class="menu-title">Tags</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-repository" role="menuitem">
+                <a href="/repository">
+                    <i class="iconfont icon-project" aria-hidden="true"></i>
+                    <span class="menu-title">Repository</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-links" role="menuitem">
+                <a href="/links">
+                    <i class="iconfont icon-friend" aria-hidden="true"></i>
+                    <span class="menu-title">Links</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-about" role="menuitem">
+                <a href="/about">
+                    <i class="iconfont icon-cup" aria-hidden="true"></i>
+                    <span class="menu-title">About</span>
+                </a>
+            </div>
+        
+        
+<div class="social-links flex sm:flex-col lg:hidden mt-5">
+    
+        <span class="social-item text-center">
+            <a target="_blank" rel="noopener" href="https://github.com/vollate">
+                <i class="iconfont social-icon icon-github"></i>
+                <span class="menu-title hidden lg:inline">menu.github</span>
+            </a>
+        </span>
+    
+        <span class="social-item text-center">
+            <a href="/atom.xml">
+                <i class="iconfont social-icon icon-rss"></i>
+                <span class="menu-title hidden lg:inline">menu.rss</span>
+            </a>
+        </span>
+    
+</div>
+
+
+    </nav>
+</header>
+
+        <section class="main-section">
+            
+    <main class="flex-1 px-4 py-14 md:px-5 lg:px-8 lg:py-4 relative min-h-screen">
+    
+
+    <article class="content article article-archives article-type-list" itemscope="">
+        <header class="article-header">
+            
+    
+        <h1 class="article-title text-lg" itemprop="name">
+            JavaScript 笔记
+        </h1>
+    
+
+
+
+            <p class="article-meta mb-3 text-xs">
+                <span class="article-date">
+    <i class="iconfont icon-calendar-check"></i>
+	<a href="/2024/04/29/javascript/" class="article-date">
+	  <time datetime="2024-04-29T07:02:51.000Z" itemprop="datePublished">Apr 29</time>
+	</a>
+</span>
+
+                
+    <span class="article-category">
+    <i class="iconfont icon-folder"></i>
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </span>
+
+
+                
+    <span class="article-tags">
+    <i class="iconfont icon-tag"></i>
+    <a class="article-tag-none-link" href="/tags/Notes/" rel="tag">Notes</a>
+  </span>
+
+
+                <span class="_partial/post-comment"><i class="icon icon-comment"></i>
+                    <a href="/2024/04/29/javascript/#comments" class="article-comment-link">
+                        Comments
+                    </a>
+                </span>
+                
+    
+        <span class="post-wordcount" itemprop="wordCount">Word Count: 4.1k(words)</span>
+    
+    
+        <span class="post-readcount" itemprop="timeRequired">Read Count: 17(minutes)</span>
+    
+
+
+            </p>
+        </header>
+        <div class="marked-body article-body">
+            <p>DOM:Document Object Model</p>
+<h2 id="script-element"><code>&lt;script&gt;</code> element</h2>
+<ul>
+<li>use js code: <code>&lt;script&gt; codes &lt;/script&gt;</code></li>
+<li>use js file: <code>&lt;script src=&quot;&quot;&gt;&lt;/script&gt;</code></li>
+<li>外部js位置:
+<ul>
+<li><code>&lt;head&gt;</code></li>
+<li>after html element in body: 避免过多js加载导致页面卡顿空白</li>
+</ul>
+</li>
+<li><code>&lt;noscript&gt;</code> 加载失败或不支持js时显示</li>
+</ul>
+<h3 id="Characteristic">Characteristic</h3>
+<ul>
+<li>defer :立即下载，推迟脚本到页面加载完成再加载,并按顺序执行,仅对外部js有效，begin in HTML4</li>
+<li>async:同上，不保证顺序</li>
+<li>动态加载：DOM API??? TODO</li>
+</ul>
+<h2 id="XHTML-历史遗物">XHTML(历史遗物)</h2>
+<ul>
+<li>To use js, must add type=“text/javascript” characteristic in <code>&lt;script&gt;</code></li>
+<li>不能正确识别 <code>&lt;</code>, 会当成标签开始</li>
+</ul>
+<h2 id="ECMAScript">ECMAScript</h2>
+<h3 id="variable-define">variable define</h3>
+<h4 id="var">var</h4>
+<ul>
+<li>范围:函数作用域</li>
+<li>函数中var定义局部变量，省略var定义全局变量</li>
+<li>提升,可以全局重复声明</li>
+<li>在全局声明会成为windows的属性</li>
+<li>for loop declare will leak to global</li>
+</ul>
+<h4 id="let">let</h4>
+<ul>
+<li>块作用域</li>
+<li>不提升，不能全局重复声明</li>
+<li>在全局声明不会成为windows的属性</li>
+<li>不能在同一块中重复声明</li>
+<li>for loop declare won’t leak</li>
+</ul>
+<h4 id="const">const</h4>
+<ul>
+<li>限制指向的对象的引用不能更改，但可以更改指向的对象</li>
+<li>让对象彻底const(连同键值冻结): <code>Object.freeze()</code></li>
+</ul>
+<blockquote>
+<p><em>const优先，let次之，少用var</em></p>
+</blockquote>
+<h3 id="Type">Type</h3>
+<ul>
+<li><code>typeof</code>返回值:
+<ul>
+<li>undefined:let or var but haven’t init</li>
+<li>boolean: <code>Boolean()</code>transform</li>
+<li>string:use `` ‘’ “”
+<ul>
+<li>不可变,更改=新建新的字符串</li>
+<li><code>.toString(x) x是进制数,2,8...</code> 除了null和undefined都有</li>
+<li><code>String()</code> :better when you don’t know if variable is null or undefined</li>
+<li>模板字面量&quot;``&quot;,保存内部空格和换行，可以跨行定义</li>
+<li>插值: <code>$&#123;var&#125;</code> 调用var.toString()，也可以调用函数和方法</li>
+<li>模板字面量标签函数: TODO</li>
+<li>raw string: use String.raw<code>your string</code>,对字符串数组ary使用<code>ary.raw</code>获得原始字符串内容</li>
+</ul>
+</li>
+<li>number:
+<ul>
+<li>type:
+<ul>
+<li>hex:0x…</li>
+<li>oct:0…(disable in strict mode)</li>
+<li>dec</li>
+</ul>
+</li>
+<li>integer:1, 1.0</li>
+<li>float:2.3, 3.1e7</li>
+<li>NaN: <code>isNaN()</code></li>
+<li>functions:
+<ul>
+<li>Number(): for any type
+<ul>
+<li>boolean:true 1, false 0</li>
+<li>null 0</li>
+<li>undefined NaN</li>
+<li>string:
+<ul>
+<li>empty 0</li>
+<li>not a number: NaN</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>parseInt(): ignore space, if first char not +,-,number, return NaN
+<ul>
+<li><code>parseInt(&quot;AF&quot;,16)</code> use as hex</li>
+</ul>
+</li>
+<li>parseFloat(): <em>only for dec</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>object:
+<ul>
+<li>使用new+对象类型名创建,概念类似于Java的Object类，所用obj的基类</li>
+<li>每一个Obj实例的属性和方法:
+<ul>
+<li>constructor()</li>
+<li>hasOwnProperty()</li>
+<li>isPrototypeOf(object):当前是否为另一个对象的 <em>原型</em></li>
+<li>propertyIsEnumerable(propertyName):判断是否可以使用for-in枚举</li>
+<li>toLocaleString(propertyName):返回对象字符串表示，用于反映对象本地化执行环境</li>
+<li>toString()</li>
+<li>valueOf():通常和上面相同</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>function</li>
+<li>symbol:符号,为对象添加属性 TODO:看不懂
+<ul>
+<li>使用 <code>Symbol('some string')</code> 初始化 - 不能和new一起使用，避免创建符号包装对象;但可以使用Object()包装 - 全局符号注册表:
+<ul>
+<li><code>Symbol.for()</code> 创建，即使字符串相同，全局和使用<code>Symbol()</code>创建的也不相同。键值必须为字符串,为空则为undefined</li>
+<li><code>Symbol.keyFor(your symbol)</code> 查询全局注册表，不是返回 undefined</li>
+</ul>
+</li>
+<li>TODO</li>
+</ul>
+</li>
+<li>Null: null==undefined, null !== undefined
+<ul>
+<li><code>if(null)==false</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Operator">Operator</h3>
+<ul>
+<li><code>++i</code> &amp; <code>--i</code>:同C++
+<ul>
+<li>string: “12”++=13; “string”++=NaN</li>
+<li>boolean: false++=1; true++=2</li>
+<li>float: 1.1++=2.1</li>
+<li>Object: obj++=obj.valueOf()++;if valueOf()=NaN,use toString()</li>
+</ul>
+</li>
+<li><code>+i</code>&amp; <code>-i</code>
+<ul>
+<li>对number正常</li>
+<li>对非number进行Number()转型，调用<code>valueOf()</code>or<code>toString()</code></li>
+</ul>
+</li>
+<li>位操作:
+<ul>
+<li><s>ECMAScript所有数值以64bits存储，但位操作是先转换成32bits然后操作然后转成64bits</s> 就是只用考虑32bits操作的意思</li>
+<li>有符号整数前31位是数，最后一位(最左边)是符号(0+,1-)</li>
+<li>正值以二进制存储</li>
+<li>负值以二补数存储:<br>
+1. 找绝对值的二进表示<br>
+2. 所有位取反<br>
+3. 给结果+1(按二进制)
+<ul>
+<li>负数调用<code>toString(2)</code>返回<code>-(绝对值的二进制数)</code></li>
+</ul>
+</li>
+<li>按位非: <code>~</code> 所有位取反，结果是对数值取反后-1</li>
+<li>按位与: <code>|</code> 当仅两数该位同时为0时为0</li>
+<li>按位异或: <code>^</code> 相同为0不同为1</li>
+<li>左移: <code>&lt;&lt;</code></li>
+<li>有符号右移: <code>&gt;&gt;</code>，空出来补和符号位相同的数字</li>
+<li>无符号右移: <code>&gt;&gt;&gt;</code> 空出来补零</li>
+</ul>
+</li>
+<li>bool operator:
+<ul>
+<li>! return:
+<ul>
+<li>object: false</li>
+<li>empty/not empty string: true/false</li>
+<li>0: true</li>
+<li>not zero(include Infinity): false</li>
+<li>null: ture</li>
+<li>NaN: true硬</li>
+<li>undefined: true</li>
+<li><code>!!=Boolean()</code></li>
+</ul>
+</li>
+<li>a &amp;&amp; b :硬
+<ul>
+<li>短路求值</li>
+<li>a is object,return b硬硬</li>
+<li>b is object,return b硬 only when a is true</li>
+<li>a&amp;&amp;b is object, return b</li>
+<li>a or b is null, return硬硬 null</li>
+<li>a or b is NaN, return NaN</li>
+<li>a or b is undefined, return undefined</li>
+</ul>
+</li>
+<li>a || b:
+<ul>
+<li>短路求值</li>
+<li>a and b is null, return null</li>
+<li>a and b is NaN, return NaN</li>
+<li>a and b is undefined, return undefined</li>
+<li>常用于变量赋值，如果a非null or undefined,赋值为a,否则赋值b</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>指数:
+<ul>
+<li><code>Math.pow()</code> or <code>**</code></li>
+<li><code>a**=2 -&gt; a^2</code></li>
+</ul>
+</li>
+<li><code>&gt; &gt;= &lt;= &lt;</code>:
+<ul>
+<li>对字符串来说，逐个对比字符串的对应编码</li>
+</ul>
+</li>
+<li><code>== ===</code>:
+<ul>
+<li><code>==</code>比较时全部转换为数值(except null undefined, null == undefined)</li>
+<li><code>===</code> 全部相等(未转换)才为true</li>
+</ul>
+</li>
+<li><code>? :</code>: same as c++</li>
+<li><code>,</code> 单行多赋值或辅助赋值</li>
+</ul>
+<h3 id="loop">loop</h3>
+<p>for:<br>
+- <code>for(;;)</code> infinity loop<br>
+- for-in:枚举非符号键属性,不保证顺序<br>
+- for-of:按照对象<code>next()</code>产生顺序迭代，不支持next()报错</p>
+<h4 id="label">label</h4>
+<ul>
+<li>label: statement</li>
+<li>用于break/continue到指定位置</li>
+</ul>
+<h4 id="with">with</h4>
+<ul>
+<li><code>with(obj)&#123;&#125;</code>将代码作用域设置为对象</li>
+</ul>
+<h4 id="switch">switch</h4>
+<ul>
+<li>适用于所有数据类型,条件可以是表达式或变量</li>
+<li>比较时使用的是<code>===</code></li>
+</ul>
+<h3 id="function">function</h3>
+<ul>
+<li>define: <code>function fuc_name()&#123;&#125;</code></li>
+<li>In strict mode:
+<ul>
+<li>函数名和参数不能是eval or arguments</li>
+<li>两个命名参数不能重名</li>
+</ul>
+</li>
+</ul>
+<h3 id="variable">variable</h3>
+<h4 id="primitive-value-and-reference-value">primitive value and reference value</h4>
+<ul>
+<li>原始变量按值访问</li>
+<li>js不允许直接访问内存，保存引用值的变量只能按引用访问</li>
+</ul>
+<h4 id="dynamic-characteristic">dynamic characteristic</h4>
+<ul>
+<li>只有reference type可以随时增删,修改属性和方法</li>
+<li>原始类型初始化必须使用原始字面量，用new会创建object</li>
+</ul>
+<h4 id="copy">copy</h4>
+<ul>
+<li>原始值是拷贝，引用值是引用(拷贝指针)</li>
+</ul>
+<h4 id="function-arguments-pass">function arguments pass</h4>
+<ul>
+<li>Only has pass by value:
+<ul>
+<li>对于原始值直接拷贝</li>
+<li>对于引用值，拷贝指针，因此依然可以对指针所指内存进行修改，但更改指针所指内存不会在外部生效</li>
+</ul>
+</li>
+</ul>
+<h4 id="determine-type">determine type</h4>
+<ul>
+<li><code>typeof</code>: return “object” when obj is null or object</li>
+<li><code>a instanceof b</code>: check instance</li>
+</ul>
+<h3 id="执行上下文和作用域">执行上下文和作用域</h3>
+<pre><code>每个上下文都有关联的变量对象，存储着上下文中定义的所有变量和对象,上下文执行完后会销毁
+</code></pre>
+<ul>
+<li>全局上下文:
+<ul>
+<li>只有在退出前才销毁</li>
+<li>浏览器中是window对象</li>
+<li>通过var定义的全局变量和函数会出现在全局上下文中，let和const不会，但作用域解析上和var一样的效果。</li>
+</ul>
+</li>
+<li>函数上下文:
+<ul>
+<li>执行函数时推到一个上下文栈上，执行结束弹出</li>
+</ul>
+</li>
+</ul>
+<h4 id="作用域链">作用域链</h4>
+<ul>
+<li>依次递减(拆包),直到全局上下文的变量对象。变量搜索从前开始</li>
+<li>作用域链增强:临时修改上下文
+<ol>
+<li>try catch 的catch:创建变量对象包含抛出错误对象的声明</li>
+<li>with:添加对象到作用域前端,在with中声明变量会添加到函数上下文中，离开销毁(可以当返回值)</li>
+</ol>
+</li>
+</ul>
+<h4 id="变量声明">变量声明</h4>
+<ul>
+<li>var:自动添加到最近的上下文中,未经声明初始化变量为全局变量 <em>提升不意味着赋值语句的提升，变量在赋值前是undefined</em>;可以多次声明</li>
+<li>let：块级作用域(if,while,for语句和单独的块)</li>
+<li>const只用于顶级原语和对象，但对象键值不受影响
+<ul>
+<li>让对象彻底const(连同键值冻结): <code>Object.freeze()</code>:赋值不会报错但不会产生副作用</li>
+</ul>
+</li>
+</ul>
+<p>标识符查找顺序:沿作用域链查找</p>
+<h3 id="Memory-manage">Memory manage</h3>
+<h4 id="GC">GC</h4>
+<ol>
+<li>
+<p>标记清理(mark and sweep),mainly used</p>
+</li>
+<li>
+<p>引用计数(RC),may have loop reference error for COM</p>
+<p>某些情况还是会泄漏</p>
+</li>
+</ol>
+<h4 id="Improve-performance">Improve performance</h4>
+<ol>
+<li>全局变量不用后设为null</li>
+<li>多用const let</li>
+<li>减少隐藏类:一次性完成类所有属性声明</li>
+</ol>
+<h4 id="Memory-leak">Memory leak</h4>
+<ol>
+<li>implict global variable</li>
+<li>opening timer</li>
+<li>closure</li>
+<li>使用静态分配和对象池</li>
+</ol>
+<h3 id="Basic-reference-type">Basic reference type</h3>
+<p>引用值或对象是某个特定 <em>引用类型</em> 的实例</p>
+<h4 id="Date">Date</h4>
+<ul>
+<li><code>Date()</code> 保存当前日期和时间</li>
+<li><code>Date.parse(&quot;date string&quot;)</code>转化为UNIX纪元至date的毫秒数</li>
+<li><code>Date.UTC(&quot;date string&quot;)</code>: use UTC format</li>
+<li>历史问题:老浏览器<code>toString()</code> 和 <code>toLocaleString()</code>输出可能不一样</li>
+</ul>
+<h4 id="RegExp">RegExp</h4>
+<p>正则:<br>
+- pattern:<br>
+- g: global<br>
+- i: ignore character case<br>
+- m: mutiline<br>
+- y: 粘贴模式,只查找从lastindex开始之后的字符串<br>
+- u: enable unicode<br>
+- s: dotAll methord，元字符，匹配任何字符(\n \r)</p>
+<ul>
+<li>Instance
+<ul>
+<li>charcaterist:
+<ul>
+<li>一堆bool指示搜索模式是否开启</li>
+<li>source: 搜索的字面量字符串</li>
+<li>flags: 标记的字符串</li>
+</ul>
+</li>
+<li>methords:
+<ul>
+<li>exec()</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>略</li>
+</ul>
+<h4 id="原始值包装类型">原始值包装类型</h4>
+<ul>
+<li>String,Boolean,Number:让原始值拥有对象的行为，创建的包装对象仅存在于该行代码中</li>
+<li><code>Object()</code>:工厂构造方法，自动创建符合传入值类型的原始值包装对象</li>
+<li>少用<code>Boolean</code>,容易出事</li>
+<li>Number:
+<ul>
+<li><code>toFixed(num)</code>:输出多少位浮点数(0~20)</li>
+<li><code>toPrecision()</code>:智能输出</li>
+<li><code>isInteger()</code></li>
+<li><code>Number.isSafeInteger()</code>:防止爆int</li>
+</ul>
+</li>
+<li>String:
+<ul>
+<li>js字符串由16位码元(code unit)构成，每个码元代表一个字符,编码方式UCS-2&amp;UTF-16</li>
+<li><code>length</code></li>
+<li>split string:
+<ul>
+<li>slice()</li>
+<li>substr()</li>
+<li>substring()</li>
+</ul>
+</li>
+<li>index:
+<ul>
+<li>indexOf()</li>
+<li>lastIndexOf()</li>
+<li>startsWith()</li>
+<li>endsWith()</li>
+<li>includes()</li>
+</ul>
+</li>
+<li>迭代器:<code>let iterator=string[Symbol.iterator]()</code></li>
+<li>etc…</li>
+</ul>
+</li>
+</ul>
+<h4 id="单例内置对象">单例内置对象</h4>
+<h5 id="Global">Global</h5>
+<p>全局作用域中定义的变量和函数都会成为Global对象的属性</p>
+<p>methords:<br>
+1. URL encoding: use %utf8code replace not ASCII character<br>
+- <code>encodeURL()</code> : replace space with %20<br>
+- <code>encodeURLComponent()</code>: change to standard URL format<br>
+- <code>decodeURL()</code><br>
+- <code>decodeURLComponent()</code><br>
+2. <code>eval(&quot;js code&quot;)</code>:same as <code>command to run</code> in shell script</p>
+<p>获取Global对象:<br>
+1. window对象实现是Global对象的代理<br>
+2. <code>let global=function()&#123;return this;&#125;()</code></p>
+<h5 id="Math">Math</h5>
+<p>Characterist:<br>
+1. <code>Math.E</code>:自然对数基数e<br>
+2. <code>Math.LN10</code>:ln10<br>
+3. LN2<br>
+4. etc</p>
+<p>Methords:<br>
+1. max() &amp; min()<br>
+2. 舍入:<br>
+1. ceil(): 向上舍入<br>
+2. floor(): 向下<br>
+3. round(): 四舍五入<br>
+4. fround(): 返回最接近的单精度(32bits)float<br>
+3. random(): 0~1<br>
+4. selectFrom(a,b):  return a integer I ( a&lt;=I&lt;=b )<br>
+5. exp(x): e^x<br>
+6. log(x): lnx<br>
+7. etc</p>
+<h3 id="集合引用类型">集合引用类型</h3>
+<h4 id="Object">Object</h4>
+<p>获取属性:<br>
+- <code>obj.a</code><br>
+- <code>obj[&quot;a&quot;]</code></p>
+<h4 id="Array">Array</h4>
+<ul>
+<li>create:
+<ul>
+<li><code>Array.form(obj)</code>: 可迭代对象</li>
+<li><code>Array.of(parameters)</code></li>
+<li>空位：<code>let a=[,,,,]</code>, a.length = 5, every member is undefined</li>
+</ul>
+</li>
+<li>check:
+<ul>
+<li>most time: instanceof</li>
+<li>Array.isArray():解决在两个不同网络框架下传输数组，因为构造函数不同无法检测的问题</li>
+</ul>
+</li>
+<li>iterator methords:
+<ul>
+<li>keys(): return index iterator</li>
+<li>values(): return value iterator</li>
+<li>entries(): intelegently return iterator</li>
+</ul>
+</li>
+<li><code>fill(element, indexbegin=0, indexend=length-1)</code>:</li>
+<li><code>copyWithin()</code>:略</li>
+<li>stack &amp; queue methords（栈&amp;队列方法）:
+<ul>
+<li><code>push() &amp; pop()</code>: insert/pop at the end</li>
+<li><code>shift()</code>: begin</li>
+</ul>
+</li>
+<li>reverse()</li>
+<li>sort()</li>
+<li>operations:
+<ul>
+<li>concat()</li>
+<li>slice()</li>
+<li>splice():插入删除和替换</li>
+<li>strict equal search:
+<ul>
+<li>indexOf() &amp; lastIndexOf(): -1 if not find</li>
+<li>includes(): return bool</li>
+</ul>
+</li>
+<li>assert search:
+<ul>
+<li>find(): return first fit element</li>
+<li>findIndex(): …</li>
+</ul>
+</li>
+<li>iterate methords:
+<ul>
+<li>every()</li>
+<li>filter()</li>
+<li>forEach()</li>
+<li>map()</li>
+<li>some()</li>
+</ul>
+</li>
+<li>归并方法:
+<ul>
+<li>reduce()</li>
+<li>reduceRight()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="定型数组">定型数组</h4>
+<h5 id="ArrayBuffer">ArrayBuffer</h5>
+<pre><code>History: 解决复杂图形程序渲染而原生Array转型所带来的性能问题
+</code></pre>
+<ul>
+<li><code>ArrayBuffer(size)</code>: fixed size,类似malloc(),但不完全相同</li>
+</ul>
+<h5 id="use-arrayBuffer-DataView">use arrayBuffer: DataView</h5>
+<ul>
+<li>
+<p>为文件和网路I/O设计,支持对缓冲数据的高度控制</p>
+</li>
+<li>
+<p>使用 <em>ElementType</em> 实现转换(number 2 缓冲区二进制)</p>
+</li>
+<li>
+<p>默认大端序TODO</p>
+<p>越界：throw <code>RangeError</code><br>
+TODO</p>
+</li>
+</ul>
+<h4 id="Map">Map</h4>
+<ul>
+<li>使用任何JS数据类型作为键，Map内部使用 <code>SameValueZero</code>(有时候会寄，RTFM) 进行比较(基本相当于<code>===</code>)，映射值没有限制</li>
+<li>Init:成对传入键/值: <code>let a = new Map( [[&quot;k1&quot;,&quot;v1&quot;],[&quot;k2&quot;,&quot;v2&quot;]] )</code></li>
+<li>Methords:
+<ul>
+<li>add: <code>set()</code></li>
+<li>search:
+<ul>
+<li><code>get()</code></li>
+<li><code>has()</code></li>
+<li><code>size()</code></li>
+</ul>
+</li>
+<li>remove:
+<ul>
+<li><code>delete()</code></li>
+<li><code>clear()</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Iterate:
+<ul>
+<li>use <code>entries()</code> or <code>Symobl.iterator</code>获取iterator</li>
+<li>迭代可以更改键和值，但是不能更改映射关系</li>
+</ul>
+</li>
+<li>Map VS Object
+<ul>
+<li>Memory: Map use less</li>
+<li>Insert speed: Map a bit quicker</li>
+<li>Search speed: 少量键/值时，Object块(有时),大量老老实实用Map</li>
+<li>Delete performance: Object是屎</li>
+</ul>
+</li>
+</ul>
+<h5 id="WeakMap">WeakMap</h5>
+<ul>
+<li>如果没有指向键的引用，该行代码执行完后键就会被gc，随后值也会被gc</li>
+<li>不可迭代</li>
+<li>Applicate: TODO</li>
+</ul>
+<h4 id="Set">Set</h4>
+<ul>
+<li>Like a enhanced Map(similar APT)</li>
+<li>RTFM</li>
+</ul>
+<h5 id="WeakSet">WeakSet</h5>
+<ul>
+<li>like WeakMap to Map,没有对象引用的weakset会被gc</li>
+<li>Useage: TODO</li>
+</ul>
+<h3 id="Iterator-Generator">Iterator &amp; Generator</h3>
+<h4 id="Iterator">Iterator</h4>
+<ul>
+<li>任何实现Iterable接口的data struct都可以被实现Iterator接口的结构消费</li>
+<li>检查是否存在默认迭代器: <code>struct[Symbol.iterator]</code>有返回迭代器，无undefined</li>
+<li>Use:
+<ul>
+<li><code>next()</code>: return <em>value</em> and <em>done</em></li>
+<li><code>return()</code>: 提前关闭iterator</li>
+</ul>
+</li>
+<li>不同迭代器可以分别的对对象进行一次性遍历；迭代器仅仅是指针，不会对对象进行快照</li>
+<li>定义<code>[Symbol.iterator()]</code>来对对象自定义迭代器</li>
+</ul>
+<h4 id="Generator">Generator</h4>
+<ul>
+<li>Define: <code>function* fuc_name()&#123;&#125;</code> 不能用箭头函数</li>
+<li>生成器对象开始处于暂停执行状态,使用<code>next()</code>恢复执行，返回值和iterator一样(同一个接口)</li>
+<li><code>yield</code> 中断执行，返回后面的值，函数作用域状态会被保留,调用next恢复(仅限生成器内部直接上下文使用，内部嵌套函数也不行)</li>
+<li>Useage: TODO</li>
+</ul>
+<h3 id="Object-2">Object</h3>
+<blockquote>
+<p>Just a piece of shit</p>
+</blockquote>
+<p>属性的类型:(略)</p>
+<ol>
+<li>数据属性:描述数据的特性</li>
+<li>访问器属性:决定更改数据的方式</li>
+</ol>
+<blockquote>
+<p>Operations, just schema below</p>
+</blockquote>
+<ul>
+<li>定义属性</li>
+<li>读取属性的特性</li>
+<li>合并对象</li>
+<li>对象标识和相等判定</li>
+<li>合并对象: <code>target.assign(Obejct...)</code>
+<ul>
+<li>合并所有可迭代值</li>
+<li>浅拷贝</li>
+<li>no exception guarantee</li>
+</ul>
+</li>
+</ul>
+<p>对象标识和相等判定: <code>Obeject.is(lhs,rhs)</code></p>
+<p>enhanced obejcet syntax:</p>
+<ul>
+<li>简写属性</li>
+<li>可计算属性</li>
+<li>简写方法名</li>
+<li>简写方法名(省略<code>: function</code>)</li>
+<li>对象的解构:类似<code>auto [a,b]:tuple&lt;int,int&gt;</code>,不存在的属性为undefined</li>
+</ul>
+<blockquote>
+<p>调用<code>toObject</code>,所以原始值会被转换为对象，null和undefined会throw exception</p>
+</blockquote>
+<h3 id="Function">Function</h3>
+<blockquote>
+<p>Also a piece of shit</p>
+</blockquote>
+<p>function is a objecet</p>
+<h2 id="Promise-and-asynchronous-function">Promise and asynchronous function</h2>
+<h3 id="Promise">Promise</h3>
+<ol>
+<li>instantiate:
+<ol>
+<li><code>new Promise(some_function)</code></li>
+<li><code>Promise.resolve()</code></li>
+<li><code>Promise.reject()</code></li>
+</ol>
+</li>
+<li>condition:
+<ol>
+<li>pending: default</li>
+<li>fulfilled/resolved: <code>by call resolve()</code></li>
+<li>rejected: <code>by call reject()</code></li>
+</ol>
+</li>
+<li>prototype:
+<ol>
+<li><code>Promise.prototype.then(f_resolve,f_reject)</code></li>
+<li><code>Promise.prototype.catch(f_reject)</code></li>
+<li><code>Promise.prototype.finally(f_reject)</code></li>
+<li><code>Promise.all([sub_promise1,sub_promise2...])</code></li>
+<li><code>Promise.race(...)</code></li>
+</ol>
+</li>
+</ol>
+<h3 id="Asynchronous-function">Asynchronous function</h3>
+<p>Keyword:</p>
+<ul>
+<li><code>async</code>: 使得函数总是返回promise封装的对象，但仍是同步求值</li>
+<li><code>await</code>: 必须在异步函数定义中使用</li>
+<li>useage:
+<ol>
+<li>sleep: <code>async function test()&#123;await sleep(514);&#125;</code></li>
+</ol>
+</li>
+</ul>
+<h3 id="message-queue">message queue</h3>
+<p>异步消息先进先出，等执行完当前线程再pop</p>
+<h2 id="BOM">BOM</h2>
+<blockquote>
+<p>Browser Object Model</p>
+</blockquote>
+<h3 id="Object-window">Object <code>window</code></h3>
+<h4 id="window-location">window location</h4>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">moveTo</span>()</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">moveBy</span>()</span><br><span class="line">可能被部分或全部禁用</span><br></pre></td></tr></table></figure>
+<h4 id="setTimeout">setTimeout</h4>
+<ul>
+<li><code>setTimeout(func,1000)</code> 1000ms后把函数添加到队列</li>
+<li><code>setInterval(func,1000)</code> 每隔1000ms塞进队列一次</li>
+</ul>
+<h4 id="对话框">对话框</h4>
+<ul>
+<li><code>alert()</code></li>
+<li><code>confirm()</code></li>
+<li><code>prompt()</code></li>
+</ul>
+<h3 id="Object-location">Object <code>location</code></h3>
+<ul>
+<li>location.hash “#contents” URL 散列值（井号后跟零或多个字符），如果没有则为空字符串</li>
+<li>location.host “<a target="_blank" rel="noopener" href="http://www.wrox.com:80">www.wrox.com:80</a>” 服务器名及端口号</li>
+<li>location.hostname “<a target="_blank" rel="noopener" href="http://www.wrox.com">www.wrox.com</a>” 服务器名</li>
+<li>location.href “<a target="_blank" rel="noopener" href="http://www.wrox.com:80/WileyCDA/?q=javascript#contents">http://www.wrox.com:80/WileyCDA/?q=javascript#contents</a>” 当前加载页面的完整 URL。 location 的 toString()方法返回这个值</li>
+<li>location.pathname “/WileyCDA/” URL 中的路径和（或）文件名</li>
+<li>location.port “80” 请求的端口。如果 URL 中没有端口，则返回空字符串</li>
+<li>location.protocol “http:” 页面使用的协议。通常是 “http:” 或 “https:”</li>
+<li>location.search “?q=javascript” URL 的查询字符串。这个字符串以问号开头</li>
+<li>location.username “foouser” 域名前指定的用户名</li>
+<li>location.password “barpassword” 域名前指定的密码</li>
+<li>location.origin “<a target="_blank" rel="noopener" href="http://www.wrox.com">http://www.wrox.com</a>” URL 的源地址。只读</li>
+</ul>
+<h2 id="DOM">DOM</h2>
+<blockquote>
+<p>Document Object Model</p>
+</blockquote>
+<h3 id="Node">Node</h3>
+<blockquote>
+<p>each element is one node</p>
+</blockquote>
+<ul>
+<li><code>nodeName &amp; nodeValue</code>: depend one node type(用前先检查检查节点是不是元素)</li>
+<li>node relation: <code>childNodes[x], parentNode[x], firstChild,lastChild, nextSibling, previousSibling</code></li>
+<li>add node: <code>appendChild, insertBefore(node,position)</code></li>
+</ul>
+<h3 id="Document">Document</h3>
+<ul>
+<li>subElements:
+<ol>
+<li>html</li>
+<li>body<br/></li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>maybe, depend on browser: DocumentType, Comment</p>
+</blockquote>
+<ul>
+<li>Information:
+<ol>
+<li>title</li>
+<li>URL</li>
+<li>domain</li>
+<li>referrer</li>
+</ol>
+</li>
+<li>locate elements:
+<ol>
+<li><code>getElementById()</code></li>
+<li><code>getElementByTagName()</code></li>
+<li><code>$(&quot;id&quot;)</code> equal to <code>getElementById</code></li>
+</ol>
+</li>
+<li>special elements:
+<ol>
+<li>anchors</li>
+<li>applets: abandoned</li>
+<li>forms</li>
+<li>imges</li>
+<li>links</li>
+</ol>
+</li>
+<li>hasFeature()</li>
+<li>write to document
+<ol>
+<li><code>write()</code>: 加载完后再写会刷新整个界面</li>
+<li><code>writeln()</code></li>
+</ol>
+</li>
+</ul>
+<h3 id="Element">Element</h3>
+<ul>
+<li>parentNode:  Document or Element</li>
+<li>set attribute: <code>setAttribute(name, value)</code></li>
+<li>“attributes” 's attribute:
+<ul>
+<li><code>getNamedItem(name)</code></li>
+<li><code>removeNamedItem(name)</code></li>
+<li><code>setNamedItem(name)</code></li>
+<li><code>item(pos)</code></li>
+</ul>
+</li>
+<li>create element: <code>createElement()</code></li>
+<li>创建后要把元素加入文档树才能显示(<code>appendChild, insertBefore...</code>),加入后会立即渲染，并且之后的修改会立即反应出来</li>
+</ul>
+<h3 id="Text">Text</h3>
+<p>按字面量解释纯文本<br>
+nodeValue=amount of the characters</p>
+<ul>
+<li>methords:
+<ol>
+<li><code>appendData(text)</code></li>
+<li><code>deleteData(offset, count)</code></li>
+<li><code>insertData(offset, text)</code></li>
+<li><code>replaceData(offset,count,text)</code></li>
+<li><code>splitText(offset)</code></li>
+<li><code>substringData(offset,count)</code></li>
+</ol>
+</li>
+<li>not belong methords:
+<ol>
+<li><code>parent.normalize()</code>合并所有相邻的Text节点</li>
+<li><code>parent.child.splitText(num)</code></li>
+</ol>
+</li>
+</ul>
+<h3 id="Comment">Comment</h3>
+<p>…</p>
+<h3 id="CDATASection">CDATASection</h3>
+<p>specific for xml</p>
+<h3 id="动态样式">动态样式</h3>
+<p>懂得都懂,不懂就rtfm</p>
+<h3 id="MutationObserver-interface">MutationObserver interface</h3>
+<p>在DOM被修改时异步回调</p>
+<h2 id="DOM-extension">DOM extension</h2>
+<p>本章跳过</p>
+<h3 id="Selectors-API">Selectors API</h3>
+<h3 id="HTML5">HTML5</h3>
+<h2 id="DOM2-3">DOM2&amp;3</h2>
+<p>本章跳过</p>
+<h2 id="Event">Event</h2>
+<ul>
+<li>event flow</li>
+</ul>
+<blockquote>
+<p>传递方式类似 try catch<br>
+从window捕获</p>
+</blockquote>
+<ul>
+<li>event type:
+<ul>
+<li>用户界面事件（UIEvent）：涉及与 BOM 交互的通用浏览器事件。</li>
+<li>焦点事件（FocusEvent）：在元素获得和失去焦点时触发。</li>
+<li>鼠标事件（MouseEvent）：使用鼠标在页面上执行某些操作时触发。</li>
+<li>滚轮事件（WheelEvent）：使用鼠标滚轮（或类似设备）时触发。</li>
+<li>输入事件（InputEvent）：向文档中输入文本时触发。</li>
+<li>键盘事件（KeyboardEvent）：使用键盘在页面上执行某些操作时触发。</li>
+<li>合成事件（CompositionEvent）：在使用某种 IME（Input Method Editor，输入法编辑器）输入字符时触发。</li>
+</ul>
+</li>
+</ul>
+<p>太多了，略</p>
+<h2 id="animation-and-canvas">animation and canvas</h2>
+<p>略…</p>
+<h2 id="JSON">JSON</h2>
+<ul>
+<li><code>JSON.stringify()</code>: to json</li>
+<li><code>JSON.parse()</code>: to js element</li>
+</ul>
+<h3 id="serialization-option">serialization option</h3>
+<p><code>JSON.stringify(trg,[&quot;name1&quot;,&quot;name2&quot;...],4)</code>：<br>
+只返回特定对象，每级缩进4空格</p>
+<h3 id="obj-toJSON"><code>obj.toJSON()</code></h3>
+<p>override <code>stringify</code> behavior</p>
+
+        </div>
+        
+<blockquote class="copyright">
+    <p><strong>Link to this article : </strong><a class="permalink" href="http://blog.vollate.top/2024/04/29/javascript/">http://blog.vollate.top/2024/04/29/javascript/</a></p>
+    <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
+</blockquote>
+
+
+    </article>
+    
+    <section id="comments">
+        
+
+        
+    </section>
+
+
+    
+
+</main>
+
+
+<aside style="" id="sidebar" class="aside aside-fixture">
+    <div class="toc-sidebar">
+        <nav id="toc" class="article-toc">
+            <h3 class="toc-title">Catalogue</h3>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#script-element"><span class="toc-number">1.</span> <span class="toc-text">&lt;script&gt; element</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Characteristic"><span class="toc-number">1.1.</span> <span class="toc-text">Characteristic</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XHTML-%E5%8E%86%E5%8F%B2%E9%81%97%E7%89%A9"><span class="toc-number">2.</span> <span class="toc-text">XHTML(历史遗物)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ECMAScript"><span class="toc-number">3.</span> <span class="toc-text">ECMAScript</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#variable-define"><span class="toc-number">3.1.</span> <span class="toc-text">variable define</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#var"><span class="toc-number">3.1.1.</span> <span class="toc-text">var</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#let"><span class="toc-number">3.1.2.</span> <span class="toc-text">let</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#const"><span class="toc-number">3.1.3.</span> <span class="toc-text">const</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Type"><span class="toc-number">3.2.</span> <span class="toc-text">Type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Operator"><span class="toc-number">3.3.</span> <span class="toc-text">Operator</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#loop"><span class="toc-number">3.4.</span> <span class="toc-text">loop</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#label"><span class="toc-number">3.4.1.</span> <span class="toc-text">label</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#with"><span class="toc-number">3.4.2.</span> <span class="toc-text">with</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#switch"><span class="toc-number">3.4.3.</span> <span class="toc-text">switch</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#function"><span class="toc-number">3.5.</span> <span class="toc-text">function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#variable"><span class="toc-number">3.6.</span> <span class="toc-text">variable</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#primitive-value-and-reference-value"><span class="toc-number">3.6.1.</span> <span class="toc-text">primitive value and reference value</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dynamic-characteristic"><span class="toc-number">3.6.2.</span> <span class="toc-text">dynamic characteristic</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#copy"><span class="toc-number">3.6.3.</span> <span class="toc-text">copy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#function-arguments-pass"><span class="toc-number">3.6.4.</span> <span class="toc-text">function arguments pass</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#determine-type"><span class="toc-number">3.6.5.</span> <span class="toc-text">determine type</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.7.</span> <span class="toc-text">执行上下文和作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="toc-number">3.7.1.</span> <span class="toc-text">作用域链</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E"><span class="toc-number">3.7.2.</span> <span class="toc-text">变量声明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memory-manage"><span class="toc-number">3.8.</span> <span class="toc-text">Memory manage</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GC"><span class="toc-number">3.8.1.</span> <span class="toc-text">GC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Improve-performance"><span class="toc-number">3.8.2.</span> <span class="toc-text">Improve performance</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Memory-leak"><span class="toc-number">3.8.3.</span> <span class="toc-text">Memory leak</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-reference-type"><span class="toc-number">3.9.</span> <span class="toc-text">Basic reference type</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Date"><span class="toc-number">3.9.1.</span> <span class="toc-text">Date</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RegExp"><span class="toc-number">3.9.2.</span> <span class="toc-text">RegExp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E5%80%BC%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.9.3.</span> <span class="toc-text">原始值包装类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E4%BE%8B%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.9.4.</span> <span class="toc-text">单例内置对象</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Global"><span class="toc-number">3.9.4.1.</span> <span class="toc-text">Global</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Math"><span class="toc-number">3.9.4.2.</span> <span class="toc-text">Math</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.10.</span> <span class="toc-text">集合引用类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Object"><span class="toc-number">3.10.1.</span> <span class="toc-text">Object</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Array"><span class="toc-number">3.10.2.</span> <span class="toc-text">Array</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E5%9E%8B%E6%95%B0%E7%BB%84"><span class="toc-number">3.10.3.</span> <span class="toc-text">定型数组</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ArrayBuffer"><span class="toc-number">3.10.3.1.</span> <span class="toc-text">ArrayBuffer</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#use-arrayBuffer-DataView"><span class="toc-number">3.10.3.2.</span> <span class="toc-text">use arrayBuffer: DataView</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Map"><span class="toc-number">3.10.4.</span> <span class="toc-text">Map</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#WeakMap"><span class="toc-number">3.10.4.1.</span> <span class="toc-text">WeakMap</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Set"><span class="toc-number">3.10.5.</span> <span class="toc-text">Set</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#WeakSet"><span class="toc-number">3.10.5.1.</span> <span class="toc-text">WeakSet</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Iterator-Generator"><span class="toc-number">3.11.</span> <span class="toc-text">Iterator &amp; Generator</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Iterator"><span class="toc-number">3.11.1.</span> <span class="toc-text">Iterator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Generator"><span class="toc-number">3.11.2.</span> <span class="toc-text">Generator</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-2"><span class="toc-number">3.12.</span> <span class="toc-text">Object</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Function"><span class="toc-number">3.13.</span> <span class="toc-text">Function</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise-and-asynchronous-function"><span class="toc-number">4.</span> <span class="toc-text">Promise and asynchronous function</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise"><span class="toc-number">4.1.</span> <span class="toc-text">Promise</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Asynchronous-function"><span class="toc-number">4.2.</span> <span class="toc-text">Asynchronous function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#message-queue"><span class="toc-number">4.3.</span> <span class="toc-text">message queue</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BOM"><span class="toc-number">5.</span> <span class="toc-text">BOM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-window"><span class="toc-number">5.1.</span> <span class="toc-text">Object window</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#window-location"><span class="toc-number">5.1.1.</span> <span class="toc-text">window location</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#setTimeout"><span class="toc-number">5.1.2.</span> <span class="toc-text">setTimeout</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E8%AF%9D%E6%A1%86"><span class="toc-number">5.1.3.</span> <span class="toc-text">对话框</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-location"><span class="toc-number">5.2.</span> <span class="toc-text">Object location</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM"><span class="toc-number">6.</span> <span class="toc-text">DOM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Node"><span class="toc-number">6.1.</span> <span class="toc-text">Node</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Document"><span class="toc-number">6.2.</span> <span class="toc-text">Document</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Element"><span class="toc-number">6.3.</span> <span class="toc-text">Element</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Text"><span class="toc-number">6.4.</span> <span class="toc-text">Text</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Comment"><span class="toc-number">6.5.</span> <span class="toc-text">Comment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CDATASection"><span class="toc-number">6.6.</span> <span class="toc-text">CDATASection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E6%A0%B7%E5%BC%8F"><span class="toc-number">6.7.</span> <span class="toc-text">动态样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MutationObserver-interface"><span class="toc-number">6.8.</span> <span class="toc-text">MutationObserver interface</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-extension"><span class="toc-number">7.</span> <span class="toc-text">DOM extension</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Selectors-API"><span class="toc-number">7.1.</span> <span class="toc-text">Selectors API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML5"><span class="toc-number">7.2.</span> <span class="toc-text">HTML5</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM2-3"><span class="toc-number">8.</span> <span class="toc-text">DOM2&amp;3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Event"><span class="toc-number">9.</span> <span class="toc-text">Event</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#animation-and-canvas"><span class="toc-number">10.</span> <span class="toc-text">animation and canvas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON"><span class="toc-number">11.</span> <span class="toc-text">JSON</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#serialization-option"><span class="toc-number">11.1.</span> <span class="toc-text">serialization option</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#obj-toJSON"><span class="toc-number">11.2.</span> <span class="toc-text">obj.toJSON()</span></a></li></ol></li></ol>
+        </nav>
+    </div>
+</aside>
+
+
+
+
+
+        </section>
+        <footer class="hidden lg:block fixed bottom-0 left-0 sm:w-1/12 lg:w-1/6 bg-gray-100 z-40">
+    
+    <div class="footer-social-links">
+        
+            <a target="_blank" rel="noopener" href="https://github.com/vollate">
+                <i class="iconfont icon-github"></i>
+            </a>
+        
+            <a href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+            </a>
+        
+    </div>
+    
+    
+        <p class="footer-custom">Freedom is the freedom to say that two plus two makes four</p>
+        <p class="theme-brand">Theme by <a target="_blank" href="https://github.com/fengkx/hexo-theme-purer" rel="nofollow noopener noreferrer noopener">hexo-theme-purer</a></p>
+    
+</footer>
+
+        <div id="mask" class="hidden mask fixed inset-0 bg-gray-900 opacity-75 z-40"></div>
+        <div id="search-view-container" class="hidden shadow-xl"></div>
+        
+<script src="/js/dom-event.min.js"></script>
+
+
+
+<script src="/js/local-search.min.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '346bd3ac57ee5e238afd',
+        clientSecret: '786b6b92c2216fae1114b63adf3d10a49931ce6a',
+        repo: 'Blog',
+        owner: 'vollate',
+        admin: ['vollate'],
+        id: md5(location.pathname),
+        distractionFreeMode: true
+    })
+    gitalk.render('comments')
+</script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/js/lightgallery.min.js"></script>
+    
+<script src="/js/light-gallery.min.js"></script>
+
+
+
+
+
+
+    </body>
+</html>
