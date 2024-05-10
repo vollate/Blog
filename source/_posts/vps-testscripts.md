@@ -1,9 +1,10 @@
 ---
 title: VPS 测试脚本整理
 tags:
-  - Journal
+  - Server  
 categories:
-  - Server
+  - Journal
+
 date: 2023-12-13 15:44:50
 ---
 

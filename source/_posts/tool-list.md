@@ -2,9 +2,9 @@
 title: Tool List
 date: 2023-03-27 08:17:41
 tags: 
-- Tools
-Categories: 
 - Linux
+Categories: 
+- Tools
 ---
 >收录了Linux下使用的一些工具
 

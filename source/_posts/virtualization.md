@@ -2,8 +2,9 @@
 title: 浅记系统虚拟化
 tags:
   - Notes
-categories:
   - OS
+categories:
+  - Knowledge
 published: true
 date: 2023-11-17 19:24:06
 ---

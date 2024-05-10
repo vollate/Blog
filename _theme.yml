@@ -101,16 +101,20 @@ profile:
   # My Personal Links
   links:
     Github: https://github.com/Vollate
-    #Blog: http://blog.vollate.top
+    Blog: https://blog.vollate.top
     Email: uint44t@gmail.com
     #Wechat: 
   # My Personal Labels
   labels:
-    - C++
-    - JAVA
-    - JS
-    - Golang
-    - Linux
+    - C++</br>
+    - Rust</br>
+    - CMake</br>
+    - Python</br>
+    - JAVA</br>
+    - ECMAScript</br>
+    - Golang</br>
+    - Linux</br>
+    - RoboMaster</br>
 
   skills:
     #Git: ★★★☆☆

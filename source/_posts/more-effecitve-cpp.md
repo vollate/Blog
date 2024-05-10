@@ -3,8 +3,9 @@ title: More Effecitve C++
 date: 2023-11-08 16:21:57
 tags:
 - Notes
-category:
 - C++
+category:
+- Knowledge
 ---
 
 - 不能直接往数组类容器塞多态类，使用指针；一定要引用的情况下（需要`operator()`）用std::reference

@@ -3,8 +3,9 @@ title: Effective C++
 date: 2023-10-05 16:03:48
 tags:
 - Notes
-category:
 - C++
+category:
+- Knowledge
 ---
 从vimwiki迁移过来的古早笔记,仔细看看发现好多忘了(
 

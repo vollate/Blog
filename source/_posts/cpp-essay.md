@@ -1,8 +1,11 @@
 ---
 title: CPP 随笔
 date: 2023-11-03 11:20:31
-tags: Notes
-categories: C++
+tags: 
+- Notes
+- C++
+categories: 
+- Knowledge
 ---
 记录cpp编程过程中的一些总结
 

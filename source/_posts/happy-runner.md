@@ -2,9 +2,8 @@
 title: Happy Runner (乐道不跑)
 date: 2022-11-03 10:57:19
 tags: 
-- Magic
-- Tips
 categories: 
+- Trick
 ---
 
 ## Requirement
