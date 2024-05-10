@@ -15,12 +15,16 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: true   
-      - name: Use Node.js 18.x
+          fetch-depth: 0
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v2
         with:
-          node-version: "18"
+          node-version: "20"
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
+          cd themes/purer
+          npm install
       - name: Build
         run: npm run build
       - name: Deploy
