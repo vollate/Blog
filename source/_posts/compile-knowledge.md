@@ -1,9 +1,9 @@
 ---
 title: 编译之法
-categories:
-- Compiler
 date: 2024-3-3 18:34:06
 tags:
+- Compiler
+categories:
 - Knowledge
 ---
 
@@ -261,4 +261,3 @@ ld.so(动态链接器) 搜索顺序:
 ![fix_all](fix_all.jpg)
 
 ## 完
-

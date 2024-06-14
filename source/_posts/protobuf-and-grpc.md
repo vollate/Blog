@@ -1,5 +1,5 @@
 ---
-title: gRPC 学习
+title: gRPC & Protobuf 学习
 date: 2024-05-10 18:42:59
 tags: 
 - Notes
@@ -11,11 +11,10 @@ Cagetories:
 ## 阅读须知
 
 本文仅供学习参考，笔者的 protobuf 版本为 3.21.12.0，不保证其他版本的兼容性。
-对于参考本文而产生的任何生产上的问题本文作者概不负责。
 
 ## proto file
 
-`.proto` 文件是 gRPC 的核心文件，用于定义服务和消息格式。通过 `protobuf` 的 `protoc` 可以生成符合同一通讯协议的对应的代码，以此实现跨语言通讯。
+`.proto` 格式文件可以被 [protobuf(protocol buffer)](https://github.com/protocolbuffers/protobuf) 解析，用于定义服务和消息格式的语言。通过 `protobuf` 的 `protoc` 可以生成符合同一通讯协议的对应的代码框架，以此实现跨语言 rpc 通讯。
 
 废话不多说，直接上例子
 
@@ -120,15 +119,81 @@ greater than 2<sup>56</sup>.</td><td>uint64</td><td>long<sup>[2]</sup></td><td>i
 be longer than 2<sup>32</sup>.</td><td>string</td><td>String</td><td>str/unicode<sup>[5]</sup></td><td>string</td><td>String (UTF-8)</td><td>string</td><td>string</td><td>String</td></tr><tr><td>bytes</td><td>May contain any arbitrary sequence of bytes no longer than 2<sup>32</sup>.</td><td>string</td><td>ByteString</td><td>str (Python 2)<br>bytes (Python 3)</td><td>[]byte</td><td>String (ASCII-8BIT)</td><td>ByteString</td><td>string</td><td>List<int></int></td></tr></tbody></table>
 </details>
 
-这是官网的表格照抄结果，仅供学习使用，生产请以官方文档为准以避免时效性问题。[官方文档链接](https://protobuf.dev/programming-guides/proto3/#scalar)
+这是官网的表格照抄结果，请以官方文档为准以避免任何时效性问题。[官方文档链接](https://protobuf.dev/programming-guides/proto3/#scalar)
 
 #### Enumerations
 
+#### Union(Variant)
+
+```proto
+message PublishRoomRequest {
+    string name = 1;
+    string password = 2;
+    oneof contact {// like union in c/c++
+        string email = 3;
+        string phone = 4;
+        int64 id = 5;
+    }
+}
+```
+
+#### Message
+
+就是 Struct, 用于定义复杂的数据结构，可以嵌套定义，可以包含 `enum`、`message`、`oneof` 等
+可以用 `repeated` 关键字定义数组
+
+```proto
+message Person {
+  string name = 1;
+  int32 id = 2;
+  string email = 3;
+
+  enum PhoneType {
+    MOBILE = 0;
+    HOME = 1;
+    WORK = 2;
+  }
+
+  message PhoneNumber {
+    string number = 1;
+    PhoneType type = 2;
+  }
+
+  repeated PhoneNumber phones = 4;
+}
+```
+
 #### Service 定义
 
-## 题外话
+```proto
+service ChatService {
+  rpc PublishRoom(PublishRoomRequest) returns (PublishRoomReply);
+  rpc GetRoomPeers(GetRoomPeersRequest) returns (stream GetRoomPeersReply);
+  rpc GetRoomsPeers(stream GetRoomPeersRequest) returns (stream GetRoomPeersReply);
+}
+```
 
-### 可变长度编码和 ZigZag 编码
+`stream` use to specify a stream message, which means the server or client can send or receive multiple messages in one rpc call.
 
-具体过程可以参考[ZigZag例子](https://gist.github.com/mfuerstenau/ba870a29e16536fdbaba)
+## grpc 一些教程
+
+- [官网](https://grpc.io/)找自己要用的语言去看
+- [找的某个 blog](https://github.com/mengbin92/protobuf/blob/master/docs/%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97(proto3).md)
+
+## 有趣的东西
+
+语法说实话没啥看的，用的时候再查，但是编码挺好玩的。[官方介绍](https://protobuf.dev/programming-guides/encoding/)
+
+### 可变长度编码
+
+将原数按小端序编码，然后分为 7 bits 一组，每 byte 的 MSB（最高位）表示是否还有后续(0表示无，1表示有)。由于按小端序而不是传统的大端序（网络字节序），可以节省数字较小时高位的存储空间。当然对于大数需要最多10 bytes来传输，因此在已知数据都较大时应直接使用定长编码。
+
+### ZigZag 编码
+
+为了解决负数而生。因为负数的标准表示方式是 MSB 设 1 的 2 补码，会导致大负数的可变长度编码远远长于同绝对值的正数。如果是期望为 0 的高斯分布，用上面的变长编码会产生很大的消耗。ZigZag 编码将负数映射到正数，使得绝对值较小的负数的编码长度接近于正数。
+
+- 编码: `n << 1 ^ n >> len`, 其中 `len` 为 n 的位数
+- 解码: `(n >> 1) ^ -(n & 1)`
+
+>本质: 只用正数表示绝对值大小，符号位从 MSB 换为 LSB, 这样让上面的变长编码关于绝对值大小的优势得以保留。
 
