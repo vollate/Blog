@@ -15,8 +15,8 @@ http://blog.vollate.top/2022/11/10/article-archives/
 http://blog.vollate.top/2023/11/13/build-site/
 http://blog.vollate.top/repository/index.html
 http://blog.vollate.top/2022/10/01/first-post/
-http://blog.vollate.top/links/index.html
 http://blog.vollate.top/categories/index.html
+http://blog.vollate.top/links/index.html
 http://blog.vollate.top/tags/index.html
 http://blog.vollate.top/
 http://blog.vollate.top/tags/Archive/
