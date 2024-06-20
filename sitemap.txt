@@ -21,8 +21,8 @@ http://blog.vollate.top/tags/index.html
 http://blog.vollate.top/
 http://blog.vollate.top/tags/Archive/
 http://blog.vollate.top/tags/Books/
-http://blog.vollate.top/tags/Journal/
 http://blog.vollate.top/tags/Compiler/
+http://blog.vollate.top/tags/Journal/
 http://blog.vollate.top/tags/Notes/
 http://blog.vollate.top/tags/C/
 http://blog.vollate.top/tags/Linux/
@@ -31,7 +31,7 @@ http://blog.vollate.top/tags/KDE-Plasma/
 http://blog.vollate.top/tags/RPC/
 http://blog.vollate.top/tags/OS/
 http://blog.vollate.top/tags/Server/
-http://blog.vollate.top/categories/Blog/
 http://blog.vollate.top/categories/Knowledge/
+http://blog.vollate.top/categories/Blog/
 http://blog.vollate.top/categories/Trick/
 http://blog.vollate.top/categories/Journal/
