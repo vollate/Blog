@@ -12,9 +12,10 @@
 <meta property="og:description" content="记(寄)录 写 15445 的时候发现 clang-14 以上编译 fmt 会报错（arch 包太新了导致的），因此在 debian12 的 docker 中挂载 host 文件夹开发。用 lldb debug 时在出现 exception 或 signal后 lldb 会报错 A packet returned an error 8 并退出进程，导致无法 backtrace，但是 gdb 没事。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-06-26T16:36:35.000Z">
-<meta property="article:modified_time" content="2024-06-26T18:22:40.000Z">
+<meta property="article:modified_time" content="2024-07-01T15:22:47.000Z">
 <meta property="article:author" content="Vollate">
-<meta property="article:tag" content="Coding">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="LLDB">
 <meta name="twitter:card" content="summary">
 
     <link rel="alternate" type="application/atom+xml" href="/atom.xml">
@@ -42,7 +43,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
 
     <body>
         <header class="header header-fixture">
@@ -201,16 +202,30 @@
             <p class="article-meta mb-3 text-xs">
                 <span class="article-date">
     
-    <i class="iconfont icon-calendar-check"></i>
+    <i class="iconfont icon-calendar-minus-o"></i>
 	<a href="/2024/06/26/docker-lldb-error/" class="article-date">
 	  <time datetime="2024-06-26T00:00:00.000Z"
             itemprop="datePublished">Created: Jun 26</time>
         
+            <i class="iconfont icon-calendar-check"></i>
+            <time datetime="2024-07-01T00:00:00.000Z"
+                  itemprop="dateModified">Last Updated: Jul 1</time>
+        
     </a>
 </span>
                 
+    <span class="article-category">
+    <i class="iconfont icon-folder"></i>
+    <a class="article-category-link" href="/categories/Journal/">Journal</a>
+  </span>
+
 
                 
+    <span class="article-tags">
+    <i class="iconfont icon-tag"></i>
+    <a class="article-tag-none-link" href="/tags/Docker/" rel="tag">Docker</a>, <a class="article-tag-none-link" href="/tags/LLDB/" rel="tag">LLDB</a>
+  </span>
+
 
                 <span class="_partial/post-comment"><i class="icon icon-comment"></i>
                     <a href="/2024/06/26/docker-lldb-error/#comments" class="article-comment-link">

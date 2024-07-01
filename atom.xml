@@ -6,7 +6,7 @@
   <link href="http://blog.vollate.top/atom.xml" rel="self"/>
   
   <link href="http://blog.vollate.top/"/>
-  <updated>2024-06-26T18:22:40.000Z</updated>
+  <updated>2024-07-01T15:22:47.000Z</updated>
   <id>http://blog.vollate.top/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://blog.vollate.top/2024/06/26/docker-lldb-error/"/>
     <id>http://blog.vollate.top/2024/06/26/docker-lldb-error/</id>
     <published>2024-06-26T16:36:35.000Z</published>
-    <updated>2024-06-26T18:22:40.000Z</updated>
+    <updated>2024-07-01T15:22:47.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="记-寄-录">记(寄)录</h2><p>写 15445 的时候发现 clang-14 以上编译 fmt 会报错（arch 包太新了导致的），因此在 debian12 的 docker 中挂载 host 文件夹开发。用 lldb debug 时在出现 exception 或 signal后 lldb 会报错 <code>A packet returned an error 8</code> 并退出进程，导致无法 backtrace，但是 gdb 没事。<br>原因是因为 lldb debug 用的 syscall ptrace 在 docker 中被限制了，解决方法是在 <code>docker run</code> 时加上 <code>--cap-add=SYS_PTRACE --security-opt seccomp=unconfined</code> 参数。<br><a href="https://stackoverflow.com/questions/69291157/lldb-producing-a-packet-returned-error-8-when-i-run-my-program">Problem on stack overflow</a></p><h2 id="Docker-小知识">Docker 小知识</h2><ul><li>Linux capabilities: Docker 关于 Linux capabilities 的<a href="https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities">章节</a>。这个是用来限制容器权限的，可以看到默认情况下 &quot;SYS_PTRACE Trace arbitrary processes using ptrace(2).&quot;是被禁用的，然后 lldb 就寄了（</li><li>Secure computing mode(Seccomp): 这是 Linux 内核的一个 feature,用于控制计算时的行为安全。Docker 默认的 profile 禁用了大约 44 个 syscall, ptrace 位列其中。通过 <code>--security-opt seccomp=unconfined</code> 来关闭这个 profile（图省事的不安全做法），正确的是改默认 profile 来自定义一个profile。然而我懒，就这样了。</li></ul><h2 id="ptrace-怎么不安全了">ptrace 怎么不安全了</h2><p><strong>Docker 官方文档</strong>:</p><ul><li>Blocked in Linux kernel versions before 4.8 to avoid seccomp bypass.</li><li>Tracing/profiling arbitrary processes is already blocked by dropping CAP_SYS_PTRACE, because it could leak a lot of information on the host.</li></ul><p>上 NVD 搜了一圈，好多文档都写的禁止使用 ptrace, debugger 和 strace（used to trace syscal)，但是没说为啥。cgroup 和 namespace 不是已经隔离了吗，等哪天有空查到再研究下。</p><!--TODO--><h2 id="为什么-GDB-没事">为什么 GDB 没事</h2><p>TODO: 找了半天资料没找到，gdb internals 偏偏这一章是咕咕的，先洗洗睡了。</p>]]></content>
     
@@ -34,6 +34,12 @@
     
     
     
+    <category term="Journal" scheme="http://blog.vollate.top/categories/Journal/"/>
+    
+    
+    <category term="Docker" scheme="http://blog.vollate.top/tags/Docker/"/>
+    
+    <category term="LLDB" scheme="http://blog.vollate.top/tags/LLDB/"/>
     
   </entry>
   
