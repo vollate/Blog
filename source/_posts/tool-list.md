@@ -52,4 +52,8 @@ Categories:
 ## Diff Tools
 
 - [meld](https://gitlab.gnome.org/GNOME/meld)
+- [kdiff3](https://kdiff3.sourceforge.net/)
 
+## Mouse
+
+- [piper](https://github.com/libratbag/piper) 解决了 LogitechG 系列鼠标在 Linux 下无法设置 DPI，灯光不亮的问题。相当于一个非官方 Logitech G Hub
