@@ -20,8 +20,8 @@ http://blog.vollate.top/categories/index.html
 http://blog.vollate.top/links/index.html
 http://blog.vollate.top/tags/index.html
 http://blog.vollate.top/
-http://blog.vollate.top/tags/Archive/
 http://blog.vollate.top/tags/Books/
+http://blog.vollate.top/tags/Archive/
 http://blog.vollate.top/tags/Journal/
 http://blog.vollate.top/tags/Compiler/
 http://blog.vollate.top/tags/Notes/
