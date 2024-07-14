@@ -402,8 +402,8 @@ packages:
   engine.io-client@6.5.4:
     resolution: {integrity: sha512-GeZeeRjpD2qf49cZQ0Wvh/8NJNfeXkXXcoGh+F77oEAgo9gUHwT1fCRxSNU+YEEaysOJTnsFHmM5oAcPy4ntvQ==}
 
-  engine.io-parser@5.2.2:
-    resolution: {integrity: sha512-RcyUFKA93/CXH20l4SoVvzZfrSDMOTUS3bWVpTt2FuFP+XYrL8i8oonHP7WInRyVHXh0n/ORtoeiE1os+8qkSw==}
+  engine.io-parser@5.2.3:
+    resolution: {integrity: sha512-HqD3yTBfnBxIrbnM1DoD6Pcq8NECnh8d4As1Qgh0z5Gg3jRRIqijury0CL3ghu/edArpUYiYqQiDUQBIs4np3Q==}
     engines: {node: '>=10.0.0'}
 
   engine.io@6.5.5:
@@ -603,8 +603,8 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
-  highlight.js@11.9.0:
-    resolution: {integrity: sha512-fJ7cW7fQGCYAkgv4CPfwFHrfd/cLS4Hau96JuJ+ZTOWhjnhoeN1ub1tFmALm/+lW5z4WCAuAV9bm05AP0mS6Gw==}
+  highlight.js@11.10.0:
+    resolution: {integrity: sha512-SYVnVFswQER+zu1laSya563s+F8VDGt7o35d4utbamowvUNLLMovFqwCLSocpZTz3MgaSRA1IbqRWZv97dtErQ==}
     engines: {node: '>=12.0.0'}
 
   html-minifier@4.0.0:
@@ -801,6 +801,10 @@ packages:
 
   mime-db@1.52.0:
     resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
+    engines: {node: '>= 0.6'}
+
+  mime-db@1.53.0:
+    resolution: {integrity: sha512-oHlN/w+3MQ3rba9rqFr6V/ypF10LSkdwUysQL7GkXoTgIWeV+tcXGA852TBxH+gsh8UWoyhR1hKcoMJTuWflpg==}
     engines: {node: '>= 0.6'}
 
   mime-types@2.1.35:
@@ -1456,7 +1460,7 @@ snapshots:
 
   compressible@2.0.18:
     dependencies:
-      mime-db: 1.52.0
+      mime-db: 1.53.0
 
   compression@1.7.4:
     dependencies:
@@ -1602,7 +1606,7 @@ snapshots:
     dependencies:
       '@socket.io/component-emitter': 3.1.2
       debug: 4.3.5
-      engine.io-parser: 5.2.2
+      engine.io-parser: 5.2.3
       ws: 8.17.1
       xmlhttprequest-ssl: 2.0.0
     transitivePeerDependencies:
@@ -1610,7 +1614,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  engine.io-parser@5.2.2: {}
+  engine.io-parser@5.2.3: {}
 
   engine.io@6.5.5:
     dependencies:
@@ -1622,7 +1626,7 @@ snapshots:
       cookie: 0.4.2
       cors: 2.8.5
       debug: 4.3.5
-      engine.io-parser: 5.2.2
+      engine.io-parser: 5.2.3
       ws: 8.17.1
     transitivePeerDependencies:
       - bufferutil
@@ -1856,7 +1860,7 @@ snapshots:
       camel-case: 4.1.2
       cross-spawn: 7.0.3
       deepmerge: 4.3.1
-      highlight.js: 11.9.0
+      highlight.js: 11.10.0
       htmlparser2: 7.2.0
       prismjs: 1.29.0
       strip-indent: 3.0.0
@@ -1866,7 +1870,7 @@ snapshots:
       camel-case: 4.1.2
       cross-spawn: 7.0.3
       deepmerge: 4.3.1
-      highlight.js: 11.9.0
+      highlight.js: 11.10.0
       htmlparser2: 9.1.0
       prismjs: 1.29.0
       strip-indent: 3.0.0
@@ -1902,7 +1906,7 @@ snapshots:
     transitivePeerDependencies:
       - chokidar
 
-  highlight.js@11.9.0: {}
+  highlight.js@11.10.0: {}
 
   html-minifier@4.0.0:
     dependencies:
@@ -2096,6 +2100,8 @@ snapshots:
       picomatch: 2.3.1
 
   mime-db@1.52.0: {}
+
+  mime-db@1.53.0: {}
 
   mime-types@2.1.35:
     dependencies:
