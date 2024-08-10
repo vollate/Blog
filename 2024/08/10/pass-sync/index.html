@@ -3,18 +3,18 @@
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
-    <title>VPS 测试脚本整理 | Vollate's Blog</title>
-    <meta name="description" content="整理自知乎 基础测试(IO+网速) Bench wget -qO- bench.sh | bashcurl -Lso- bench.sh | bashwget -qO- 86.re&#x2F;bench.sh | bashcurl -so- 86.re&#x2F;bench.sh | bash SuperBench 会安装较多东西，测得也较全，并且网络测速注重回国速度 wget -qO- --no-check-cer">
+    <title>使用 pass 管理密码 | Vollate's Blog</title>
+    <meta name="description" content="zx2c4 pass 是一个 unix 下的密码管理工具，使用 gpg 加密密码，配合 git 可以方便的实现密码同步，来彻底摆脱 browser 和其他各式各样非自由密码管理工具。 下面介绍 pass 的配置，密码迁移，以及各个客户端的使用方法。 配置 安装 pass UNIX like 系统直接使用包管理器安装即可，我的系统是 Arch, 使用 pacman 安装: # 已有 gpg 和 gi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VPS 测试脚本整理">
-<meta property="og:url" content="http://blog.vollate.top/2023/12/13/vps-testscripts/index.html">
+<meta property="og:title" content="使用 pass 管理密码">
+<meta property="og:url" content="http://blog.vollate.top/2024/08/10/pass-sync/index.html">
 <meta property="og:site_name" content="Vollate&#39;s Blog">
-<meta property="og:description" content="整理自知乎 基础测试(IO+网速) Bench wget -qO- bench.sh | bashcurl -Lso- bench.sh | bashwget -qO- 86.re&#x2F;bench.sh | bashcurl -so- 86.re&#x2F;bench.sh | bash SuperBench 会安装较多东西，测得也较全，并且网络测速注重回国速度 wget -qO- --no-check-cer">
+<meta property="og:description" content="zx2c4 pass 是一个 unix 下的密码管理工具，使用 gpg 加密密码，配合 git 可以方便的实现密码同步，来彻底摆脱 browser 和其他各式各样非自由密码管理工具。 下面介绍 pass 的配置，密码迁移，以及各个客户端的使用方法。 配置 安装 pass UNIX like 系统直接使用包管理器安装即可，我的系统是 Arch, 使用 pacman 安装: # 已有 gpg 和 gi">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-12-13T07:44:50.000Z">
-<meta property="article:modified_time" content="2024-05-10T18:01:09.000Z">
+<meta property="article:published_time" content="2024-08-10T11:48:05.000Z">
+<meta property="article:modified_time" content="2024-08-10T11:48:24.000Z">
 <meta property="article:author" content="Vollate">
-<meta property="article:tag" content="Server">
+<meta property="article:tag" content="Password">
 <meta name="twitter:card" content="summary">
 
     <link rel="alternate" type="application/atom+xml" href="/atom.xml">
@@ -192,7 +192,7 @@
             
     
         <h1 class="article-title text-lg" itemprop="name">
-            VPS 测试脚本整理
+            使用 pass 管理密码
         </h1>
     
 
@@ -201,14 +201,10 @@
             <p class="article-meta mb-3 text-xs">
                 <span class="article-date">
     
-    <i class="iconfont icon-calendar-minus-o"></i>
-	<a href="/2023/12/13/vps-testscripts/" class="article-date">
-	  <time datetime="2023-12-13T00:00:00.000Z"
-            itemprop="datePublished">Created: Dec 13</time>
-        
-            <i class="iconfont icon-calendar-check"></i>
-            <time datetime="2024-05-10T00:00:00.000Z"
-                  itemprop="dateModified">Last Updated: May 10</time>
+    <i class="iconfont icon-calendar-check"></i>
+	<a href="/2024/08/10/pass-sync/" class="article-date">
+	  <time datetime="2024-08-10T00:00:00.000Z"
+            itemprop="datePublished">Created: Aug 10</time>
         
     </a>
 </span>
@@ -222,48 +218,73 @@
                 
     <span class="article-tags">
     <i class="iconfont icon-tag"></i>
-    <a class="article-tag-none-link" href="/tags/Server/" rel="tag">Server</a>
+    <a class="article-tag-none-link" href="/tags/Password/" rel="tag">Password</a>
   </span>
 
 
                 <span class="_partial/post-comment"><i class="icon icon-comment"></i>
-                    <a href="/2023/12/13/vps-testscripts/#comments" class="article-comment-link">
+                    <a href="/2024/08/10/pass-sync/#comments" class="article-comment-link">
                         Comments
                     </a>
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">Word Count: 239(words)</span>
+        <span class="post-wordcount" itemprop="wordCount">Word Count: 806(words)</span>
     
     
         <span class="post-readcount"
-              itemprop="timeRequired">Read Count: 1(minutes)</span>
+              itemprop="timeRequired">Read Count: 4(minutes)</span>
     
 
 
             </p>
         </header>
         <div class="marked-body article-body">
-            <p>整理自<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/117547388">知乎</a></p>
-<h2 id="基础测试-IO-网速">基础测试(IO+网速)</h2>
-<h3 id="Bench">Bench</h3>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget -qO- bench.sh | bash</span><br><span class="line">curl -Lso- bench.sh | bash</span><br><span class="line">wget -qO- 86.re/bench.sh | bash</span><br><span class="line">curl -so- 86.re/bench.sh | bash</span><br></pre></td></tr></table></figure>
-<h3 id="SuperBench">SuperBench</h3>
-<p>会安装较多东西，测得也较全，并且网络测速注重回国速度</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget -qO- --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/superbench.sh | bash</span><br><span class="line">curl -Lso- -no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/superb</span><br></pre></td></tr></table></figure>
-<h3 id="Superseed">Superseed</h3>
-<p>提供测试全国各地三大运营商速度</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/oooldking/script/master/superspeed.sh &amp;&amp; chmod +x superspeed.sh &amp;&amp; ./superspeed.sh</span><br></pre></td></tr></table></figure>
-<h3 id="UnixBench">UnixBench</h3>
-<p>主要测试项目有：系统调用、读写、进程、图形化测试、2D、3D、管道、运算、C库等系统基准性能提供测试数据，<a target="_blank" rel="noopener" href="https://github.com/teddysun/across?tab=readme-ov-file">发布页</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/unixbench.sh</span><br><span class="line">chmod +x unixbench.sh</span><br><span class="line">./unixbench.sh</span><br></pre></td></tr></table></figure>
-<h3 id="Memory-Test">Memory Test</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">CentOS / RHEL</span></span><br><span class="line">yum install wget -y</span><br><span class="line">yum groupinstall &quot;Development Tools&quot; -y</span><br><span class="line">wget https://raw.githubusercontent.com/FunctionClub/Memtester/master/memtester.cpp</span><br><span class="line">gcc -l stdc++ memtester.cpp</span><br><span class="line">./a.out</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Ubuntu / Debian</span></span><br><span class="line">apt-get update</span><br><span class="line">apt-get install wget build-essential -y</span><br><span class="line">wget https://raw.githubusercontent.com/FunctionClub/Memtester/master/memtester.cpp</span><br><span class="line">gcc -l stdc++ memtester.cpp</span><br><span class="line">./a.out</span><br></pre></td></tr></table></figure>
+            <p><a target="_blank" rel="noopener" href="https://www.passwordstore.org/">zx2c4 pass</a> 是一个 unix 下的密码管理工具，使用 gpg 加密密码，配合 git 可以方便的实现密码同步，来彻底摆脱 browser 和其他各式各样非自由密码管理工具。<br>
+下面介绍 pass 的配置，密码迁移，以及各个客户端的使用方法。</p>
+<h2 id="配置">配置</h2>
+<h3 id="安装-pass">安装 pass</h3>
+<p>UNIX like 系统直接使用包管理器安装即可，我的系统是 Arch, 使用 pacman 安装:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 已有 gpg 和 git 的忽略这步</span></span><br><span class="line"><span class="built_in">sudo</span> pacman -S gnupg git</span><br><span class="line"></span><br><span class="line"><span class="comment"># pass 本体为 cli 工具，可以配合 qtpass 来使用</span></span><br><span class="line"><span class="built_in">sudo</span> pacman -S pass qtpass</span><br></pre></td></tr></table></figure>
+<p>如果是windows，可以尝试以下几个平替:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/timvisee/prs">prs</a>: rust 实现的 pass，但不支持 extension</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/geluk/pass-winmenu">pass-winmenu</a>: 可以实现 pass 的基本功能，但为 GUI 应用</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/bfrascher/passpy">passpy</a>: python 实现的 pass，功能补全且年久失修</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mbos/Pass4Win">pass4win</a>: 年久失修且已经 archiving ，不建议使用</li>
+</ul>
+<h3 id="初始化-pass">初始化 pass</h3>
+<p>在使用 pass 之前，先生成 gpg 密钥对。已有 gpg 密钥对可以跳过这一步。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">gpg --full-generate-key <span class="comment"># 然后根据提示输入对应信息和你要设置的密码</span></span><br><span class="line"></span><br><span class="line">gpg --list-secret-keys --keyid-format LONG </span><br><span class="line"><span class="comment"># 列出密钥的 gpg-id, 大概的输出长这样:</span></span><br><span class="line"><span class="comment"># /home/foo/.gnupg/pubring.kbx</span></span><br><span class="line"><span class="comment"># ----------------------------------</span></span><br><span class="line"><span class="comment"># sec   ed25519/xxx 20xx-xx-xx [SC] [expires: 20xx-xx-xx]</span></span><br><span class="line"><span class="comment">#       &lt;gpg-id&gt;</span></span><br><span class="line"><span class="comment"># uid                 [ unknown] vollate &lt;uint44t@gmail.com&gt;</span></span><br><span class="line"><span class="comment"># ssb   cv25519/xxxxxxxxxxxxxxxx 20xx-xx-xx [E] [expires: 20xx-xx-xx]</span></span><br><span class="line"></span><br><span class="line">pass init &lt;gpg-id&gt; <span class="comment"># 使用 gpg-id 初始化 pass</span></span><br></pre></td></tr></table></figure>
+<p>经过初始化，会生成 <code>~/.password-store</code> 目录。目录下会生成一个 <code>.gpg-id</code> 文件，存放了用来加密密码的 gpg-id。</p>
+<p>如果你想要导入或导出 gpg key,使用下面的命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># export</span></span><br><span class="line">gpg --export-secret-keys -a &lt;gpg-id&gt; &gt; private.key</span><br><span class="line"></span><br><span class="line"><span class="comment"># import</span></span><br><span class="line">gpg --import private.key</span><br></pre></td></tr></table></figure>
+<p>注意，使用 <code>--export-secret-keys</code> 导出私钥，否则行为为导出公钥。</p>
+<h3 id="同步密码">同步密码</h3>
+<p>使用 git 来同步密码，这里使用 github 作为远程仓库。推荐使用 ssh-key 进行认证，因为github很早就停止了使用密码认证。</p>
+<p>首先创建你的 private repo，不用添加 gitignore 或 readme，然后初始化你的 .password-store 并 ref 到远程仓库。<s>或者你可以跟我一样偷懒 clone 下来然后 把 .git 扔进 .password-store 里。</s> 之后就可以使用git 来管理密码了。</p>
+<h2 id="从浏览器迁移">从浏览器迁移</h2>
+<p>firefox,chrome,edge都支持导出密码为 csv 文件，首先导出密码到 csv 文件，然后安装 <a target="_blank" rel="noopener" href="https://github.com/roddhjav/pass-import">pass-import</a>。 使用下面的命令导入密码:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pass import &lt;csv-file&gt;</span><br></pre></td></tr></table></figure>
+<p>更多用法见 <a target="_blank" rel="noopener" href="https://github.com/roddhjav/pass-import?tab=readme-ov-file#usage">useage</a></p>
+<p>导出完后记得清空浏览器保存的密码。如果开启了云同步，需要在 history 中删除密码后同步到云端。</p>
+<p>firefox 比较特殊，在password manager 右上角可以直接删除所有密码。</p>
+<h2 id="客户端">客户端</h2>
+<p>下面推荐几个个人使用的客户端:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://qtpass.org/">qtpass</a>: pass 的 qt 客户端，支持图形化操作和一定 extension</li>
+<li><a target="_blank" rel="noopener" href="https://codeberg.org/PassFF/passff">passff</a>: firefox 插件，可以在浏览器中使用 pass 来填充密码，基本可以做到完全替代浏览器自带的密码管理器(但是 windows 上支持稀烂)</li>
+</ul>
+<blockquote>
+<p>目前 windows 上的 passff 有一些问题，暂时没找到好的解决方案<s>不用win就行了</s></p>
+</blockquote>
+<h2 id="扩展">扩展</h2>
+<p>pass 支持 extension，具体参考<a target="_blank" rel="noopener" href="https://github.com/tijn/awesome-password-store">这个合集</a>，找自己需要的用。</p>
 
         </div>
         
 <blockquote class="copyright">
-    <p><strong>Link to this article : </strong><a class="permalink" href="http://blog.vollate.top/2023/12/13/vps-testscripts/">http://blog.vollate.top/2023/12/13/vps-testscripts/</a></p>
+    <p><strong>Link to this article : </strong><a class="permalink" href="http://blog.vollate.top/2024/08/10/pass-sync/">http://blog.vollate.top/2024/08/10/pass-sync/</a></p>
     <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
 </blockquote>
 
@@ -286,7 +307,7 @@
     <div class="toc-sidebar">
         <nav id="toc" class="article-toc">
             <h3 class="toc-title">Catalogue</h3>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%B5%8B%E8%AF%95-IO-%E7%BD%91%E9%80%9F"><span class="toc-number">1.</span> <span class="toc-text">基础测试(IO+网速)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bench"><span class="toc-number">1.1.</span> <span class="toc-text">Bench</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SuperBench"><span class="toc-number">1.2.</span> <span class="toc-text">SuperBench</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Superseed"><span class="toc-number">1.3.</span> <span class="toc-text">Superseed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UnixBench"><span class="toc-number">1.4.</span> <span class="toc-text">UnixBench</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memory-Test"><span class="toc-number">1.5.</span> <span class="toc-text">Memory Test</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-pass"><span class="toc-number">1.1.</span> <span class="toc-text">安装 pass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-pass"><span class="toc-number">1.2.</span> <span class="toc-text">初始化 pass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%AF%86%E7%A0%81"><span class="toc-number">1.3.</span> <span class="toc-text">同步密码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%81%E7%A7%BB"><span class="toc-number">2.</span> <span class="toc-text">从浏览器迁移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">3.</span> <span class="toc-text">客户端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">4.</span> <span class="toc-text">扩展</span></a></li></ol>
         </nav>
     </div>
 </aside>

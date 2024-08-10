@@ -1,3 +1,4 @@
+http://blog.vollate.top/2024/08/10/pass-sync/
 http://blog.vollate.top/2024/07/14/google-gn/
 http://blog.vollate.top/2023/03/27/tool-list/
 http://blog.vollate.top/2024/06/26/docker-lldb-error/
@@ -32,6 +33,7 @@ http://blog.vollate.top/tags/LLDB/
 http://blog.vollate.top/tags/Linux/
 http://blog.vollate.top/tags/Proxy/
 http://blog.vollate.top/tags/KDE-Plasma/
+http://blog.vollate.top/tags/Password/
 http://blog.vollate.top/tags/RPC/
 http://blog.vollate.top/tags/OS/
 http://blog.vollate.top/tags/Server/
