@@ -48,7 +48,7 @@ gpg --list-secret-keys --keyid-format LONG
 pass init <gpg-id> # 使用 gpg-id 初始化 pass
 ```
 
-经过初始化，会生成 `~/.password-store` 目录。目录下会生成一个 `.gpg-id` 文件，存放了用来加密密码的 gpg-id。
+经过初始化，会生成 `~/.password-store` 目录。目录下会生成一个 `.gpg-id` 文件，存放了用来加密密码的 gpg key 的 id。
 
 如果你想要导入或导出 gpg key,使用下面的命令
 
@@ -79,8 +79,9 @@ pass import <csv-file>
 更多用法见 [useage](https://github.com/roddhjav/pass-import?tab=readme-ov-file#usage)
 
 导出完后记得清空浏览器保存的密码。如果开启了云同步，需要在 history 中删除密码后同步到云端。
-
-firefox 比较特殊，在password manager 右上角可以直接删除所有密码。
+- Chome 直接历史记录清除密码后会自动同步
+- Edge 需要在历史记录中删除密码后手动强制同步![fucking microsoft](fucking-mc.png)
+- firefox 在 password manager 右上角可以直接删除所有密码。
 
 ## 客户端
 
@@ -88,6 +89,7 @@ firefox 比较特殊，在password manager 右上角可以直接删除所有密�
 
 - [qtpass](https://qtpass.org/): pass 的 qt 客户端，支持图形化操作和一定 extension
 - [passff](https://codeberg.org/PassFF/passff): firefox 插件，可以在浏览器中使用 pass 来填充密码，基本可以做到完全替代浏览器自带的密码管理器(但是 windows 上支持稀烂)
+- [Android-Password-Store](https://github.com/android-password-store/Android-Password-Store): Android 客户端，支持加密解密和 git 同步，但是自动填充稀烂
 
 > 目前 windows 上的 passff 有一些问题，暂时没找到好的解决方案~~不用win就行了~~
 
