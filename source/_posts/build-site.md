@@ -2,9 +2,10 @@
 title: 折腾网站记录
 date: 2023-12-13 12:02:27
 tags:
-- Journal
-categories:
 - Blog
+- CI/CD
+categories:
+- Journal
 ---
 原来的 vps 到期了，不想续费新开了一台，忘了全系统备份。索性 blog 扔到 github page,然后又是一顿折腾。
 
