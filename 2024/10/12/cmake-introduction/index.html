@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html  lang="en" >
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <title>CMake 从入门到能用就行 | Vollate's Blog</title>
+    <meta name="description" content="构建系统发展历史  手工编译 (1950s - 1960s): 编程语言刚刚诞生，程序员需要手工编译程序，将源代码转换为机器码。 批处理脚本 (1960s - 1970s)： 使用批处理脚本或 shell 脚本自动化编译命令，减少了手工输入。 Make 系统 (1970s)： Make 引入了增量编译的概念，只重新编译修改过的文件，大幅提升效率。 配置和生成工具 (1980s - 1990s)：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CMake 从入门到能用就行">
+<meta property="og:url" content="http://blog.vollate.top/2024/10/12/cmake-introduction/index.html">
+<meta property="og:site_name" content="Vollate&#39;s Blog">
+<meta property="og:description" content="构建系统发展历史  手工编译 (1950s - 1960s): 编程语言刚刚诞生，程序员需要手工编译程序，将源代码转换为机器码。 批处理脚本 (1960s - 1970s)： 使用批处理脚本或 shell 脚本自动化编译命令，减少了手工输入。 Make 系统 (1970s)： Make 引入了增量编译的概念，只重新编译修改过的文件，大幅提升效率。 配置和生成工具 (1980s - 1990s)：">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://blog.vollate.top/2024/10/12/cmake-introduction/Image_1728729096791.jpg">
+<meta property="article:published_time" content="2024-10-12T17:49:55.000Z">
+<meta property="article:modified_time" content="2024-10-12T18:01:41.000Z">
+<meta property="article:author" content="Vollate">
+<meta property="article:tag" content="CMake">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.vollate.top/2024/10/12/cmake-introduction/Image_1728729096791.jpg">
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    
+<link rel="stylesheet" href="/css/common.min.css">
+
+
+
+    
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.css" rel="stylesheet">
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/css/lightgallery.min.css" rel="stylesheet">
+    
+    
+    
+<link rel="stylesheet" href="/css/iconfont.min.css">
+
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <header class="header header-fixture">
+    <div class="profile-search-wrap flex sm:block">
+        
+        
+        <div class="profile sm:text-center md:px-1 lg:px-3 sm:pb-4 sm:pt-6">
+            <a id="avatar" role="link" href="https://github.com/vollate" class="inline-block lg:w-16 lg:h-16 w-8 h-8 m-2" target="_blank" rel="noopener" rel="noreferrer" >
+                <img src="/about/avatar.jpg" class="rounded-full" alt="avatar">
+            </a>
+            <h2 id="name" class="hidden lg:block">Vollate</h2>
+            <h3 id="title" class="hidden lg:block">Student</h3>
+            
+            <small id="location" class="hidden lg:block">
+                <i class="iconfont icon-map-icon"></i>
+                Shenzhen, China
+            </small>
+            
+        </div>
+        
+        
+<div class="search flex-1 flex lg:inline-block sm:hidden lg:px-4 lg:mt-2 lg:mb-4 lg:w-full">
+    <form id="search-form" class="my-auto flex-1 lg:border lg:border-solid lg:border-gray-200">
+        <div class="input-group table bg-gray-100 lg:bg-white w-full">
+            <input id="search-input" type="text" placeholder="Search" class="inline-block w-full bg-gray-100 lg:bg-white p-1">
+            <span class="table-cell">
+                <button name="search tigger button" disabled>
+                    <i class="iconfont icon-search m-2"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+        
+<div id="content-json" data-placeholder="Search" class="invisible hidden">/content.json</div>
+<script id="search-teamplate" type="text/html" data-path="/content.json">
+    <div>
+        <div class="search-header bg-gray-400">
+            <input id="actual-search-input" model="keyword" ref="input" class="inline-block w-full h-10 px-2 py-1" placeholder="Search" type="text">
+        </div>
+        <div class="search-result bg-gray-200">
+            {{#each searchPosts}}
+            <a href="/{{ path }}" class="result-item block px-2 pb-3 mb-1 pt-1 hover:bg-indigo-100">
+                <i class="iconfont icon-file"></i>
+                <h1 class="result-title inline font-medium text-lg">{{ title }}</h1>
+                <p class="result-content text-gray-600 text-sm">{{{ text }}}</p>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</script>
+
+</div>
+
+
+        <button name="menu toogle button" id="menu-toggle-btn" class="block sm:hidden p-3" role="button" aria-expanded="false">
+            <i class="iconfont icon-hamburger"></i>
+        </button>
+    </div>
+    <nav id="menu-nav" class="hidden sm:flex flex-col">
+        
+        
+            <div class="menu-item menu-home" role="menuitem">
+                <a href="/.">
+                    <i class="iconfont icon-home" aria-hidden="true"></i>
+                    <span class="menu-title">Home</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-archives" role="menuitem">
+                <a href="/archives">
+                    <i class="iconfont icon-archive" aria-hidden="true"></i>
+                    <span class="menu-title">Archives</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-categories" role="menuitem">
+                <a href="/categories">
+                    <i class="iconfont icon-folder" aria-hidden="true"></i>
+                    <span class="menu-title">Categories</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-tags" role="menuitem">
+                <a href="/tags">
+                    <i class="iconfont icon-tag" aria-hidden="true"></i>
+                    <span class="menu-title">Tags</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-repository" role="menuitem">
+                <a href="/repository">
+                    <i class="iconfont icon-project" aria-hidden="true"></i>
+                    <span class="menu-title">Repository</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-links" role="menuitem">
+                <a href="/links">
+                    <i class="iconfont icon-friend" aria-hidden="true"></i>
+                    <span class="menu-title">Links</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-about" role="menuitem">
+                <a href="/about">
+                    <i class="iconfont icon-cup" aria-hidden="true"></i>
+                    <span class="menu-title">About</span>
+                </a>
+            </div>
+        
+        
+<div class="social-links flex sm:flex-col lg:hidden mt-5">
+    
+        <span class="social-item text-center">
+            <a target="_blank" rel="noopener" href="https://github.com/vollate">
+                <i class="iconfont social-icon icon-github"></i>
+                <span class="menu-title hidden lg:inline">menu.github</span>
+            </a>
+        </span>
+    
+        <span class="social-item text-center">
+            <a href="/atom.xml">
+                <i class="iconfont social-icon icon-rss"></i>
+                <span class="menu-title hidden lg:inline">menu.rss</span>
+            </a>
+        </span>
+    
+</div>
+
+
+    </nav>
+</header>
+
+        <section class="main-section">
+            
+    <main class="flex-1 px-4 py-14 md:px-5 lg:px-8 lg:py-4 relative min-h-screen">
+    
+
+    <article class="content article article-archives article-type-list" itemscope="">
+        <header class="article-header">
+            
+    
+        <h1 class="article-title text-lg" itemprop="name">
+            CMake 从入门到能用就行
+        </h1>
+    
+
+
+
+            <p class="article-meta mb-3 text-xs">
+                <span class="article-date">
+    
+    <i class="iconfont icon-calendar-check"></i>
+	<a href="/2024/10/12/cmake-introduction/" class="article-date">
+	  <time datetime="2024-10-12T00:00:00.000Z"
+            itemprop="datePublished">Created: Oct 12</time>
+        
+    </a>
+</span>
+                
+    <span class="article-category">
+    <i class="iconfont icon-folder"></i>
+    <a class="article-category-link" href="/categories/Knowledge/">Knowledge</a>
+  </span>
+
+
+                
+    <span class="article-tags">
+    <i class="iconfont icon-tag"></i>
+    <a class="article-tag-none-link" href="/tags/CMake/" rel="tag">CMake</a>
+  </span>
+
+
+                <span class="_partial/post-comment"><i class="icon icon-comment"></i>
+                    <a href="/2024/10/12/cmake-introduction/#comments" class="article-comment-link">
+                        Comments
+                    </a>
+                </span>
+                
+    
+        <span class="post-wordcount" itemprop="wordCount">Word Count: 2.3k(words)</span>
+    
+    
+        <span class="post-readcount"
+              itemprop="timeRequired">Read Count: 14(minutes)</span>
+    
+
+
+            </p>
+        </header>
+        <div class="marked-body article-body">
+            <h2 id="构建系统发展历史">构建系统发展历史</h2>
+<ol>
+<li>手工编译 (1950s - 1960s): 编程语言刚刚诞生，程序员需要手工编译程序，将源代码转换为机器码。</li>
+<li>批处理脚本 (1960s - 1970s)： 使用批处理脚本或 shell 脚本自动化编译命令，减少了手工输入。</li>
+<li>Make 系统 (1970s)： Make 引入了增量编译的概念，只重新编译修改过的文件，大幅提升效率。</li>
+<li>配置和生成工具 (1980s - 1990s)： Autotools 等工具通过自动生成跨平台的构建脚本，支持多平台开发，避免了手写 Makefile 的情况。</li>
+<li>现代构建系统 (2000s - 2010s)： CMake 和 Meson 等工具采用声明式语法，简化了复杂项目的构建过程。</li>
+<li>专用构建系统和构建工具链 (2010s - Present)：Ninja、Gradle、Bazel、Buck 等专注于加速大型项目的构建，提供高度的自定义功能。</li>
+<li>云原生和分布式构建 (2010s - Now)： 支持云原生和分布式开发场景的构建系统，集成了容器化和 CI/CD 工具。</li>
+</ol>
+<br/>
+<p><strong>增量编译</strong>是指每次只编译修改过的编译单元，避免了无效编译。<br>
+例如，在 C/C++ 中，每个源文件对应一个编译单元，只有修改过的源文件才需要重新编译。同时由于预处理的原因，头文件的变更会递归影响到所有直接或间接引用该头文件的源文件。</p>
+<h2 id="GNU-Make">GNU Make</h2>
+<p>Make 是一个构建工具，通过 Makefile 文件定义项目的构建规则。Makefile 文件包含了一系列规则，每个规则由一个目标、依赖和命令组成。</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Variable</span></span><br><span class="line">CC = clang</span><br><span class="line">CFLAGS = -Wall -Wextra -Werror</span><br><span class="line"></span><br><span class="line"><span class="comment"># Target</span></span><br><span class="line"><span class="section">all: program</span></span><br><span class="line"></span><br><span class="line"><span class="section">foo.o: foo.c</span></span><br><span class="line">  <span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -c foo.c -o <span class="variable">$@</span></span><br><span class="line"><span class="comment"># $@ refers to the target</span></span><br><span class="line"><span class="comment"># $&lt; refers to the first dependency</span></span><br><span class="line"><span class="comment"># $^ refers to all dependencies</span></span><br><span class="line"></span><br><span class="line"><span class="section">main.o: main.c</span></span><br><span class="line">  <span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -c main.c -o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line"><span class="section">program: main.o foo.o</span></span><br><span class="line">  <span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> main.o foo.o -o program</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> subdir/Makefile</span><br></pre></td></tr></table></figure>
+<p>make 是一个过程化的构建工具，需要手动书写构建命令，灵活度高但可维护性差。</p>
+<h2 id="CMake">CMake</h2>
+<p>CMake 作为元构建系统，可以生成 Make、Ninja、Visual Studio 等构建系统所需的配置文件，方便的实现项目的跨平台。CMake 的配置文件是 CMakeLists.txt，通过编写 CMakeLists.txt 文件，可以定义项目的构建规则。</p>
+<h3 id="Version">Version</h3>
+<p>cmake 不同版本之间的命令可能有所不同，新版可能会添加新的命令，并且会废弃一些旧的命令（但大部分情况仍然可用）, 所以在编写 CMakeLists.txt 文件时，需要限定 CMake 的最低版本。</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.16</span>) <span class="comment"># minimum cmake version</span></span><br><span class="line"><span class="comment"># This is a line comment in cmake</span></span><br><span class="line"><span class="comment">#[[ This is a block comment in cmake ]]</span></span><br></pre></td></tr></table></figure>
+<h3 id="Project">Project</h3>
+<p>Project 命令用于定义项目的名称和支持的语言。对于支持的语言，可以使用 C、CXX、CUDA、Fortran、ASM 等。默认情况下，CMake 会自动检测项目中的源文件，并根据文件后缀名推断语言类型。</p>
+<p>Project 支持设置项目的版本号，可以通过 VERSION 选项指定项目的版本号。</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">project</span>(hello_world) <span class="comment"># project name</span></span><br><span class="line"><span class="keyword">project</span>(hello_wrold VERSION <span class="number">5.14</span> LANGUAGES CXX CUDA) <span class="comment"># project name with languages</span></span><br></pre></td></tr></table></figure>
+<h3 id="Variable">Variable</h3>
+<p>CMake 中的变量分为如下几种：普通变量，缓存变量，环境变量。<br>
+普通变量仅在本次运行cmake期间有效；缓存变量会被存储到生成项目目录的 CMakeCache.txt 文件中，用途主要有以下几点：</p>
+<ul>
+<li>避免用户再次运行 cmake 重新设置变量</li>
+<li>存储某些运行时信息，对用户不可见。如系统库的路径、编译器的路径等。</li>
+</ul>
+<p>环境变量取决于运行 cmake 的环境</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(SRC_FILES main.cpp lib.cpp) <span class="comment"># set Variable</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">17</span>) <span class="comment"># set Variable</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD_REQUIRED <span class="keyword">ON</span> cache) <span class="comment"># set Cache Variable</span></span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;CMAKE_CXX_STANDARD: $&#123;CMAKE_CXX_STANDARD&#125;&quot;</span>) <span class="comment"># print message</span></span><br><span class="line"><span class="keyword">message</span>(WARNING <span class="string">&quot;$ENV&#123;USER&#125;&quot;</span>) <span class="comment"># print warning message</span></span><br><span class="line"><span class="keyword">message</span>(ERROR <span class="string">&quot;Error message&quot;</span>) <span class="comment"># print error message</span></span><br></pre></td></tr></table></figure>
+<p>CMAKE 中，所有变量都是字符串，访问不存在的变量会返回空（不是空字符串），如果无法正常处理会产生问题。因此常用的方法是使用 <code>if</code> 判断变量是否存在。</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">DEFINED</span> CMAKE_CXX_STANDARD)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;CMAKE_CXX_STANDARD: $&#123;CMAKE_CXX_STANDARD&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">  <span class="keyword">message</span>(WARNING <span class="string">&quot;CMAKE_CXX_STANDARD is not defined&quot;</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+<p>在比较时，则可以直接加上引号，这样即使变量不存在也不会报错。</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="string">&quot;$&#123;CMAKE_CXX_STANDARD&#125;&quot;</span> <span class="keyword">STREQUAL</span> <span class="string">&quot;17&quot;</span>)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;CMAKE_CXX_STANDARD is 17&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">  <span class="keyword">message</span>(WARNING <span class="string">&quot;CMAKE_CXX_STANDARD is not 17&quot;</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+<h3 id="Control-Flow">Control Flow</h3>
+<p>同大部分编程语言一样，CMake 也支持条件判断和循环控制。</p>
+<h4 id="if">if</h4>
+<p>if 语句支持 AND、OR、NOT 逻辑运算符，可以使用 PARENT_SCOPE 选项将变量传递到父作用域。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(CMAKE_CXX_STANDARD <span class="keyword">EQUAL</span> <span class="number">17</span> <span class="keyword">OR</span> ENABLE_CXX17)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;CMAKE_CXX_STANDARD is 17&quot;</span>)</span><br><span class="line"><span class="keyword">elseif</span>(CMAKE_CXX_STANDARD <span class="keyword">EQUAL</span> <span class="number">14</span> <span class="keyword">AND</span> CMAKE_CXX_STANDARD_REQUIRED)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;CMAKE_CXX_STANDARD is 14&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">  <span class="keyword">message</span>(WARNING <span class="string">&quot;CMAKE_CXX_STANDARD is not 17 or 14&quot;</span>) </span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+<p>任何空字符串、0、FALSE、NOTFOUND、OFF、NO、N、IGNORE、无定义的变量都会被视为假，其他值都会被视为真。</p>
+<h4 id="loop">loop</h4>
+<p>CMake 支持 FOREACH、WHILE、WHILE、UNTIL 循环，其中 FOREACH 循环最为常用。</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span>(SRC_FILES main.cpp lib.cpp a.cpp b.cpp)</span><br><span class="line"><span class="keyword">foreach</span>(<span class="keyword">file</span> <span class="variable">$&#123;SRC_FILES&#125;</span>)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;Source file: $&#123;file&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">endforeach</span>()</span><br></pre></td></tr></table></figure>
+<h3 id="Subdir">Subdir</h3>
+<p>CMake 支持子目录，可以通过 add_subdirectory 命令添加子目录，子目录中的 CMakeLists.txt 文件会被执行。</p>
+<p>eg：假设项目目录结构如下</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── 1</span><br><span class="line">│   └── CMakeLists.txt</span><br><span class="line">├── 2</span><br><span class="line">│   └── CMakeLists.txt</span><br><span class="line">└── CMakeLists.txt</span><br></pre></td></tr></table></figure>
+<p>根目录的 CMakeLists.txt 文件如下</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">project</span>(foo)</span><br><span class="line"><span class="keyword">set</span>(useless <span class="string">&quot;root&quot;</span>)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;Root: $&#123;useless&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">add_subdirectory</span>(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;Root: $&#123;useless&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">add_subdirectory</span>(<span class="number">2</span>)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;Root: $&#123;useless&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;Root: $&#123;useless2&#125;&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>1/CMakeLists.txt 文件如下</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;Dir1: $&#123;useless&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">set</span>(useless <span class="string">&quot;dir1&quot;</span>)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;Dir1: $&#123;useless&#125;&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>2/CMakeLists.txt 文件如下</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span>(useless <span class="string">&quot;dir2&quot;</span> PARENT_SCOPE)</span><br><span class="line"><span class="keyword">set</span>(useless2 <span class="string">&quot;dir2&quot;</span>)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;Dir2: $&#123;useless2&#125;&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>运行<code>cmake -Bbuild</code> 输出如下</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// something</span><br><span class="line">-- Root: root</span><br><span class="line">-- Dir1: root</span><br><span class="line">-- Dir1: dir1</span><br><span class="line">-- Root: root</span><br><span class="line">-- Dir2: dir2</span><br><span class="line">-- Root: dir2</span><br><span class="line">-- Root:</span><br><span class="line">// something</span><br></pre></td></tr></table></figure>
+<p>可以看到，子目录中的变量不会影响到父目录，但是可以通过 PARENT_SCOPE 选项将变量传递到父目录。子目录调用完成后，返回到父目录，继续执行。</p>
+<p>CMake 支持 include 命令，可以包含其他 CMakeLists.txt 文件。include 命令会将被包含的文件的内容直接插入到当前文件中，因此被包含的文件中定义的变量会影响到包含的文件。和 C/CPP的预处理#include 作用相同。</p>
+<h3 id="Executable-Lib">Executable/Lib</h3>
+<p>CMake 中支持三种类型的构建目标：可执行文件（add_executable）、静态库（add_library STATIC）、动态库（add_library SHARED）。</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(hello_world main.cpp) <span class="comment"># add executable target</span></span><br><span class="line"><span class="keyword">add_library</span>(hello STATIC lib.cpp) <span class="comment"># add static library target</span></span><br><span class="line"><span class="keyword">add_library</span>(hello SHARED lib.cpp) <span class="comment"># add shared library target</span></span><br></pre></td></tr></table></figure>
+<h3 id="include-directories">include_directories</h3>
+<p>include_directories 命令用于添加头文件搜索路径，可以添加多个路径。使用 BEFORE 选项可以将路径添加到已有路径的前面，放置被其他路径覆盖。</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">include_directories</span>(<span class="keyword">include</span>/foo) <span class="comment"># add include path</span></span><br><span class="line"><span class="keyword">include_directories</span>(BEFORE <span class="keyword">include</span>/bar) <span class="comment"># add include path before</span></span><br></pre></td></tr></table></figure>
+<h3 id="target-xxx">target_xxx</h3>
+<p>target_xxx 系列命令用于设置目标的属性，如编译选项、链接选项、依赖等。分为三种属性：PRIVATE, PUBLIC, INTERFACE。</p>
+<ul>
+<li>PRIVATE 属性只对当前目标有效, 不会传递给依赖目标</li>
+<li>PUBLIC 属性对当前目标和依赖目标都有效</li>
+<li>INTERFACE 属性只对依赖目标有效,不会对当前目标有效</li>
+</ul>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">target_include_directories</span>(hello PUBLIC <span class="keyword">include</span>) <span class="comment"># add include path for target hello and any target that depends on hello</span></span><br><span class="line"><span class="keyword">target_compile_definitions</span>(hello PRIVATE DEBUG) <span class="comment"># add compile definition for target hello</span></span><br><span class="line"><span class="keyword">target_link_libraries</span>(hello INTERFACE foo) <span class="comment"># link library foo to targets who depends on hello</span></span><br></pre></td></tr></table></figure>
+<p>常用的 target_xxx 命令有：</p>
+<ul>
+<li>target_include_directories 添加头文件搜索路径</li>
+<li>target_compile_definitions 添加编译宏定义</li>
+<li>target_compile_options 添加编译选项</li>
+<li>target_link_libraries 添加链接库</li>
+</ul>
+<h3 id="find-package">find_package</h3>
+<p>find_package 命令用于查找外部库，有如下几种模式：</p>
+<ul>
+<li>Module 模式：在指定的路径下查找 Find<package>.cmake 文件，这个文件包含了查找库的规则，如何设置库的头文件路径、库文件路径、链接库等。</li>
+<li>Config 模式：在指定的路径下查找 <package>Config.cmake或<lower-case-package>-config.cmake 文件，这个文件包含了库的配置信息，如头文件路径、库文件路径、链接库等。</li>
+</ul>
+<p>其他可选项</p>
+<ul>
+<li><code>REQUIRED</code>: 如果找不到库，CMake 会报错并停止构建。如果 <code>find_package</code> 成功，会定义一个 <code>&lt;package&gt;_FOUND</code> 变量，表示找到库。</li>
+<li><code>OPTIONAL</code>: 如果找不到库，CMake 会继续构建。</li>
+<li><code>QUIET</code>: 失败时不输出警告。</li>
+<li><code>PATHS</code> &amp; <code>HINTS</code>: 指定查找路径，其中 <code>HINTS</code> 优先级高于 <code>PATHS</code>。</li>
+<li><code>&lt;package&gt;_ROOT</code> 变量或环境变量如果设置，会优先使用。</li>
+</ul>
+<blockquote>
+<p>具体查找顺序参考 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/find_package.html#find-package">CMake 官方文档</a> 💩</p>
+</blockquote>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(Boost) <span class="comment"># find boost library</span></span><br><span class="line"><span class="keyword">if</span>(Boost_FOUND)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;Boost found&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">  <span class="keyword">message</span>(FATAL_ERROR <span class="string">&quot;Boost not found&quot;</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(OpenCV CONFIG REQUIRED) <span class="comment"># find opencv library</span></span><br><span class="line"><span class="keyword">find_package</span>(OpenGL REQUIRED HINTS /usr/lib) <span class="comment"># find opengl library</span></span><br></pre></td></tr></table></figure>
+<h3 id="常用变量">常用变量</h3>
+<ul>
+<li>CMAKE_SOURCE_DIR: 项目根目录</li>
+<li>CMAKE_BINARY_DIR: 项目构建目录</li>
+<li>CMAKE_CURRENT_SOURCE_DIR: 当前处理的 CMakeLists.txt 文件所在的目录</li>
+<li>CMAKE_PREFIX_PATH: 查找库的路径</li>
+<li>CMAKE_MODULE_PATH: 查找模块的路径</li>
+<li>CMAKE_INCLUDE_PATH: 查找头文件的路径</li>
+<li>CMAKE_LIBRARY_PATH: 查找库文件的路径</li>
+<li>CMAKE_INSTALL_PREFIX: 安装目录</li>
+<li>CMAKE_BUILD_TYPE: 构建类型，如 Debug、Release、RelWithDebInfo、MinSizeRel</li>
+<li>CMAKE_C_COMPILER: C 编译器</li>
+<li>CMAKE_CXX_COMPILER: C++ 编译器</li>
+<li>CMAKE_C_FLAGS: C 编译选项</li>
+<li>CMAKE_CXX_FLAGS: C++ 编译选项</li>
+<li>CMAKE_EXE_LINKER_FLAGS: 可执行文件链接选项</li>
+<li>CMAKE_LINKER_FLAGS: 链接选项</li>
+</ul>
+<h2 id="拓展">拓展</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.foonathan.net/2016/03/cmake-install/">让 CMake install 支持 find_package</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/microsoft/vcpkg">vcpkg</a></li>
+<li><a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/target_precompile_headers.html">precompiled headers</a></li>
+</ul>
+<h2 id="废话">废话</h2>
+<p>Debug CMake 项目时的精神状态</p>
+<p><img src="Image_1728729096791.jpg" alt="😆"></p>
+<!--CMake 语法是依托，历史遗留太多(支持 JAVA 没看懂)。但是由于其存在已久，大量的开源库都使用 CMake 作为构建工具,加上目前比较好用的 C/C++ 包管理区 `vcpkg` 也使用 CMake 作为构建工具，所以学习 CMake 是必要的。-->
+
+        </div>
+        
+<blockquote class="copyright">
+    <p><strong>Link to this article : </strong><a class="permalink" href="http://blog.vollate.top/2024/10/12/cmake-introduction/">http://blog.vollate.top/2024/10/12/cmake-introduction/</a></p>
+    <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
+</blockquote>
+
+
+    </article>
+    
+    <section id="comments">
+        
+
+        
+    </section>
+
+
+    
+
+</main>
+
+
+<aside style="" id="sidebar" class="aside aside-fixture">
+    <div class="toc-sidebar">
+        <nav id="toc" class="article-toc">
+            <h3 class="toc-title">Catalogue</h3>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="toc-number">1.</span> <span class="toc-text">构建系统发展历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GNU-Make"><span class="toc-number">2.</span> <span class="toc-text">GNU Make</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CMake"><span class="toc-number">3.</span> <span class="toc-text">CMake</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Version"><span class="toc-number">3.1.</span> <span class="toc-text">Version</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Project"><span class="toc-number">3.2.</span> <span class="toc-text">Project</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Variable"><span class="toc-number">3.3.</span> <span class="toc-text">Variable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Control-Flow"><span class="toc-number">3.4.</span> <span class="toc-text">Control Flow</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#if"><span class="toc-number">3.4.1.</span> <span class="toc-text">if</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#loop"><span class="toc-number">3.4.2.</span> <span class="toc-text">loop</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Subdir"><span class="toc-number">3.5.</span> <span class="toc-text">Subdir</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Executable-Lib"><span class="toc-number">3.6.</span> <span class="toc-text">Executable&#x2F;Lib</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#include-directories"><span class="toc-number">3.7.</span> <span class="toc-text">include_directories</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#target-xxx"><span class="toc-number">3.8.</span> <span class="toc-text">target_xxx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find-package"><span class="toc-number">3.9.</span> <span class="toc-text">find_package</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%8F%98%E9%87%8F"><span class="toc-number">3.10.</span> <span class="toc-text">常用变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%93%E5%B1%95"><span class="toc-number">4.</span> <span class="toc-text">拓展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%9F%E8%AF%9D"><span class="toc-number">5.</span> <span class="toc-text">废话</span></a></li></ol>
+        </nav>
+    </div>
+</aside>
+
+
+
+
+
+        </section>
+        <footer class="hidden lg:block fixed bottom-0 left-0 sm:w-1/12 lg:w-1/6 bg-gray-100 z-40">
+    
+    <div class="footer-social-links">
+        
+            <a target="_blank" rel="noopener" href="https://github.com/vollate">
+                <i class="iconfont icon-github"></i>
+            </a>
+        
+            <a href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+            </a>
+        
+    </div>
+    
+    
+        <p class="footer-custom">Freedom is the freedom to say that two plus two makes four</p>
+        <p class="theme-brand">Theme by <a target="_blank" href="https://github.com/fengkx/hexo-theme-purer" rel="nofollow noopener noreferrer noopener">hexo-theme-purer</a></p>
+    
+</footer>
+
+        <div id="mask" class="hidden mask fixed inset-0 bg-gray-900 opacity-75 z-40"></div>
+        <div id="search-view-container" class="hidden shadow-xl"></div>
+        
+<script src="/js/dom-event.min.js"></script>
+
+
+
+<script src="/js/local-search.min.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '346bd3ac57ee5e238afd',
+        clientSecret: '786b6b92c2216fae1114b63adf3d10a49931ce6a',
+        repo: 'Blog',
+        owner: 'vollate',
+        admin: ['vollate'],
+        id: md5(location.pathname),
+        distractionFreeMode: true
+    })
+    gitalk.render('comments')
+</script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/js/lightgallery.min.js"></script>
+    
+<script src="/js/light-gallery.min.js"></script>
+
+
+
+
+
+
+    </body>
+</html>
