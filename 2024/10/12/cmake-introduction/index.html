@@ -13,7 +13,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://blog.vollate.top/2024/10/12/cmake-introduction/Image_1728729096791.jpg">
 <meta property="article:published_time" content="2024-10-12T17:49:55.000Z">
-<meta property="article:modified_time" content="2024-10-12T18:01:41.000Z">
+<meta property="article:modified_time" content="2024-10-13T04:39:25.000Z">
 <meta property="article:author" content="Vollate">
 <meta property="article:tag" content="CMake">
 <meta name="twitter:card" content="summary">
@@ -203,10 +203,14 @@
             <p class="article-meta mb-3 text-xs">
                 <span class="article-date">
     
-    <i class="iconfont icon-calendar-check"></i>
+    <i class="iconfont icon-calendar-minus-o"></i>
 	<a href="/2024/10/12/cmake-introduction/" class="article-date">
 	  <time datetime="2024-10-12T00:00:00.000Z"
             itemprop="datePublished">Created: Oct 12</time>
+        
+            <i class="iconfont icon-calendar-check"></i>
+            <time datetime="2024-10-13T00:00:00.000Z"
+                  itemprop="dateModified">Last Updated: Oct 13</time>
         
     </a>
 </span>
@@ -231,11 +235,11 @@
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">Word Count: 2.3k(words)</span>
+        <span class="post-wordcount" itemprop="wordCount">Word Count: 2.5k(words)</span>
     
     
         <span class="post-readcount"
-              itemprop="timeRequired">Read Count: 14(minutes)</span>
+              itemprop="timeRequired">Read Count: 16(minutes)</span>
     
 
 
@@ -343,6 +347,9 @@
 <p>具体查找顺序参考 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/find_package.html#find-package">CMake 官方文档</a> 💩</p>
 </blockquote>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(Boost) <span class="comment"># find boost library</span></span><br><span class="line"><span class="keyword">if</span>(Boost_FOUND)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;Boost found&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">  <span class="keyword">message</span>(FATAL_ERROR <span class="string">&quot;Boost not found&quot;</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(OpenCV CONFIG REQUIRED) <span class="comment"># find opencv library</span></span><br><span class="line"><span class="keyword">find_package</span>(OpenGL REQUIRED HINTS /usr/lib) <span class="comment"># find opengl library</span></span><br></pre></td></tr></table></figure>
+<h3 id="ctest">ctest</h3>
+<p>ctest 是 CMake 的测试工具，可以用于运行测试。可以通过 <code>add_test</code> 指令添加对应的测试。签名如下: <code>add_test(NAME &lt;test_name&gt; COMMAND &lt;executable&gt; [arg1 [arg2 ...]])</code></p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enable_testing</span>() <span class="comment"># enable testing</span></span><br><span class="line"><span class="keyword">add_executable</span>(<span class="keyword">test</span> <span class="keyword">test</span>.cpp) <span class="comment"># add test target</span></span><br><span class="line"><span class="keyword">add_test</span>(NAME example-<span class="keyword">test</span> <span class="keyword">COMMAND</span> <span class="keyword">test</span> config.yaml &gt; <span class="variable">$&#123;CMAKE_BINARY_DIR&#125;</span>/<span class="keyword">test</span>.log) <span class="comment"># add test</span></span><br></pre></td></tr></table></figure>
 <h3 id="常用变量">常用变量</h3>
 <ul>
 <li>CMAKE_SOURCE_DIR: 项目根目录</li>
@@ -361,6 +368,16 @@
 <li>CMAKE_EXE_LINKER_FLAGS: 可执行文件链接选项</li>
 <li>CMAKE_LINKER_FLAGS: 链接选项</li>
 </ul>
+<h3 id="CMake-Cli">CMake Cli</h3>
+<p>虽然 CMake 有提供 GUI 工具，但是大部分情况下还是使用命令行工具。CMake 的命令行工具是 cmake，可以通过 cmake --help 查看帮助信息。</p>
+<p>常用命令行参数：</p>
+<ul>
+<li><code>cmake -B&lt;build-dir&gt;</code>: 指定构建目录</li>
+<li><code>cmake &lt;source-dir&gt;</code>: 指定源代码目录</li>
+<li><code>cmake --build &lt;build-dir&gt;</code>: 构建项目</li>
+<li><code>cmake -D&lt;variable&gt;=&lt;value&gt;</code>: 设置变量</li>
+<li><code>ctest -C &lt;build-dir&gt;</code>: 在指定的构建目录下运行测试</li>
+</ul>
 <h2 id="拓展">拓展</h2>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://www.foonathan.net/2016/03/cmake-install/">让 CMake install 支持 find_package</a></li>
@@ -368,7 +385,7 @@
 <li><a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/target_precompile_headers.html">precompiled headers</a></li>
 </ul>
 <h2 id="废话">废话</h2>
-<p>Debug CMake 项目时的精神状态</p>
+<p>由于 CMake 语法过于复杂，实际使用时应多去官网查找用法。网址贴到<a target="_blank" rel="noopener" href="https://cmake.org/documentation/">这里</a>，不过官网的文档查找效率低下，个人一般都是找大型 cmake 项目直接抄 CMakeLists.txt （</p>
 <p><img src="Image_1728729096791.jpg" alt="😆"></p>
 <!--CMake 语法是依托，历史遗留太多(支持 JAVA 没看懂)。但是由于其存在已久，大量的开源库都使用 CMake 作为构建工具,加上目前比较好用的 C/C++ 包管理区 `vcpkg` 也使用 CMake 作为构建工具，所以学习 CMake 是必要的。-->
 
@@ -398,7 +415,7 @@
     <div class="toc-sidebar">
         <nav id="toc" class="article-toc">
             <h3 class="toc-title">Catalogue</h3>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="toc-number">1.</span> <span class="toc-text">构建系统发展历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GNU-Make"><span class="toc-number">2.</span> <span class="toc-text">GNU Make</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CMake"><span class="toc-number">3.</span> <span class="toc-text">CMake</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Version"><span class="toc-number">3.1.</span> <span class="toc-text">Version</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Project"><span class="toc-number">3.2.</span> <span class="toc-text">Project</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Variable"><span class="toc-number">3.3.</span> <span class="toc-text">Variable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Control-Flow"><span class="toc-number">3.4.</span> <span class="toc-text">Control Flow</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#if"><span class="toc-number">3.4.1.</span> <span class="toc-text">if</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#loop"><span class="toc-number">3.4.2.</span> <span class="toc-text">loop</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Subdir"><span class="toc-number">3.5.</span> <span class="toc-text">Subdir</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Executable-Lib"><span class="toc-number">3.6.</span> <span class="toc-text">Executable&#x2F;Lib</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#include-directories"><span class="toc-number">3.7.</span> <span class="toc-text">include_directories</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#target-xxx"><span class="toc-number">3.8.</span> <span class="toc-text">target_xxx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find-package"><span class="toc-number">3.9.</span> <span class="toc-text">find_package</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%8F%98%E9%87%8F"><span class="toc-number">3.10.</span> <span class="toc-text">常用变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%93%E5%B1%95"><span class="toc-number">4.</span> <span class="toc-text">拓展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%9F%E8%AF%9D"><span class="toc-number">5.</span> <span class="toc-text">废话</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="toc-number">1.</span> <span class="toc-text">构建系统发展历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GNU-Make"><span class="toc-number">2.</span> <span class="toc-text">GNU Make</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CMake"><span class="toc-number">3.</span> <span class="toc-text">CMake</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Version"><span class="toc-number">3.1.</span> <span class="toc-text">Version</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Project"><span class="toc-number">3.2.</span> <span class="toc-text">Project</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Variable"><span class="toc-number">3.3.</span> <span class="toc-text">Variable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Control-Flow"><span class="toc-number">3.4.</span> <span class="toc-text">Control Flow</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#if"><span class="toc-number">3.4.1.</span> <span class="toc-text">if</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#loop"><span class="toc-number">3.4.2.</span> <span class="toc-text">loop</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Subdir"><span class="toc-number">3.5.</span> <span class="toc-text">Subdir</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Executable-Lib"><span class="toc-number">3.6.</span> <span class="toc-text">Executable&#x2F;Lib</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#include-directories"><span class="toc-number">3.7.</span> <span class="toc-text">include_directories</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#target-xxx"><span class="toc-number">3.8.</span> <span class="toc-text">target_xxx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find-package"><span class="toc-number">3.9.</span> <span class="toc-text">find_package</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ctest"><span class="toc-number">3.10.</span> <span class="toc-text">ctest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%8F%98%E9%87%8F"><span class="toc-number">3.11.</span> <span class="toc-text">常用变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CMake-Cli"><span class="toc-number">3.12.</span> <span class="toc-text">CMake Cli</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%93%E5%B1%95"><span class="toc-number">4.</span> <span class="toc-text">拓展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%9F%E8%AF%9D"><span class="toc-number">5.</span> <span class="toc-text">废话</span></a></li></ol>
         </nav>
     </div>
 </aside>

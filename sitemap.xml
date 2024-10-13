@@ -4,7 +4,7 @@
   <url>
     <loc>http://blog.vollate.top/2024/10/12/cmake-introduction/</loc>
     
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -110,7 +110,7 @@
   </url>
   
   <url>
-    <loc>http://blog.vollate.top/2024/02/20/missing-emoji/</loc>
+    <loc>http://blog.vollate.top/2024/01/09/linux-desktop-system-proxy/</loc>
     
     <lastmod>2024-05-10</lastmod>
     
@@ -119,7 +119,7 @@
   </url>
   
   <url>
-    <loc>http://blog.vollate.top/2024/01/09/linux-desktop-system-proxy/</loc>
+    <loc>http://blog.vollate.top/2024/02/20/missing-emoji/</loc>
     
     <lastmod>2024-05-10</lastmod>
     
@@ -229,134 +229,134 @@
 
   <url>
     <loc>http://blog.vollate.top/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>http://blog.vollate.top/tags/Archive/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <loc>http://blog.vollate.top/tags/Books/</loc>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.vollate.top/tags/Books/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <loc>http://blog.vollate.top/tags/Archive/</loc>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/Blog/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/CI-CD/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/CMake/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/Compiler/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/Notes/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/C/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/Server/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/Emali/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/Docker/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/LLDB/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/Linux/</loc>
-    <lastmod>2024-10-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.vollate.top/tags/KDE-Plasma/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/Proxy/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.vollate.top/tags/KDE-Plasma/</loc>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/Password/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/RPC/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/tags/OS/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -365,21 +365,21 @@
   
   <url>
     <loc>http://blog.vollate.top/categories/Journal/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/categories/Knowledge/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://blog.vollate.top/categories/Trick/</loc>
-    <lastmod>2024-10-12</lastmod>
+    <lastmod>2024-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
