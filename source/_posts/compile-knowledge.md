@@ -243,7 +243,8 @@ ld.so(动态链接器) 搜索顺序:
   - `-v`：输出执行的命令
   - `-x`：显示指定语言类型
   - `-std=`：指定语言标准
-  - `-Wall`：将所有 warning 当作 error
+  - `-Wall`：启用几乎所有 warning
+  - `-Werror`: 将所有 warning 当作 error
   - `-Wno-deprecated`：如果使用了编译器被弃用的功能，不要产生 warning
   - `-Wno-deprecated-declarations`：不要对使用 C++ 中的 [[deprecated]] 修饰的对象产生 warning
   - `-mx32`：生成32位x86代码

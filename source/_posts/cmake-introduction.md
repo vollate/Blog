@@ -253,8 +253,8 @@ target_link_libraries(hello INTERFACE foo) # link library foo to targets who dep
 
 find_package 命令用于查找外部库，有如下几种模式：
 
-- Module 模式：在指定的路径下查找 Find<package>.cmake 文件，这个文件包含了查找库的规则，如何设置库的头文件路径、库文件路径、链接库等。
-- Config 模式：在指定的路径下查找 <package>Config.cmake或<lower-case-package>-config.cmake 文件，这个文件包含了库的配置信息，如头文件路径、库文件路径、链接库等。
+- Module 模式：在指定的路径下查找 `Find<package>.cmake` 文件，这个文件包含了查找库的规则，如何设置库的头文件路径、库文件路径、链接库等。
+- Config 模式：在指定的路径下查找 `<package>Config.cmake` 或 `<lower-case-package>-config.cmake` 文件，这个文件包含了库的配置信息，如头文件路径、库文件路径、链接库等。
 
 其他可选项
 
