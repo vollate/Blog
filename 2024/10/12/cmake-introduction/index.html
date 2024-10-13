@@ -13,7 +13,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://blog.vollate.top/2024/10/12/cmake-introduction/Image_1728729096791.jpg">
 <meta property="article:published_time" content="2024-10-12T17:49:55.000Z">
-<meta property="article:modified_time" content="2024-10-13T04:39:25.000Z">
+<meta property="article:modified_time" content="2024-10-13T10:35:01.000Z">
 <meta property="article:author" content="Vollate">
 <meta property="article:tag" content="CMake">
 <meta name="twitter:card" content="summary">
@@ -332,8 +332,8 @@
 <h3 id="find-package">find_package</h3>
 <p>find_package 命令用于查找外部库，有如下几种模式：</p>
 <ul>
-<li>Module 模式：在指定的路径下查找 Find<package>.cmake 文件，这个文件包含了查找库的规则，如何设置库的头文件路径、库文件路径、链接库等。</li>
-<li>Config 模式：在指定的路径下查找 <package>Config.cmake或<lower-case-package>-config.cmake 文件，这个文件包含了库的配置信息，如头文件路径、库文件路径、链接库等。</li>
+<li>Module 模式：在指定的路径下查找 <code>Find&lt;package&gt;.cmake</code> 文件，这个文件包含了查找库的规则，如何设置库的头文件路径、库文件路径、链接库等。</li>
+<li>Config 模式：在指定的路径下查找 <code>&lt;package&gt;Config.cmake</code> 或 <code>&lt;lower-case-package&gt;-config.cmake</code> 文件，这个文件包含了库的配置信息，如头文件路径、库文件路径、链接库等。</li>
 </ul>
 <p>其他可选项</p>
 <ul>
