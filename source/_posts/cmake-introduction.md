@@ -278,6 +278,16 @@ find_package(OpenCV CONFIG REQUIRED) # find opencv library
 find_package(OpenGL REQUIRED HINTS /usr/lib) # find opengl library
 ```
 
+### ctest
+
+ctest 是 CMake 的测试工具，可以用于运行测试。可以通过 `add_test` 指令添加对应的测试。签名如下: `add_test(NAME <test_name> COMMAND <executable> [arg1 [arg2 ...]])`
+
+```cmake
+enable_testing() # enable testing
+add_executable(test test.cpp) # add test target
+add_test(NAME example-test COMMAND test config.yaml > ${CMAKE_BINARY_DIR}/test.log) # add test
+```
+
 ### 常用变量
 
 - CMAKE_SOURCE_DIR: 项目根目录
@@ -296,6 +306,18 @@ find_package(OpenGL REQUIRED HINTS /usr/lib) # find opengl library
 - CMAKE_EXE_LINKER_FLAGS: 可执行文件链接选项
 - CMAKE_LINKER_FLAGS: 链接选项
 
+### CMake Cli
+
+虽然 CMake 有提供 GUI 工具，但是大部分情况下还是使用命令行工具。CMake 的命令行工具是 cmake，可以通过 cmake --help 查看帮助信息。
+
+常用命令行参数：
+
+- `cmake -B<build-dir>`: 指定构建目录
+- `cmake <source-dir>`: 指定源代码目录
+- `cmake --build <build-dir>`: 构建项目
+- `cmake -D<variable>=<value>`: 设置变量
+- `ctest -C <build-dir>`: 在指定的构建目录下运行测试
+
 ## 拓展
 
 - [让 CMake install 支持 find_package](https://www.foonathan.net/2016/03/cmake-install/)
@@ -304,7 +326,7 @@ find_package(OpenGL REQUIRED HINTS /usr/lib) # find opengl library
 
 ## 废话
 
-Debug CMake 项目时的精神状态
+由于 CMake 语法过于复杂，实际使用时应多去官网查找用法。网址贴到[这里](https://cmake.org/documentation/)，不过官网的文档查找效率低下，个人一般都是找大型 cmake 项目直接抄 CMakeLists.txt （
 
 ![😆](Image_1728729096791.jpg)
 
