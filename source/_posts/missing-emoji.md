@@ -1,5 +1,5 @@
 ---
-title: Arch Linux 下 firefox 无法显示 emoji
+title: Arch Linux 下 Firefox 无法正确显示 emoji
 date: 2024-02-21 00:11:59
 tags:
 - Linux
