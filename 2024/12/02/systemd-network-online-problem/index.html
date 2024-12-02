@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html  lang="en" >
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <title>Systemd network-online.target 问题排查记录 | Vollate's Blog</title>
+    <meta name="description" content="clash verge rev 某不存在的软件更新到 2.0 后，启动时会安装 systemd 服务用于 TUN 网络代理。但升级后每次都需要重新执行 uninstall-service 和 install-service, 且必定会卡死一段时间。这里记录一下排查过程。 检查为何要执行 uninstall-service 和 install-service 查看源码得知，service 安装由这个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Systemd network-online.target 问题排查记录">
+<meta property="og:url" content="http://blog.vollate.top/2024/12/02/systemd-network-online-problem/index.html">
+<meta property="og:site_name" content="Vollate&#39;s Blog">
+<meta property="og:description" content="clash verge rev 某不存在的软件更新到 2.0 后，启动时会安装 systemd 服务用于 TUN 网络代理。但升级后每次都需要重新执行 uninstall-service 和 install-service, 且必定会卡死一段时间。这里记录一下排查过程。 检查为何要执行 uninstall-service 和 install-service 查看源码得知，service 安装由这个">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-12-02T12:46:13.000Z">
+<meta property="article:modified_time" content="2024-12-02T12:46:31.000Z">
+<meta property="article:author" content="Vollate">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Systemd">
+<meta name="twitter:card" content="summary">
+
+    <link rel="alternate" type="application/atom+xml" href="/atom.xml">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+    
+<link rel="stylesheet" href="/css/common.min.css">
+
+
+
+    
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.css" rel="stylesheet">
+    
+    
+        <link href="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/css/lightgallery.min.css" rel="stylesheet">
+    
+    
+    
+<link rel="stylesheet" href="/css/iconfont.min.css">
+
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <header class="header header-fixture">
+    <div class="profile-search-wrap flex sm:block">
+        
+        
+        <div class="profile sm:text-center md:px-1 lg:px-3 sm:pb-4 sm:pt-6">
+            <a id="avatar" role="link" href="https://github.com/vollate" class="inline-block lg:w-16 lg:h-16 w-8 h-8 m-2" target="_blank" rel="noopener" rel="noreferrer" >
+                <img src="/about/avatar.jpg" class="rounded-full" alt="avatar">
+            </a>
+            <h2 id="name" class="hidden lg:block">Vollate</h2>
+            <h3 id="title" class="hidden lg:block">Student</h3>
+            
+            <small id="location" class="hidden lg:block">
+                <i class="iconfont icon-map-icon"></i>
+                Shenzhen, China
+            </small>
+            
+        </div>
+        
+        
+<div class="search flex-1 flex lg:inline-block sm:hidden lg:px-4 lg:mt-2 lg:mb-4 lg:w-full">
+    <form id="search-form" class="my-auto flex-1 lg:border lg:border-solid lg:border-gray-200">
+        <div class="input-group table bg-gray-100 lg:bg-white w-full">
+            <input id="search-input" type="text" placeholder="Search" class="inline-block w-full bg-gray-100 lg:bg-white p-1">
+            <span class="table-cell">
+                <button name="search tigger button" disabled>
+                    <i class="iconfont icon-search m-2"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+        
+<div id="content-json" data-placeholder="Search" class="invisible hidden">/content.json</div>
+<script id="search-teamplate" type="text/html" data-path="/content.json">
+    <div>
+        <div class="search-header bg-gray-400">
+            <input id="actual-search-input" model="keyword" ref="input" class="inline-block w-full h-10 px-2 py-1" placeholder="Search" type="text">
+        </div>
+        <div class="search-result bg-gray-200">
+            {{#each searchPosts}}
+            <a href="/{{ path }}" class="result-item block px-2 pb-3 mb-1 pt-1 hover:bg-indigo-100">
+                <i class="iconfont icon-file"></i>
+                <h1 class="result-title inline font-medium text-lg">{{ title }}</h1>
+                <p class="result-content text-gray-600 text-sm">{{{ text }}}</p>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</script>
+
+</div>
+
+
+        <button name="menu toogle button" id="menu-toggle-btn" class="block sm:hidden p-3" role="button" aria-expanded="false">
+            <i class="iconfont icon-hamburger"></i>
+        </button>
+    </div>
+    <nav id="menu-nav" class="hidden sm:flex flex-col">
+        
+        
+            <div class="menu-item menu-home" role="menuitem">
+                <a href="/.">
+                    <i class="iconfont icon-home" aria-hidden="true"></i>
+                    <span class="menu-title">Home</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-archives" role="menuitem">
+                <a href="/archives">
+                    <i class="iconfont icon-archive" aria-hidden="true"></i>
+                    <span class="menu-title">Archives</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-categories" role="menuitem">
+                <a href="/categories">
+                    <i class="iconfont icon-folder" aria-hidden="true"></i>
+                    <span class="menu-title">Categories</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-tags" role="menuitem">
+                <a href="/tags">
+                    <i class="iconfont icon-tag" aria-hidden="true"></i>
+                    <span class="menu-title">Tags</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-repository" role="menuitem">
+                <a href="/repository">
+                    <i class="iconfont icon-project" aria-hidden="true"></i>
+                    <span class="menu-title">Repository</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-links" role="menuitem">
+                <a href="/links">
+                    <i class="iconfont icon-friend" aria-hidden="true"></i>
+                    <span class="menu-title">Links</span>
+                </a>
+            </div>
+        
+        
+            <div class="menu-item menu-about" role="menuitem">
+                <a href="/about">
+                    <i class="iconfont icon-cup" aria-hidden="true"></i>
+                    <span class="menu-title">About</span>
+                </a>
+            </div>
+        
+        
+<div class="social-links flex sm:flex-col lg:hidden mt-5">
+    
+        <span class="social-item text-center">
+            <a target="_blank" rel="noopener" href="https://github.com/vollate">
+                <i class="iconfont social-icon icon-github"></i>
+                <span class="menu-title hidden lg:inline">menu.github</span>
+            </a>
+        </span>
+    
+        <span class="social-item text-center">
+            <a href="/atom.xml">
+                <i class="iconfont social-icon icon-rss"></i>
+                <span class="menu-title hidden lg:inline">menu.rss</span>
+            </a>
+        </span>
+    
+</div>
+
+
+    </nav>
+</header>
+
+        <section class="main-section">
+            
+    <main class="flex-1 px-4 py-14 md:px-5 lg:px-8 lg:py-4 relative min-h-screen">
+    
+
+    <article class="content article article-archives article-type-list" itemscope="">
+        <header class="article-header">
+            
+    
+        <h1 class="article-title text-lg" itemprop="name">
+            Systemd network-online.target 问题排查记录
+        </h1>
+    
+
+
+
+            <p class="article-meta mb-3 text-xs">
+                <span class="article-date">
+    
+    <i class="iconfont icon-calendar-check"></i>
+	<a href="/2024/12/02/systemd-network-online-problem/" class="article-date">
+	  <time datetime="2024-12-02T00:00:00.000Z"
+            itemprop="datePublished">Created: Dec 2</time>
+        
+    </a>
+</span>
+                
+    <span class="article-category">
+    <i class="iconfont icon-folder"></i>
+    <a class="article-category-link" href="/categories/Journal/">Journal</a>
+  </span>
+
+
+                
+    <span class="article-tags">
+    <i class="iconfont icon-tag"></i>
+    <a class="article-tag-none-link" href="/tags/Linux/" rel="tag">Linux</a>, <a class="article-tag-none-link" href="/tags/Systemd/" rel="tag">Systemd</a>
+  </span>
+
+
+                <span class="_partial/post-comment"><i class="icon icon-comment"></i>
+                    <a href="/2024/12/02/systemd-network-online-problem/#comments" class="article-comment-link">
+                        Comments
+                    </a>
+                </span>
+                
+    
+        <span class="post-wordcount" itemprop="wordCount">Word Count: 1.1k(words)</span>
+    
+    
+        <span class="post-readcount"
+              itemprop="timeRequired">Read Count: 8(minutes)</span>
+    
+
+
+            </p>
+        </header>
+        <div class="marked-body article-body">
+            <p><s>clash verge rev</s> 某不存在的软件更新到 2.0 后，启动时会安装 systemd 服务用于 TUN 网络代理。但升级后每次都需要重新执行 <code>uninstall-service</code> 和 <code>install-service</code>, 且必定会卡死一段时间。这里记录一下排查过程。</p>
+<h2 id="检查为何要执行-uninstall-service-和-install-service">检查为何要执行 <code>uninstall-service</code> 和 <code>install-service</code></h2>
+<p>查看<a target="_blank" rel="noopener" href="https://github.com/clash-verge-rev/clash-verge-rev/blob/ae5b2cfb79423c7e76a281725209b812774367fa/src-tauri/src/core/service.rs#L76">源码</a>得知，service 安装由这个函数执行，检查调用他的 <a target="_blank" rel="noopener" href="https://github.com/clash-verge-rev/clash-verge-rev/blob/ae5b2cfb79423c7e76a281725209b812774367fa/src-tauri/src/core/service.rs#L163"><code>check_service</code></a> 函数发现对 “SERVICE_URL/get_clash” 发 GET 请求来检测服务是否运行。 “SERVICE_URL” 是一个常量,为 “<a target="_blank" rel="noopener" href="http://127.0.0.1:33211">http://127.0.0.1:33211</a>”</p>
+<p>lsof 看看是什么进程</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">❯ sudo lsof -i :33211</span><br><span class="line">COMMAND   PID USER FD   TYPE DEVICE SIZE/OFF NODE NAME</span><br><span class="line">clash-ver 738 root 9u  IPv4   5515      0t0  TCP localhost:33211 (LISTEN)</span><br><span class="line">❯ sudo lsof -p 738</span><br><span class="line">lsof: WARNING: can&#x27;t stat() fuse.portal file system /run/user/1001/doc</span><br><span class="line">      Output information may be incomplete.</span><br><span class="line">COMMAND   PID USER  FD      TYPE             DEVICE SIZE/OFF    NODE NAME</span><br><span class="line">clash-ver 738 root cwd       DIR              259,6     4096       2 /</span><br><span class="line">clash-ver 738 root rtd       DIR              259,6     4096       2 /</span><br><span class="line">clash-ver 738 root txt       REG              259,6  1068272 4667021 /usr/bin/clash-verge-service</span><br><span class="line">clash-ver 738 root mem       REG              259,6  2014520 4590980 /usr/lib/libc.so.6</span><br><span class="line">clash-ver 738 root mem       REG              259,6    14280 4590996 /usr/lib/libdl.so.2</span><br><span class="line">clash-ver 738 root mem       REG              259,6   973144 4591006 /usr/lib/libm.so.6</span><br><span class="line">clash-ver 738 root mem       REG              259,6    14288 4591034 /usr/lib/libpthread.so.0</span><br><span class="line">clash-ver 738 root mem       REG              259,6    14352 4591039 /usr/lib/librt.so.1</span><br><span class="line">clash-ver 738 root mem       REG              259,6   915712 4591699 /usr/lib/libgcc_s.so.1</span><br><span class="line">clash-ver 738 root mem       REG              259,6   228376 4590929 /usr/lib/ld-linux-x86-64.so.2</span><br><span class="line">clash-ver 738 root   0r      CHR                1,3      0t0       4 /dev/null</span><br><span class="line">clash-ver 738 root   1u     unix 0x000000005430ea85      0t0   17938 type=STREAM (CONNECTED)</span><br><span class="line">clash-ver 738 root   2u     unix 0x000000005430ea85      0t0   17938 type=STREAM (CONNECTED)</span><br><span class="line">clash-ver 738 root   3u  a_inode               0,16        0    2087 [eventpoll:4,8,9]</span><br><span class="line">clash-ver 738 root   4u  a_inode               0,16        0    2087 [eventfd:0]</span><br><span class="line">clash-ver 738 root   5u  a_inode               0,16        0    2087 [eventpoll:4,8,9]</span><br><span class="line">clash-ver 738 root   6u     unix 0x00000000cb59cf7b      0t0    2387 type=STREAM (CONNECTED)</span><br><span class="line">clash-ver 738 root   7u     unix 0x00000000093de046      0t0    2388 type=STREAM (CONNECTED)</span><br><span class="line">clash-ver 738 root   8u     unix 0x00000000cb59cf7b      0t0    2387 type=STREAM (CONNECTED)</span><br><span class="line">clash-ver 738 root   9u     IPv4               5515      0t0     TCP localhost:33211 (LISTEN)</span><br></pre></td></tr></table></figure>
+<h2 id="检查服务状态">检查服务状态</h2>
+<p>看看装了哪些服务</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">❯ systemctl list-units|grep clash</span><br><span class="line">  clash-verge-service.service</span><br></pre></td></tr></table></figure>
+<p>使用 <code>systemctl status clash-verge-service.service</code> 查看服务状态和文件位置，打开后如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Clash Verge Service helps to launch Clash Core.</span><br><span class="line">After=network-online.target nftables.service iptables.service</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/usr/bin/clash-verge-service</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=5</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>Systemd serive 定义中，<code>After=network-online.target nftables.service iptables.service</code> 表明至少一个服务完成启动后才会启动 clash-verge-service。<br>
+我的系统使用 <code>firewalld</code> 作为防火墙,它会作为上层服务自动启用 <code>nftables.service</code> 和 <code>iptables.service</code> 作为底层服务，所以 <code>nftables.service iptables.service</code> 两个服务不会启动，因此只需要等待 <code>network-online.target</code> 启动完成即可。</p>
+<h2 id="测试-network-online-target">测试 network-online.target</h2>
+<p>执行 <code>systemctl start network-online.target</code>，发现会卡死将近 2 min。使用 <code>systemd-analyze critical-chain network-online.target</code> 检查依赖和耗时，发现实际执行(CPU 时间)正常，但是启动前经过了长时间等待。</p>
+<p>接下来查了下 <code>network-online.target</code> 的依赖和被依赖，没什么问题</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">❯ systemctl list-dependencies network-online.target --after</span><br><span class="line">network-online.target</span><br><span class="line">○ ├─NetworkManager-wait-online.service</span><br><span class="line">● └─network.target</span><br><span class="line">●   ├─dhcpcd.service</span><br><span class="line">●   ├─NetworkManager.service</span><br><span class="line">●   ├─systemd-networkd.service</span><br><span class="line">●   ├─wpa_supplicant.service</span><br><span class="line">●   └─network-pre.target</span><br><span class="line">●     ├─firewalld.service</span><br><span class="line">○     ├─ip6tables.service</span><br><span class="line">○     ├─iptables.service</span><br><span class="line">○     ├─nftables.service</span><br><span class="line">●     └─systemd-network-generator.service</span><br><span class="line"></span><br><span class="line">❯ systemctl list-dependencies network-online.target --before</span><br><span class="line">network-online.target</span><br><span class="line">○ ├─archlinux-keyring-wkd-sync.service</span><br><span class="line">● ├─clash-verge-service.service</span><br><span class="line">○ ├─docker.service</span><br><span class="line">○ └─shutdown.target</span><br><span class="line">○   ├─systemd-halt.service</span><br><span class="line">○   ├─systemd-kexec.service</span><br><span class="line">○   ├─systemd-poweroff.service</span><br><span class="line">○   ├─systemd-reboot.service</span><br><span class="line">○   ├─systemd-soft-reboot.service</span><br><span class="line">○   └─final.target</span><br><span class="line">○     ├─systemd-halt.service</span><br><span class="line">○     ├─systemd-kexec.service</span><br><span class="line">○     ├─systemd-poweroff.service</span><br><span class="line">○     ├─systemd-reboot.service</span><br><span class="line">○     └─systemd-soft-reboot.service</span><br></pre></td></tr></table></figure>
+<p>同样，执行任何依赖于 <code>network-online.target</code> 的服务都会卡死将近 2 min（我就说我 docker.service 为什么启动慢）</p>
+<p>参考 <a target="_blank" rel="noopener" href="https://systemd.io/NETWORK_ONLINE/">systemd.io</a>，可以知道在使用 systemd 的系统中，<code>network-online.target</code> 一般会在网络连接成功后启动,用于确保服务在网络连接成功后启动来。如需要进行远程磁盘挂载、远程数据库连接等操作，可以将服务依赖于 <code>network-online.target</code>。<br>
+<code>network-online.target</code> 主要通过 <code>NetworkManager-wait-online.service</code> 或 <code>systemd-networkd-wait-online.service</code> 来启动。我使用的是 NetworkManager，所以应该是 <code>NetworkManager-wait-online.service</code>。<br>
+在 “To verify that the right service is enabled (usually only one should be):” 章节中提到了可以使用如下命令验证 service 正常配置：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">systemctl is-enabled NetworkManager-wait-online.service systemd-networkd-wait-online.service</span></span><br><span class="line">disabled</span><br><span class="line">enabled</span><br></pre></td></tr></table></figure>
+<p>经排查发现同时启用了 <code>NetworkManager-wait-online.service</code> 和 <code>systemd-networkd-wait-online.service</code>，导致了问题。禁用 <code>systemd-networkd-wait-online.service</code> 后，<code>network-online.target</code> 启动正常。</p>
+
+        </div>
+        
+<blockquote class="copyright">
+    <p><strong>Link to this article : </strong><a class="permalink" href="http://blog.vollate.top/2024/12/02/systemd-network-online-problem/">http://blog.vollate.top/2024/12/02/systemd-network-online-problem/</a></p>
+    <p><strong>This article is available under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> License</strong></p>
+</blockquote>
+
+
+    </article>
+    
+    <section id="comments">
+        
+
+        
+    </section>
+
+
+    
+
+</main>
+
+
+<aside style="" id="sidebar" class="aside aside-fixture">
+    <div class="toc-sidebar">
+        <nav id="toc" class="article-toc">
+            <h3 class="toc-title">Catalogue</h3>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E4%B8%BA%E4%BD%95%E8%A6%81%E6%89%A7%E8%A1%8C-uninstall-service-%E5%92%8C-install-service"><span class="toc-number">1.</span> <span class="toc-text">检查为何要执行 uninstall-service 和 install-service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E6%9C%8D%E5%8A%A1%E7%8A%B6%E6%80%81"><span class="toc-number">2.</span> <span class="toc-text">检查服务状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-network-online-target"><span class="toc-number">3.</span> <span class="toc-text">测试 network-online.target</span></a></li></ol>
+        </nav>
+    </div>
+</aside>
+
+
+
+
+
+        </section>
+        <footer class="hidden lg:block fixed bottom-0 left-0 sm:w-1/12 lg:w-1/6 bg-gray-100 z-40">
+    
+    <div class="footer-social-links">
+        
+            <a target="_blank" rel="noopener" href="https://github.com/vollate">
+                <i class="iconfont icon-github"></i>
+            </a>
+        
+            <a href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+            </a>
+        
+    </div>
+    
+    
+        <p class="footer-custom">Freedom is the freedom to say that two plus two makes four</p>
+        <p class="theme-brand">Theme by <a target="_blank" href="https://github.com/fengkx/hexo-theme-purer" rel="nofollow noopener noreferrer noopener">hexo-theme-purer</a></p>
+    
+</footer>
+
+        <div id="mask" class="hidden mask fixed inset-0 bg-gray-900 opacity-75 z-40"></div>
+        <div id="search-view-container" class="hidden shadow-xl"></div>
+        
+<script src="/js/dom-event.min.js"></script>
+
+
+
+<script src="/js/local-search.min.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '346bd3ac57ee5e238afd',
+        clientSecret: '786b6b92c2216fae1114b63adf3d10a49931ce6a',
+        repo: 'Blog',
+        owner: 'vollate',
+        admin: ['vollate'],
+        id: md5(location.pathname),
+        distractionFreeMode: true
+    })
+    gitalk.render('comments')
+</script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/lightgallery.js@1.1.3/dist/js/lightgallery.min.js"></script>
+    
+<script src="/js/light-gallery.min.js"></script>
+
+
+
+
+
+
+    </body>
+</html>

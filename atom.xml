@@ -6,7 +6,7 @@
   <link href="http://blog.vollate.top/atom.xml" rel="self"/>
   
   <link href="http://blog.vollate.top/"/>
-  <updated>2024-10-13T10:35:01.000Z</updated>
+  <updated>2024-12-02T12:46:31.000Z</updated>
   <id>http://blog.vollate.top/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Systemd network-online.target 问题排查记录</title>
+    <link href="http://blog.vollate.top/2024/12/02/systemd-network-online-problem/"/>
+    <id>http://blog.vollate.top/2024/12/02/systemd-network-online-problem/</id>
+    <published>2024-12-02T12:46:13.000Z</published>
+    <updated>2024-12-02T12:46:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><s>clash verge rev</s> 某不存在的软件更新到 2.0 后，启动时会安装 systemd 服务用于 TUN 网络代理。但升级后每次都需要重新执行 <code>uninstall-service</code> 和 <code>install-service</code>, 且必定会卡死一段时间。这里记录一下排查过程。</p><h2 id="检查为何要执行-uninstall-service-和-install-service">检查为何要执行 <code>uninstall-service</code> 和 <code>install-service</code></h2><p>查看<a href="https://github.com/clash-verge-rev/clash-verge-rev/blob/ae5b2cfb79423c7e76a281725209b812774367fa/src-tauri/src/core/service.rs#L76">源码</a>得知，service 安装由这个函数执行，检查调用他的 <a href="https://github.com/clash-verge-rev/clash-verge-rev/blob/ae5b2cfb79423c7e76a281725209b812774367fa/src-tauri/src/core/service.rs#L163"><code>check_service</code></a> 函数发现对 “SERVICE_URL/get_clash” 发 GET 请求来检测服务是否运行。 “SERVICE_URL” 是一个常量,为 “<a href="http://127.0.0.1:33211">http://127.0.0.1:33211</a>”</p><p>lsof 看看是什么进程</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">❯ sudo lsof -i :33211</span><br><span class="line">COMMAND   PID USER FD   TYPE DEVICE SIZE/OFF NODE NAME</span><br><span class="line">clash-ver 738 root 9u  IPv4   5515      0t0  TCP localhost:33211 (LISTEN)</span><br><span class="line">❯ sudo lsof -p 738</span><br><span class="line">lsof: WARNING: can&#x27;t stat() fuse.portal file system /run/user/1001/doc</span><br><span class="line">      Output information may be incomplete.</span><br><span class="line">COMMAND   PID USER  FD      TYPE             DEVICE SIZE/OFF    NODE NAME</span><br><span class="line">clash-ver 738 root cwd       DIR              259,6     4096       2 /</span><br><span class="line">clash-ver 738 root rtd       DIR              259,6     4096       2 /</span><br><span class="line">clash-ver 738 root txt       REG              259,6  1068272 4667021 /usr/bin/clash-verge-service</span><br><span class="line">clash-ver 738 root mem       REG              259,6  2014520 4590980 /usr/lib/libc.so.6</span><br><span class="line">clash-ver 738 root mem       REG              259,6    14280 4590996 /usr/lib/libdl.so.2</span><br><span class="line">clash-ver 738 root mem       REG              259,6   973144 4591006 /usr/lib/libm.so.6</span><br><span class="line">clash-ver 738 root mem       REG              259,6    14288 4591034 /usr/lib/libpthread.so.0</span><br><span class="line">clash-ver 738 root mem       REG              259,6    14352 4591039 /usr/lib/librt.so.1</span><br><span class="line">clash-ver 738 root mem       REG              259,6   915712 4591699 /usr/lib/libgcc_s.so.1</span><br><span class="line">clash-ver 738 root mem       REG              259,6   228376 4590929 /usr/lib/ld-linux-x86-64.so.2</span><br><span class="line">clash-ver 738 root   0r      CHR                1,3      0t0       4 /dev/null</span><br><span class="line">clash-ver 738 root   1u     unix 0x000000005430ea85      0t0   17938 type=STREAM (CONNECTED)</span><br><span class="line">clash-ver 738 root   2u     unix 0x000000005430ea85      0t0   17938 type=STREAM (CONNECTED)</span><br><span class="line">clash-ver 738 root   3u  a_inode               0,16        0    2087 [eventpoll:4,8,9]</span><br><span class="line">clash-ver 738 root   4u  a_inode               0,16        0    2087 [eventfd:0]</span><br><span class="line">clash-ver 738 root   5u  a_inode               0,16        0    2087 [eventpoll:4,8,9]</span><br><span class="line">clash-ver 738 root   6u     unix 0x00000000cb59cf7b      0t0    2387 type=STREAM (CONNECTED)</span><br><span class="line">clash-ver 738 root   7u     unix 0x00000000093de046      0t0    2388 type=STREAM (CONNECTED)</span><br><span class="line">clash-ver 738 root   8u     unix 0x00000000cb59cf7b      0t0    2387 type=STREAM (CONNECTED)</span><br><span class="line">clash-ver 738 root   9u     IPv4               5515      0t0     TCP localhost:33211 (LISTEN)</span><br></pre></td></tr></table></figure><h2 id="检查服务状态">检查服务状态</h2><p>看看装了哪些服务</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">❯ systemctl list-units|grep clash</span><br><span class="line">  clash-verge-service.service</span><br></pre></td></tr></table></figure><p>使用 <code>systemctl status clash-verge-service.service</code> 查看服务状态和文件位置，打开后如下</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Clash Verge Service helps to launch Clash Core.</span><br><span class="line">After=network-online.target nftables.service iptables.service</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/usr/bin/clash-verge-service</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=5</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure><p>Systemd serive 定义中，<code>After=network-online.target nftables.service iptables.service</code> 表明至少一个服务完成启动后才会启动 clash-verge-service。<br>我的系统使用 <code>firewalld</code> 作为防火墙,它会作为上层服务自动启用 <code>nftables.service</code> 和 <code>iptables.service</code> 作为底层服务，所以 <code>nftables.service iptables.service</code> 两个服务不会启动，因此只需要等待 <code>network-online.target</code> 启动完成即可。</p><h2 id="测试-network-online-target">测试 network-online.target</h2><p>执行 <code>systemctl start network-online.target</code>，发现会卡死将近 2 min。使用 <code>systemd-analyze critical-chain network-online.target</code> 检查依赖和耗时，发现实际执行(CPU 时间)正常，但是启动前经过了长时间等待。</p><p>接下来查了下 <code>network-online.target</code> 的依赖和被依赖，没什么问题</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">❯ systemctl list-dependencies network-online.target --after</span><br><span class="line">network-online.target</span><br><span class="line">○ ├─NetworkManager-wait-online.service</span><br><span class="line">● └─network.target</span><br><span class="line">●   ├─dhcpcd.service</span><br><span class="line">●   ├─NetworkManager.service</span><br><span class="line">●   ├─systemd-networkd.service</span><br><span class="line">●   ├─wpa_supplicant.service</span><br><span class="line">●   └─network-pre.target</span><br><span class="line">●     ├─firewalld.service</span><br><span class="line">○     ├─ip6tables.service</span><br><span class="line">○     ├─iptables.service</span><br><span class="line">○     ├─nftables.service</span><br><span class="line">●     └─systemd-network-generator.service</span><br><span class="line"></span><br><span class="line">❯ systemctl list-dependencies network-online.target --before</span><br><span class="line">network-online.target</span><br><span class="line">○ ├─archlinux-keyring-wkd-sync.service</span><br><span class="line">● ├─clash-verge-service.service</span><br><span class="line">○ ├─docker.service</span><br><span class="line">○ └─shutdown.target</span><br><span class="line">○   ├─systemd-halt.service</span><br><span class="line">○   ├─systemd-kexec.service</span><br><span class="line">○   ├─systemd-poweroff.service</span><br><span class="line">○   ├─systemd-reboot.service</span><br><span class="line">○   ├─systemd-soft-reboot.service</span><br><span class="line">○   └─final.target</span><br><span class="line">○     ├─systemd-halt.service</span><br><span class="line">○     ├─systemd-kexec.service</span><br><span class="line">○     ├─systemd-poweroff.service</span><br><span class="line">○     ├─systemd-reboot.service</span><br><span class="line">○     └─systemd-soft-reboot.service</span><br></pre></td></tr></table></figure><p>同样，执行任何依赖于 <code>network-online.target</code> 的服务都会卡死将近 2 min（我就说我 docker.service 为什么启动慢）</p><p>参考 <a href="https://systemd.io/NETWORK_ONLINE/">systemd.io</a>，可以知道在使用 systemd 的系统中，<code>network-online.target</code> 一般会在网络连接成功后启动,用于确保服务在网络连接成功后启动来。如需要进行远程磁盘挂载、远程数据库连接等操作，可以将服务依赖于 <code>network-online.target</code>。<br><code>network-online.target</code> 主要通过 <code>NetworkManager-wait-online.service</code> 或 <code>systemd-networkd-wait-online.service</code> 来启动。我使用的是 NetworkManager，所以应该是 <code>NetworkManager-wait-online.service</code>。<br>在 “To verify that the right service is enabled (usually only one should be):” 章节中提到了可以使用如下命令验证 service 正常配置：</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">systemctl is-enabled NetworkManager-wait-online.service systemd-networkd-wait-online.service</span></span><br><span class="line">disabled</span><br><span class="line">enabled</span><br></pre></td></tr></table></figure><p>经排查发现同时启用了 <code>NetworkManager-wait-online.service</code> 和 <code>systemd-networkd-wait-online.service</code>，导致了问题。禁用 <code>systemd-networkd-wait-online.service</code> 后，<code>network-online.target</code> 启动正常。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;s&gt;clash verge rev&lt;/s&gt; 某不存在的软件更新到 2.0 后，启动时会安装 systemd 服务用于 TUN 网络代理。但升级后每次都需要重新执行 &lt;code&gt;uninstall-service&lt;/code&gt; 和 &lt;code&gt;install-service</summary>
+      
+    
+    
+    
+    <category term="Journal" scheme="http://blog.vollate.top/categories/Journal/"/>
+    
+    
+    <category term="Linux" scheme="http://blog.vollate.top/tags/Linux/"/>
+    
+    <category term="Systemd" scheme="http://blog.vollate.top/tags/Systemd/"/>
+    
+  </entry>
   
   <entry>
     <title>CMake 从入门到能用就行</title>
@@ -176,11 +202,11 @@
   </entry>
   
   <entry>
-    <title>Arch Linux 下 firefox 无法显示 emoji</title>
+    <title>Arch Linux 下 Firefox 无法正确显示 emoji</title>
     <link href="http://blog.vollate.top/2024/02/20/missing-emoji/"/>
     <id>http://blog.vollate.top/2024/02/20/missing-emoji/</id>
     <published>2024-02-20T16:11:59.000Z</published>
-    <updated>2024-05-10T18:01:09.000Z</updated>
+    <updated>2024-12-02T12:46:31.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="问题描述">问题描述</h2><p>firefox 无法显示任何 emoji，但 chrome，edge 均显示正常</p><h2 id="折腾过程">折腾过程</h2><p>首先怀疑是 firefox 什么地方配置炸了。搜了几篇提问，解决方案都无效，包括 Arch wiki 上的<a href="https://wiki.archlinuxcn.org/wiki/Firefox#%E5%AD%97%E4%BD%93%E9%97%AE%E9%A2%98">这个</a>。<br>然后我开了下自己另一台电脑上的 Arch 发现显示正常，于是推断可能是缺字体。具体是什么不清楚，但是包名中大概带 “emoji”。搜了半天没找到个能用的解决方案，noto-font-emoji 装了也没用。最后不抱希望搜了下<a href="https://archlinux.org/packages/">package</a>，原以为会出现一堆带 emoji 的，结果就十几个。看了看，觉得缺少 “unicode-emoji” 的可能性最高，装了，好了。<br>然后发现 vim 中的 warning 字体突然变成 unicode 里面那个黄色 warning（丑），于是又把包卸了。重启后发现 firefox 中 emoji 正常显示，大概是本地哪个配置文件炸了一开始才显示不了。</p><h2 id="总结">总结</h2><p>人生 -1h<br>强迫症满足++<br>折腾 Linux 经验++</p>]]></content>
     
@@ -534,30 +560,6 @@
     
     
     <category term="Trick" scheme="http://blog.vollate.top/categories/Trick/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>First Post</title>
-    <link href="http://blog.vollate.top/2022/10/01/first-post/"/>
-    <id>http://blog.vollate.top/2022/10/01/first-post/</id>
-    <published>2022-10-01T03:12:59.000Z</published>
-    <updated>2023-12-08T07:34:57.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>总算整了个能看的 blog 界面</p><p>之前搭图床然后疯狂报错<br>最后发现发现设置 nginx 的时候 location 拼错了 <s>不开语法高亮的下场</s></p><p>总之捣鼓了快一个月想起来弄一下断断续续的终于配好了</p><p><img src="514.png" alt="恋恋可爱捏"></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;总算整了个能看的 blog 界面&lt;/p&gt;
-&lt;p&gt;之前搭图床然后疯狂报错&lt;br&gt;
-最后发现发现设置 nginx 的时候 location 拼错了 &lt;s&gt;不开语法高亮的下场&lt;/s&gt;&lt;/p&gt;
-&lt;p&gt;总之捣鼓了快一个月想起来弄一下断断续续的终于配好了&lt;/p&gt;
-&lt;p&gt;&lt;img src</summary>
-      
-    
-    
     
     
   </entry>
