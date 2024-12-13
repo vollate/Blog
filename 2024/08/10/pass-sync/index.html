@@ -13,7 +13,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://blog.vollate.top/2024/08/10/pass-sync/fucking-mc.png">
 <meta property="article:published_time" content="2024-08-10T11:48:05.000Z">
-<meta property="article:modified_time" content="2024-08-12T02:15:07.000Z">
+<meta property="article:modified_time" content="2024-12-13T19:29:40.000Z">
 <meta property="article:author" content="Vollate">
 <meta property="article:tag" content="Password">
 <meta name="twitter:card" content="summary">
@@ -209,8 +209,8 @@
             itemprop="datePublished">Created: Aug 10</time>
         
             <i class="iconfont icon-calendar-check"></i>
-            <time datetime="2024-08-12T00:00:00.000Z"
-                  itemprop="dateModified">Last Updated: Aug 12</time>
+            <time datetime="2024-12-13T00:00:00.000Z"
+                  itemprop="dateModified">Last Updated: Dec 13</time>
         
     </a>
 </span>
@@ -235,11 +235,11 @@
                 </span>
                 
     
-        <span class="post-wordcount" itemprop="wordCount">Word Count: 866(words)</span>
+        <span class="post-wordcount" itemprop="wordCount">Word Count: 1k(words)</span>
     
     
         <span class="post-readcount"
-              itemprop="timeRequired">Read Count: 5(minutes)</span>
+              itemprop="timeRequired">Read Count: 6(minutes)</span>
     
 
 
@@ -254,6 +254,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 已有 gpg 和 git 的忽略这步</span></span><br><span class="line"><span class="built_in">sudo</span> pacman -S gnupg git</span><br><span class="line"></span><br><span class="line"><span class="comment"># pass 本体为 cli 工具，可以配合 qtpass 来使用</span></span><br><span class="line"><span class="built_in">sudo</span> pacman -S pass qtpass</span><br></pre></td></tr></table></figure>
 <p>如果是windows，可以尝试以下几个平替:</p>
 <ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/gopasspw/gopass">gopass</a>: go 实现的 pass，支持较全</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/timvisee/prs">prs</a>: rust 实现的 pass，但不支持 extension</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/geluk/pass-winmenu">pass-winmenu</a>: 可以实现 pass 的基本功能，但为 GUI 应用</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/bfrascher/passpy">passpy</a>: python 实现的 pass，功能补全且年久失修</li>
@@ -283,12 +284,14 @@
 <p>下面推荐几个个人使用的客户端:</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://qtpass.org/">qtpass</a>: pass 的 qt 客户端，支持图形化操作和一定 extension</li>
-<li><a target="_blank" rel="noopener" href="https://codeberg.org/PassFF/passff">passff</a>: firefox 插件，可以在浏览器中使用 pass 来填充密码，基本可以做到完全替代浏览器自带的密码管理器(但是 windows 上支持稀烂)</li>
+<li><a target="_blank" rel="noopener" href="https://codeberg.org/PassFF/passff">passff</a>: firefox 插件，可以在浏览器中使用 pass 来填充密码，基本可以做到完全替代浏览器自带的密码管理器(<s>但是 windows 上支持稀烂</s> 修好了，详情见下)</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/android-password-store/Android-Password-Store">Android-Password-Store</a>: Android 客户端，支持加密解密和 git 同步，但是自动填充稀烂</li>
 </ul>
-<blockquote>
-<p>目前 windows 上的 passff 有一些问题，暂时没找到好的解决方案<s>不用win就行了</s></p>
-</blockquote>
+<h2 id="passff-on-windows">passff on windows</h2>
+<p>首先安装 passff-host， 按照<a target="_blank" rel="noopener" href="https://github.com/passff/passff-host">官网</a>说明下载 <code>.bat</code> 文件，然后运行,命令行参数选择你要安装的浏览器，我这里是 firefox。执行完成后会下载几个文件，位置自己翻脚本里面，和你安装的浏览器有关（或者everything直接搜 <code>passff.py</code>，对应文件夹就是）。安装 <code>gopass</code>,推荐使用 <code>scoop</code> 安装。<br>
+然后对 <code>passff.py</code> 开头部分进行修改</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###############################################################################</span></span><br><span class="line"><span class="comment">######################## Begin preferences section ############################</span></span><br><span class="line"><span class="comment">###############################################################################</span></span><br><span class="line">COMMAND = <span class="string">&quot;gopass&quot;</span> <span class="comment"># Rename this to your target pass-like executable</span></span><br><span class="line">COMMAND_ARGS = []</span><br><span class="line">COMMAND_ENV = &#123;</span><br><span class="line">    <span class="string">&quot;TREE_CHARSET&quot;</span>: <span class="string">&quot;ISO-8859-1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;PATH&quot;</span>: os.environ.get(<span class="string">&quot;PATH&quot;</span>), <span class="comment"># Fix stupid path</span></span><br><span class="line">&#125;</span><br><span class="line">CHARSET = <span class="string">&quot;UTF-8&quot;</span></span><br></pre></td></tr></table></figure>
+<p>然后就可以在 windows 上的浏览器中使用 pass 了。</p>
 <h2 id="扩展">扩展</h2>
 <p>pass 支持 extension，具体参考<a target="_blank" rel="noopener" href="https://github.com/tijn/awesome-password-store">这个合集</a>，找自己需要的用。</p>
 
@@ -318,7 +321,7 @@
     <div class="toc-sidebar">
         <nav id="toc" class="article-toc">
             <h3 class="toc-title">Catalogue</h3>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-pass"><span class="toc-number">1.1.</span> <span class="toc-text">安装 pass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-pass"><span class="toc-number">1.2.</span> <span class="toc-text">初始化 pass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%AF%86%E7%A0%81"><span class="toc-number">1.3.</span> <span class="toc-text">同步密码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%81%E7%A7%BB"><span class="toc-number">2.</span> <span class="toc-text">从浏览器迁移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">3.</span> <span class="toc-text">客户端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">4.</span> <span class="toc-text">扩展</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-pass"><span class="toc-number">1.1.</span> <span class="toc-text">安装 pass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-pass"><span class="toc-number">1.2.</span> <span class="toc-text">初始化 pass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%AF%86%E7%A0%81"><span class="toc-number">1.3.</span> <span class="toc-text">同步密码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%81%E7%A7%BB"><span class="toc-number">2.</span> <span class="toc-text">从浏览器迁移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">3.</span> <span class="toc-text">客户端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#passff-on-windows"><span class="toc-number">4.</span> <span class="toc-text">passff on windows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">5.</span> <span class="toc-text">扩展</span></a></li></ol>
         </nav>
     </div>
 </aside>
