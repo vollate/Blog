@@ -24,6 +24,7 @@ sudo pacman -S pass qtpass
 
 如果是windows，可以尝试以下几个平替:
 
+- [gopass](https://github.com/gopasspw/gopass): go 实现的 pass，支持较全
 - [prs](https://github.com/timvisee/prs): rust 实现的 pass，但不支持 extension
 - [pass-winmenu](https://github.com/geluk/pass-winmenu): 可以实现 pass 的基本功能，但为 GUI 应用
 - [passpy](https://github.com/bfrascher/passpy): python 实现的 pass，功能补全且年久失修
@@ -88,10 +89,27 @@ pass import <csv-file>
 下面推荐几个个人使用的客户端:
 
 - [qtpass](https://qtpass.org/): pass 的 qt 客户端，支持图形化操作和一定 extension
-- [passff](https://codeberg.org/PassFF/passff): firefox 插件，可以在浏览器中使用 pass 来填充密码，基本可以做到完全替代浏览器自带的密码管理器(但是 windows 上支持稀烂)
+- [passff](https://codeberg.org/PassFF/passff): firefox 插件，可以在浏览器中使用 pass 来填充密码，基本可以做到完全替代浏览器自带的密码管理器(~~但是 windows 上支持稀烂~~ 修好了，详情见下)
 - [Android-Password-Store](https://github.com/android-password-store/Android-Password-Store): Android 客户端，支持加密解密和 git 同步，但是自动填充稀烂
 
-> 目前 windows 上的 passff 有一些问题，暂时没找到好的解决方案~~不用win就行了~~
+## passff on windows
+
+首先安装 passff-host， 按照[官网](https://github.com/passff/passff-host)说明下载 `.bat` 文件，然后运行,命令行参数选择你要安装的浏览器，我这里是 firefox。执行完成后会下载几个文件，位置自己翻脚本里面，和你安装的浏览器有关（或者everything直接搜 `passff.py`，对应文件夹就是）。安装 `gopass`,推荐使用 `scoop` 安装。
+然后对 `passff.py` 开头部分进行修改
+
+```python
+###############################################################################
+######################## Begin preferences section ############################
+###############################################################################
+COMMAND = "gopass" # Rename this to your target pass-like executable
+COMMAND_ARGS = []
+COMMAND_ENV = {
+    "TREE_CHARSET": "ISO-8859-1",
+    "PATH": os.environ.get("PATH"), # Fix stupid path
+}
+CHARSET = "UTF-8"
+```
+然后就可以在 windows 上的浏览器中使用 pass 了。
 
 ## 扩展
 
