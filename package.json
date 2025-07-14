@@ -5,11 +5,11 @@
   "scripts": {
     "config-theme": "cp ./_theme.yml ./themes/purer/_config.yml",
     "config-cname": "cp CNAME public/",
-    "build": "npm run config-theme && hexo generate && npm run config-cname",
-    "clean": "hexo clean",
-    "deploy": "hexo deploy",
-    "server": "hexo server",
-    "dev": "hexo generate --watch & live-server public"
+    "build": "pnpm run config-theme && hexo generate && pnpm run config-cname",
+    "clean": "pnpx hexo clean",
+    "deploy": "pnpx hexo deploy",
+    "server": "pnpx hexo server",
+    "dev": "pnpx hexo generate --watch & live-server public"
   },
   "hexo": {
     "version": "7.3.0"
