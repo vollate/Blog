@@ -6,7 +6,7 @@
   <link href="http://blog.vollate.top/atom.xml" rel="self"/>
   
   <link href="http://blog.vollate.top/"/>
-  <updated>2025-04-26T19:12:34.000Z</updated>
+  <updated>2025-07-14T17:20:53.000Z</updated>
   <id>http://blog.vollate.top/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>记 Singbox Google Play 连接问题解决</title>
+    <link href="http://blog.vollate.top/2025/07/14/singbox-google-play-error/"/>
+    <id>http://blog.vollate.top/2025/07/14/singbox-google-play-error/</id>
+    <published>2025-07-14T15:29:10.000Z</published>
+    <updated>2025-07-14T17:20:53.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题描述">问题描述</h2><p>自从电脑从 clash verge rev 换到 Singbox 并且配置好自己的 doh3 dns server 后，手机上的代理软件也从 Surfboard 换成的 Singbox 的安卓版并导入电脑上配置好的配置文件。导入之后一切安好，除了 Google Play 商店无法下载，永远卡在转圈。开了 global 模式后，问题解决，因此是规则配置的问题。<br>不得不说，安卓版 UI 非常简陋，单纯做了个壳子。能用，也仅限能用。log 输出非常不友好，也没有暂停按键，开 debug level 后 log 刷新速度非常快，不是人能看的。不过通过 clash api, 我们可以远程获取到 log 信息。</p><h2 id="获取-log">获取 log</h2><p>首先连接手机并启用 usb debug，电脑上执行</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">adb forward tcp:&lt;pc-port&gt; tcp:&lt;phone-port&gt;</span><br></pre></td></tr></table></figure><p>将手机上 clash api 的端口转发到电脑上，然后通过浏览器访问 <code>http://localhost:&lt;pc-port&gt;</code> 就可以调用了。<br>web ui 一开始尝试使用 yacd,但是发现 log 输出<s>花里胡哨</s>难以复制并分析，换了 Dreamacro/clash-dashboard 后好多了。</p><h2 id="问题分析">问题分析</h2><p>截取了使用 clash <code>Rule mode</code> 和 <code>Global mode</code> 的 log 信息，对照后问题如下</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># ——— Rule mode ———</span><br><span class="line">[3517687682 …] inbound … to services.googleapis.cn:443</span><br><span class="line">[3517687682 …] outbound/direct[🎯 Direct]: outbound connection to services.googleapis.cn:443</span><br><span class="line"></span><br><span class="line"># ——— 切到 Global 模式 后 ———</span><br><span class="line">[4166616312 …] inbound … to services.googleapis.cn:443</span><br><span class="line">[4166616312 …] outbound/vless[这是马赛克(]: outbound connection to services.googleapis.cn:443</span><br></pre></td></tr></table></figure><p>查询后发现是 <a href="http://services.googleapis.cn">services.googleapis.cn</a> 的返回导致之后的下载链接到的是 google play cn 的域名，显而易见无法连接(。将 <code>services.googleapis.cn</code> 路由规则改为走代理后，问题解决。</p><h2 id="疑问">疑问</h2><p>那么问题来了，为什么即使开了 global 模式，还是会去走 cn 的域名呢。查询后发现是 GMS 会对手机 SIM 卡的 MCC/MNC 码进行判断。当 MCC 为 460 时，GMS 就将设备标记为“中国大陆用户”。触发 GMS 内部一个写死的（硬编码的）规则。这个规则将标准的 Google 服务域名（如 *.googleapis.com, *.gstatic.com）直接在客户端层面就替换为中国专用的域名（*.googleapis.cn, *.gstatic.cn）。<br><s>笔者刚好有一张旅游办的海外电话卡</s>，拔掉国内卡并插上后，重新检查 Singbox log，发现请求域名变成了 <code>firebaselogging.googleapis.com</code>，验证了上述原因。</p><blockquote><p>好久没写<s>这种问题记录</s> blog 了，主要感觉没什么技术含量，而且写起来的时间成本太高，比解决问题的时间还长（<br>不过还是有用的，至少写 blog 会让你想去挖一下问题背后的原因而不是解决了就完事(人肉 AI Agent)，不过还是好水</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;问题描述&quot;&gt;问题描述&lt;/h2&gt;
+&lt;p&gt;自从电脑从 clash verge rev 换到 Singbox 并且配置好自己的 doh3 dns server 后，手机上的代理软件也从 Surfboard 换成的 Singbox 的安卓版并导入电脑上配置好的配置文件。导</summary>
+      
+    
+    
+    
+    <category term="Journal" scheme="http://blog.vollate.top/categories/Journal/"/>
+    
+    
+    <category term="Singbox" scheme="http://blog.vollate.top/tags/Singbox/"/>
+    
+    <category term="Android" scheme="http://blog.vollate.top/tags/Android/"/>
+    
+  </entry>
   
   <entry>
     <title>Clash 迁移到 Sing-Box</title>
@@ -537,34 +564,6 @@
     
     
     <category term="Linux" scheme="http://blog.vollate.top/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Article Archive</title>
-    <link href="http://blog.vollate.top/2022/11/10/article-archives/"/>
-    <id>http://blog.vollate.top/2022/11/10/article-archives/</id>
-    <published>2022-11-10T20:10:57.000Z</published>
-    <updated>2024-02-15T14:09:46.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="OS">OS</h2><ul><li><a href="https://bbs.huaweicloud.com/blogs/279735">内存管理</a></li></ul><h2 id="Program">Program</h2><ul><li><a href="https://www.foonathan.net/2016/03/cmake-install/">CMake export lib</a></li><li><a href="https://www.cnblogs.com/pcdack/p/16019319.html">oneAPI|DPC++归档</a></li><li><a href="https://www.youtube.com/@CppCon">CppCon</a></li></ul><h2 id="Network">Network</h2><ul><li><a href="https://gfw.report/">GFW report</a></li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;OS&quot;&gt;OS&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://bbs.huaweicloud.com/blogs/279735&quot;&gt;内存管理&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;Program&quot;&gt;Program&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;</summary>
-      
-    
-    
-    
-    
-    <category term="Archive" scheme="http://blog.vollate.top/tags/Archive/"/>
     
   </entry>
   

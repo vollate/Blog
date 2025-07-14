@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.vollate.top/2025/07/14/singbox-google-play-error/</loc>
+    
+    <lastmod>2025-07-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://blog.vollate.top/2025/04/26/clash2singbox/</loc>
     
     <lastmod>2025-04-26</lastmod>
@@ -218,15 +227,6 @@
   </url>
   
   <url>
-    <loc>http://blog.vollate.top/categories/index.html</loc>
-    
-    <lastmod>2023-08-31</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://blog.vollate.top/links/index.html</loc>
     
     <lastmod>2023-08-31</lastmod>
@@ -244,6 +244,15 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>http://blog.vollate.top/categories/index.html</loc>
+    
+    <lastmod>2023-08-31</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   <url>
     <loc>http://blog.vollate.top/</loc>
@@ -254,14 +263,14 @@
 
   
   <url>
-    <loc>http://blog.vollate.top/tags/Books/</loc>
+    <loc>http://blog.vollate.top/tags/Archive/</loc>
     <lastmod>2025-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.vollate.top/tags/Archive/</loc>
+    <loc>http://blog.vollate.top/tags/Books/</loc>
     <lastmod>2025-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -331,20 +340,6 @@
   </url>
   
   <url>
-    <loc>http://blog.vollate.top/tags/Server/</loc>
-    <lastmod>2025-07-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.vollate.top/tags/Emali/</loc>
-    <lastmod>2025-07-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://blog.vollate.top/tags/Docker/</loc>
     <lastmod>2025-07-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -353,6 +348,20 @@
   
   <url>
     <loc>http://blog.vollate.top/tags/LLDB/</loc>
+    <lastmod>2025-07-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.vollate.top/tags/Server/</loc>
+    <lastmod>2025-07-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.vollate.top/tags/Emali/</loc>
     <lastmod>2025-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -374,6 +383,13 @@
   
   <url>
     <loc>http://blog.vollate.top/tags/RPC/</loc>
+    <lastmod>2025-07-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.vollate.top/tags/Android/</loc>
     <lastmod>2025-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
