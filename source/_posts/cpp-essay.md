@@ -21,7 +21,12 @@ cheatsheet: cmake 中切换到 llvm 全套 C++ 工具链
 ```cmake
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     set(CMAKE_CXX_FLAGS "-stdlib=libc++")
-    set(CMAKE_EXE_LINKER_FLAGS "-fuse-ld=lld")
+    # set linker to lld
+    set(CMAKE_LINKER_TYPE LLD)
+    # if not works, use below
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=lld")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fuse-ld=lld")
+    set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -fuse-ld=lld")
 endif ()
 ```
 
